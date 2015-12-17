@@ -1,0 +1,19 @@
+{
+  "name": "docsys",
+  "version": "1.0.0",
+  "description": "Document management system using node.js and mongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-jkithome/docsys.git"
+  },
+  "author": "Jeremy Kithome",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-jkithome/docsys/issues"
+  },
+  "homepage": "https://github.com/andela-jkithome/docsys#readme"
+}
