@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// Set up a mongoose model and pass it using module.exports
+// Set up a mongoose model and export it
 module.exports = mongoose.model('Document', new Schema({
   title: {
     type: String,
