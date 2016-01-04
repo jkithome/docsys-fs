@@ -126,7 +126,7 @@
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
             expect(res.body.length).toBeGreaterThan(0);
-            expect(res.body.length).toBe(4);
+            expect(res.body.length).toBe(5);
             expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
             expect(res.body instanceof Array).toBe(true);
             done();
@@ -166,7 +166,7 @@
           .get('http://localhost:8080/api/users/' + userId)
           .set('x-access-token', token)
           .accept('application/json')
-          .enf(function(err, res) {
+          .end(function(err, res) {
             expect(res.status).toEqual(200);
             expect(res.body.name.first).toBeDefined();
             expect(typeof res.body.name.first).toBe('string');
@@ -210,7 +210,7 @@
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
             expect(res.body.length).toBeGreaterThan(0);
-            expect(res.body.length).toBe(3);
+            expect(res.body.length).toBe(4);
             expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
             expect(res.body instanceof Array).toBe(true);
             done();
