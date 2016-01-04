@@ -8,7 +8,7 @@
       // Find the user
       User.findOne({
         username: req.body.username
-      }, function(err, user) {
+      }).populate('role').exec(function(err, user) {
 
         if (err) throw err;
 
