@@ -65,7 +65,6 @@
           })
           .accept('application/json')
           .end(function(err, res) {
-            token = res.body.token;
             request
               .post('http://localhost:8080/api/documents', {
                 genre: 'Action',
@@ -80,6 +79,111 @@
                 expect(res.body.errors.message).toBe('Path `title` is required.');
                 done();
               });
+          });
+      });
+
+      it('Document should have unique title', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Jemmy',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            request
+              .post('http://localhost:8080/api/documents', {
+                title: 'The Matrix',
+                genre: 'Action',
+                content: 'A new theme park is built on the original site of Jurassic Park. Everything is going well until the park\'s newest attraction--a genetically modified giant stealth killing machine--escapes containment and goes on a killing spree.',
+                access: 'user'
+              })
+              .set('x-access-token', token)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.code).toEqual(11000);
+                expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.users.$email_1 dup key: { : \"The Matrix\" }');
+                done();
+              });
+          });
+      });
+
+      it('Document has owner', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Jemmy',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            token = res.body.token;
+            request
+              .post('http://localhost:8080/api/documents', {
+                title: 'The Hunger Games',
+                genre: 'Science fiction',
+                content: 'Katniss Everdeen voluntarily takes her younger sister\'s place in the Hunger Games, a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.',
+              })
+              .set('x-access-token', token)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('Document created successfully.');
+                expect(res.body.doc.owner).toBeDefined();
+                done();
+              });
+          });
+      });
+
+      it('Document has date of creation', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Jemmy',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            request
+              .post('http://localhost:8080/api/documents', {
+                title: 'The Martian',
+                genre: 'Adventure',
+                content: 'During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.',
+              })
+              .set('x-access-token', token)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('Document created successfully.');
+                expect(res.body.doc.createdAt).toBeDefined();
+                done();
+              });
+          });
+      });
+
+      it('Documents can be searched by genre', function(done) {
+        request
+          .get('http://localhost:8080/api/documents/genre/science fiction')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(res.body instanceof Array).toBe(true);
+            expect(res.body[0].genre).toBe('Science fiction');
+            done();
+          });
+      });
+
+      it('Documents can be searched by content', function(done) {
+        request
+          .get('http://localhost:8080/api/documents/search/hacker')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(res.body instanceof Array).toBe(true);
+            expect(res.body[0].title).toBe('The Matrix');
+            done();
           });
       });
 
