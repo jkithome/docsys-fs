@@ -66,12 +66,20 @@
     },
 
     update: function(req, res) {
-      Document.findById(req.params.id, function(req, document) {
+      Document.findById(req.params.id, function(err, document) {
         if (err) {
           res.send(err);
         } else {
+          console.log(document);
+          console.log(req.decoded.role.title);
+          console.log(req.decoded._id);
+          console.log(document.owner.toString());
+          // console.log(req.decoded._id === document.owner.toString());
+          // console.log(document.access.indexOf(req.decoded.role._id) !== -1);
+          // console.log(req.decoded.role.title === 'staff');
+          console.log(req.decoded.role.title === 'admin');
           if (req.decoded._id === document.owner.toString() ||
-            (document.access.indexOf(req.decoded._id) !== -1 &&
+            (document.access.indexOf(req.decoded.role._id) !== -1 &&
               (req.decoded.role.title === 'staff' || req.decoded.role.title === 'admin'))) {
             var saveDocument = function() {
               if (req.body.title) {
@@ -133,12 +141,16 @@
 
     delete: function(req, res) {
       Document.findById(req.params.id, function(err, document) {
+
+        console.log(req.decoded.role);
+        console.log(typeof req.decoded.role);
         if (err) {
           res.send(err);
         } else {
+          console.log(req.decoded);
           // data exists, remove it.
           if (req.decoded._id === document.owner.toString() ||
-            (document.access.indexOf(req.decoded._id) !== -1 && req.decoded.role.title === 'admin')) {
+            (document.access.indexOf(req.decoded.role._id) !== -1 && req.decoded.role.title === 'admin')) {
             document.remove({
               _id: req.params.id
             }, function(err) {
@@ -185,7 +197,7 @@
         if (err) {
           res.send(err);
         } else {
-          if ((req.decoded._id === document.owner.toString()) || (document.access.indexOf(req.decoded._id) !== -1)) {
+          if ((req.decoded._id === document.owner.toString()) || (document.access.indexOf(req.decoded.role._id) !== -1)) {
             res.json(document);
           } else {
             res.json({
