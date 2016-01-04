@@ -32,6 +32,15 @@ var data = [{
     email: 'robot@skynet.com',
     password: 'password',
     role: 'admin'
+  }, {
+    username: 'ExtraGuy',
+    name: {
+      first: 'Make',
+      last: 'Sure'
+    },
+    email: 'this@that.com',
+    password: 'password',
+    role: 'admin'
   }]
 }];
 
