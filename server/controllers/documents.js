@@ -277,6 +277,26 @@
       });
     },
 
+    allUserCreated: function(req, res) {
+      var userId = req.params.id;
+      User.findById(userId, function(err, user) {
+        if (err) {
+          res.send(err);
+        } else {
+          var userRole = user.role;
+          Document.find({
+            owner: userId
+          }, function(err, documents) {
+            if (err) {
+              res.send(err);
+            } else {
+              res.json(documents);
+            }
+          });
+        }
+      });
+    },
+
     // Get all documents created on a specific date. Midnight to midnight
     allByDate: function(req, res) {
       var start = new Date(req.params.year, (req.params.month - 1), req.params.day);
