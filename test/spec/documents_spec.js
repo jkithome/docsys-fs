@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   var request = require('superagent');
-  var documentId, token;
+  var documentId, documentIdB, token, tokenB;
   var userHelper = require('../helpers/usersHelper');
   var documentsHelper = require('../helpers/documentsHelper');
   var helper = require('../helpers/helpers');
@@ -137,11 +137,12 @@
       it('Document has date of creation', function(done) {
         request
           .post('http://localhost:8080/api/users/login', {
-            username: 'Jemmy',
+            username: 'ExtraGuy',
             password: 'password'
           })
           .accept('application/json')
           .end(function(err, res) {
+            tokenB = res.body.token;
             request
               .post('http://localhost:8080/api/documents', {
                 title: 'The Martian',
@@ -151,11 +152,45 @@
               .set('x-access-token', token)
               .accept('application/json')
               .end(function(err, res) {
+                documentIdB = res.body.doc._id;
                 expect(res.status).toEqual(200);
                 expect(res.body.message).toBe('Document created successfully.');
                 expect(res.body.doc.createdAt).toBeDefined();
                 done();
               });
+          });
+      });
+
+      it('All documents are returned in order of creation', function(done) {
+        request
+          .get('http://localhost:8080/api/documents/all/0')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body).toBeDefined();
+            expect(res.body instanceof Array).toBe(true);
+            expect(res.body.length).toBeGreaterThan(0);
+            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(res.body[0].title).toBe('The Martian');
+            done();
+          });
+      });
+
+      it('All Documents returned can be limited to specific number', function(done) {
+        request
+          .get('http://localhost:8080/api/documents/all/2')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body).toBeDefined();
+            expect(res.body instanceof Array).toBe(true);
+            expect(res.body.length).toBeGreaterThan(0);
+            expect(res.body.length).toBeLessThan(3);
+            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(res.body[0].title).toBe('The Martian');
+            done();
           });
       });
 
@@ -236,7 +271,7 @@
           });
       });
 
-      it('Users not allowed access can\'t update the document', function(done) {
+      it('User Roles not allowed access can\'t update the document', function(done) {
         request
           .post('http://localhost:8080/api/users/login', {
             username: 'Terminator',
@@ -259,7 +294,138 @@
           });
       });
 
-      it('Users not allowed access can\'t delete the document', function(done) {
+      it('User with User Role not document owner and allowed access can\'t update the document', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Jemmy',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            var tokenator = res.body.token;
+            request
+              .put('http://localhost:8080/api/documents/' + documentIdB, {
+                title: 'The Martian Jemmy'
+              })
+              .set('x-access-token', tokenator)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('You are not allowed to update this document!');
+                done();
+              });
+          });
+      });
+
+      it('User with Staff Role not owner and allowed access can update a particular document', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'FutureCEO',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            var tokenator = res.body.token;
+            request
+              .put('http://localhost:8080/api/documents/' + documentIdB, {
+                title: 'The Martian CEO'
+              })
+              .set('x-access-token', tokenator)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('Document updated successfully.');
+                done();
+              });
+          });
+      });
+
+      it('User with Admin Role not owner and allowed access can update a particular document', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Terminator',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            var tokenator = res.body.token;
+            request
+              .put('http://localhost:8080/api/documents/' + documentIdB, {
+                title: 'The Martian Terminator'
+              })
+              .set('x-access-token', tokenator)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('Document updated successfully.');
+                done();
+              });
+          });
+      });
+
+      it('User with User Role not document owner and allowed access can\'t delete the document', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Jemmy',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            var tokenator = res.body.token;
+            request
+              .delete('http://localhost:8080/api/documents/' + documentIdB)
+              .set('x-access-token', tokenator)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('You are not allowed to update this document!');
+                done();
+              });
+          });
+      });
+
+      it('User with staff Role not document owner and allowed access can\'t delete the document', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'FutureCEO',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            var tokenator = res.body.token;
+            request
+              .delete('http://localhost:8080/api/documents/' + documentIdB)
+              .set('x-access-token', tokenator)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('You are not allowed to update this document!');
+                done();
+              });
+          });
+      });
+
+      it('User with Admin Role not owner and allowed access can delete the document', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Terminator',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            var tokenator = res.body.token;
+            request
+              .delete('http://localhost:8080/api/documents/' + documentIdB)
+              .set('x-access-token', tokenator)
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('Document deleted successfully.');
+                done();
+              });
+          });
+      });
+
+      it('User Roles not allowed access can\'t delete the document', function(done) {
         request
           .post('http://localhost:8080/api/users/login', {
             username: 'Terminator',
