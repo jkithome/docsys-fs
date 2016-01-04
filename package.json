@@ -4,7 +4,7 @@
   "description": "Document management system using node.js and mongoDB",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-node test/spec --verbose || :"
   },
   "repository": {
     "type": "git",
