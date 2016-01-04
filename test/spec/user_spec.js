@@ -150,19 +150,20 @@
 
       it('User has role defined', function(done) {
         request
-          .get('http:localhost:8080/api/users/' + userId)
+          .get('http://localhost:8080/api/users/' + userId)
           .set('x-access-token', token)
           .accept('application/json')
-          .enf(function(err, res) {
+          .end(function(err, res) {
             expect(res.status).toEqual(200);
             expect(res.body.role).toBeDefined();
             expect(typeof res.body.role).toBe('string');
+            done();
           });
       });
 
       it('User has first and last names defined', function(done) {
         request
-          .get('http:localhost:8080/api/users/' + userId)
+          .get('http://localhost:8080/api/users/' + userId)
           .set('x-access-token', token)
           .accept('application/json')
           .enf(function(err, res) {
@@ -171,6 +172,7 @@
             expect(typeof res.body.name.first).toBe('string');
             expect(res.body.name.last).toBeDefined();
             expect(typeof res.body.name.last).toBe('string');
+            done();
           });
       });
 
