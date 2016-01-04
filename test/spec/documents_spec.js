@@ -192,6 +192,25 @@
           });
       });
 
+      it('Documents created on a specific day are returned', function(done) {
+        var day = new Date();
+        var date = day.getDate();
+        var month = day.getMonth() + 1;
+        var year = day.getFullYear();
+        request
+          .get('http://localhost:8080/api/documents/' + year + '/' + month + '/' + date + '/' + '0')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body).toBeDefined();
+            expect(res.body instanceof Array).toBe(true);
+            expect(res.body.length).toBe(3);
+            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            done();
+          });
+      });
+
       it('Documents can be searched by genre', function(done) {
         request
           .get('http://localhost:8080/api/documents/genre/science fiction')
