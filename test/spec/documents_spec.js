@@ -3,8 +3,6 @@
   var request = require('superagent');
   var documentId, documentIdB, token, tokenB;
   var userHelper = require('../helpers/usersHelper');
-  var documentsHelper = require('../helpers/documentsHelper');
-  var helper = require('../helpers/helpers');
 
   describe('Document spec', function() {
     beforeEach(function(done) {
@@ -76,7 +74,7 @@
               .end(function(err, res) {
                 expect(res.status).toEqual(200);
                 expect(res.body.message).toBe('Document validation failed');
-                expect(res.body.errors.message).toBe('Path `title` is required.');
+                expect(res.body.errors.title.message).toBe('Path `title` is required.');
                 done();
               });
           });
@@ -149,7 +147,7 @@
                 genre: 'Adventure',
                 content: 'During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.',
               })
-              .set('x-access-token', token)
+              .set('x-access-token', tokenB)
               .accept('application/json')
               .end(function(err, res) {
                 documentIdB = res.body.doc._id;
@@ -378,7 +376,7 @@
               .accept('application/json')
               .end(function(err, res) {
                 expect(res.status).toEqual(200);
-                expect(res.body.message).toBe('You are not allowed to update this document!');
+                expect(res.body.message).toBe('You are not allowed to delete this document!');
                 done();
               });
           });
@@ -399,7 +397,7 @@
               .accept('application/json')
               .end(function(err, res) {
                 expect(res.status).toEqual(200);
-                expect(res.body.message).toBe('You are not allowed to update this document!');
+                expect(res.body.message).toBe('You are not allowed to delete this document!');
                 done();
               });
           });
