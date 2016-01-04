@@ -148,6 +148,32 @@
           });
       });
 
+      it('User has role defined', function(done) {
+        request
+          .get('http:localhost:8080/api/users/' + userId)
+          .set('x-access-token', token)
+          .accept('application/json')
+          .enf(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body.role).toBeDefined();
+            expect(typeof res.body.role).toBe('string');
+          });
+      });
+
+      it('User has first and last names defined', function(done) {
+        request
+          .get('http:localhost:8080/api/users/' + userId)
+          .set('x-access-token', token)
+          .accept('application/json')
+          .enf(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body.name.first).toBeDefined();
+            expect(typeof res.body.name.first).toBe('string');
+            expect(res.body.name.last).toBeDefined();
+            expect(typeof res.body.name.last).toBe('string');
+          });
+      });
+
       it('Should update the specified user', function(done) {
         request
           .put('http://localhost:8080/api/users/' + userId)
