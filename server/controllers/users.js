@@ -35,6 +35,7 @@
 
             // return the information including token as JSON
             res.json({
+              message: 'User successfully logged in.',
               user: user,
               token: token
             });
