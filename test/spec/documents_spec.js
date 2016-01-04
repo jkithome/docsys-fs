@@ -57,6 +57,32 @@
           });
       });
 
+      it('Documents must have a title', function(done) {
+        request
+          .post('http://localhost:8080/api/users/login', {
+            username: 'Jemmy',
+            password: 'password'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            token = res.body.token;
+            request
+              .post('http://localhost:8080/api/documents', {
+                genre: 'Action',
+                content: 'A new theme park is built on the original site of Jurassic Park. Everything is going well until the park\'s newest attraction--a genetically modified giant stealth killing machine--escapes containment and goes on a killing spree.',
+                access: 'user'
+              })
+              .set('x-access-token', token)
+              .accept('application/json')
+              .end(function(err, res) {
+                expect(res.status).toEqual(200);
+                expect(res.body.message).toBe('Document validation failed');
+                expect(res.body.errors.message).toBe('Path `title` is required.');
+                done();
+              });
+          });
+      });
+
       it('Should return a particular document', function(done) {
         request
           .get('http://localhost:8080/api/documents/' + documentId)
