@@ -4,10 +4,7 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
-  jwt = require('jsonwebtoken'),
   config = require('./config'),
-  User = require('./server/models/users'),
-  Document = require('./server/models/documents'),
   routes = require('./server/routes'),
   port = process.env.PORT || 8080;
 
@@ -29,4 +26,3 @@ app.use(morgan('dev'));
 routes(app);
 
 app.listen(port);
-console.log('Listening at http://localhost:' + port);

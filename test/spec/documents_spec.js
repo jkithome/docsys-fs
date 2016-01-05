@@ -58,78 +58,53 @@
 
       it('Documents must have a title', function(done) {
         request
-          .post('http://localhost:8080/api/users/login', {
-            username: 'Jemmy',
-            password: 'password'
+          .post('http://localhost:8080/api/documents', {
+            genre: 'Action',
+            content: 'A new theme park is built on the original site of Jurassic Park. Everything is going well until the park\'s newest attraction--a genetically modified giant stealth killing machine--escapes containment and goes on a killing spree.',
+            access: 'user'
           })
+          .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
-            request
-              .post('http://localhost:8080/api/documents', {
-                genre: 'Action',
-                content: 'A new theme park is built on the original site of Jurassic Park. Everything is going well until the park\'s newest attraction--a genetically modified giant stealth killing machine--escapes containment and goes on a killing spree.',
-                access: 'user'
-              })
-              .set('x-access-token', token)
-              .accept('application/json')
-              .end(function(err, res) {
-                expect(res.status).toEqual(200);
-                expect(res.body.message).toBe('Document validation failed');
-                expect(res.body.errors.title.message).toBe('Path `title` is required.');
-                done();
-              });
+            expect(res.status).toEqual(200);
+            expect(res.body.message).toBe('Document validation failed');
+            expect(res.body.errors.title.message).toBe('Path `title` is required.');
+            done();
           });
       });
 
       it('Document should have unique title', function(done) {
         request
-          .post('http://localhost:8080/api/users/login', {
-            username: 'Jemmy',
-            password: 'password'
+          .post('http://localhost:8080/api/documents', {
+            title: 'The Matrix',
+            genre: 'Action',
+            content: 'A new theme park is built on the original site of Jurassic Park. Everything is going well until the park\'s newest attraction--a genetically modified giant stealth killing machine--escapes containment and goes on a killing spree.',
+            access: 'user'
           })
+          .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
-            request
-              .post('http://localhost:8080/api/documents', {
-                title: 'The Matrix',
-                genre: 'Action',
-                content: 'A new theme park is built on the original site of Jurassic Park. Everything is going well until the park\'s newest attraction--a genetically modified giant stealth killing machine--escapes containment and goes on a killing spree.',
-                access: 'user'
-              })
-              .set('x-access-token', token)
-              .accept('application/json')
-              .end(function(err, res) {
-                expect(res.status).toEqual(200);
-                expect(res.body.code).toEqual(11000);
-                expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.documents.$title_1 dup key: { : \"The Matrix\" }');
-                done();
-              });
+            expect(res.status).toEqual(200);
+            expect(res.body.code).toEqual(11000);
+            expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.documents.$title_1 dup key: { : \"The Matrix\" }');
+            done();
           });
       });
 
       it('Document has owner', function(done) {
         request
-          .post('http://localhost:8080/api/users/login', {
-            username: 'Jemmy',
-            password: 'password'
+          .post('http://localhost:8080/api/documents', {
+            title: 'The Hunger Games',
+            genre: 'Science fiction',
+            content: 'Katniss Everdeen voluntarily takes her younger sister\'s place in the Hunger Games, a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.'
           })
+          .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
-            token = res.body.token;
-            request
-              .post('http://localhost:8080/api/documents', {
-                title: 'The Hunger Games',
-                genre: 'Science fiction',
-                content: 'Katniss Everdeen voluntarily takes her younger sister\'s place in the Hunger Games, a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.',
-              })
-              .set('x-access-token', token)
-              .accept('application/json')
-              .end(function(err, res) {
-                expect(res.status).toEqual(200);
-                expect(res.body.message).toBe('Document created successfully.');
-                expect(res.body.doc.owner).toBeDefined();
-                done();
-              });
+            expect(res.status).toEqual(200);
+            expect(res.body.message).toBe('Document created successfully.');
+            expect(res.body.doc.owner).toBeDefined();
+            done();
           });
       });
 
@@ -138,7 +113,7 @@
           .post('http://localhost:8080/api/documents', {
             title: 'Star Wars: The Force Awakens',
             genre: 'Fantasy',
-            content: '30 years after the defeat of the Galactic Empire, a new threat rises. The First Order attempts to rule the galaxy and only a ragtag group of Heroes can stop them, along with the help of the Resistance.',
+            content: '30 years after the defeat of the Galactic Empire, a new threat rises. The First Order attempts to rule the galaxy and only a ragtag group of Heroes can stop them, along with the help of the Resistance.'
           })
           .set('x-access-token', token)
           .accept('application/json')
@@ -163,7 +138,7 @@
               .post('http://localhost:8080/api/documents', {
                 title: 'The Martian',
                 genre: 'Adventure',
-                content: 'During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.',
+                content: 'During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.'
               })
               .set('x-access-token', tokenB)
               .accept('application/json')
@@ -187,7 +162,7 @@
             expect(res.body).toBeDefined();
             expect(res.body instanceof Array).toBe(true);
             expect(res.body.length).toBeGreaterThan(0);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             expect(res.body[0].title).toBe('The Martian');
             done();
           });
@@ -204,7 +179,7 @@
             expect(res.body instanceof Array).toBe(true);
             expect(res.body.length).toBeGreaterThan(0);
             expect(res.body.length).toBeLessThan(3);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             expect(res.body[0].title).toBe('The Martian');
             done();
           });
@@ -224,7 +199,7 @@
             expect(res.body).toBeDefined();
             expect(res.body instanceof Array).toBe(true);
             expect(res.body.length).toBe(4);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             done();
           });
       });
@@ -237,7 +212,7 @@
           .end(function(err, res) {
             expect(res.status).toEqual(200);
             expect(res.body instanceof Array).toBe(true);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             expect(res.body.length).toBe(4);
             done();
           });
@@ -250,7 +225,7 @@
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(200);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             expect(res.body instanceof Array).toBe(true);
             expect(res.body[0].genre).toBe('Science fiction');
             done();
@@ -264,7 +239,7 @@
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(200);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             expect(res.body instanceof Array).toBe(true);
             expect(res.body[0].title).toBe('The Matrix');
             done();
@@ -304,7 +279,7 @@
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(200);
-            expect(Object.prototype.toString.call(res.body)).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body)).toBe('[object Object]');
             expect(res.body.title).toBe('The Matrix');
             done();
           });
@@ -325,7 +300,7 @@
               .accept('application/json')
               .end(function(err, res) {
                 expect(res.status).toEqual(200);
-                expect(Object.prototype.toString.call(res.body)).toBe("[object Object]");
+                expect(Object.prototype.toString.call(res.body)).toBe('[object Object]');
                 expect(res.body.message).toBe('You are not allowed to access this document!');
                 done();
               });
