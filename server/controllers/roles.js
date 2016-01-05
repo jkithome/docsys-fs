@@ -12,7 +12,8 @@
           res.send(err);
         } else {
           res.json({
-            message: 'Role created successfully.'
+            message: 'Role created successfully.',
+            the_role: role
           });
         }
       });
