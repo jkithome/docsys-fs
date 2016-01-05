@@ -12,7 +12,11 @@ var UserSchema = new Schema({
     first: String,
     last: String
   },
-  email: String,
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
   password: String,
   role: {
     type: mongoose.Schema.Types.ObjectId,

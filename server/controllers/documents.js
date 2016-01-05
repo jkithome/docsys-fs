@@ -29,7 +29,6 @@
       };
 
       var roleFind = function(aRole, callback) {
-        console.log(aRole);
         Roles.findOne({
           title: aRole
         }, function(err, role) {
@@ -66,58 +65,65 @@
     },
 
     update: function(req, res) {
-      Document.findById(req.params.id, function(req, document) {
+      Document.findById(req.params.id, function(err, document) {
         if (err) {
           res.send(err);
         } else {
-          var saveDocument = function() {
-            if (req.body.title) {
-              document.title = req.body.title;
-            }
-            if (req.body.content) {
-              document.content = req.body.content;
-            }
-            if (req.body.genre) {
-              document.genre = req.body.genre;
-            }
-
-            document.save(function(err) {
-              if (err) {
-                res.send(err);
-              } else {
-                res.json({
-                  message: 'Document updated successfully.'
-                });
+          if (req.decoded._id === document.owner.toString() ||
+            (document.access.indexOf(req.decoded.role._id) !== -1 &&
+              (req.decoded.role.title === 'staff' || req.decoded.role.title === 'admin'))) {
+            var saveDocument = function() {
+              if (req.body.title) {
+                document.title = req.body.title;
               }
-            });
-          };
-
-          var roleFind = function(aRole, callback) {
-            console.log(aRole);
-            Roles.findOne({
-              title: aRole
-            }, function(err, role) {
-              if (err) {
-                res.send(err);
-              } else {
-                return callback(null, role._id);
+              if (req.body.content) {
+                document.content = req.body.content;
               }
-            });
-          };
-
-
-          if (req.body.access) {
-            var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
-            async.map(granted, roleFind, function(err, results) {
-              if (err) {
-                res.send(err);
-              } else {
-                document.access = results;
-                saveDocument();
+              if (req.body.genre) {
+                document.genre = req.body.genre;
               }
-            });
+
+              document.save(function(err) {
+                if (err) {
+                  res.send(err);
+                } else {
+                  res.json({
+                    message: 'Document updated successfully.'
+                  });
+                }
+              });
+            };
+
+            var roleFind = function(aRole, callback) {
+              Roles.findOne({
+                title: aRole
+              }, function(err, role) {
+                if (err) {
+                  res.send(err);
+                } else {
+                  return callback(null, role._id);
+                }
+              });
+            };
+
+
+            if (req.body.access) {
+              var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
+              async.map(granted, roleFind, function(err, results) {
+                if (err) {
+                  res.send(err);
+                } else {
+                  document.access = results;
+                  saveDocument();
+                }
+              });
+            } else {
+              saveDocument();
+            }
           } else {
-            saveDocument();
+            res.json({
+              message: 'You are not allowed to update this document!'
+            });
           }
         }
       });
@@ -129,17 +135,24 @@
           res.send(err);
         } else {
           // data exists, remove it.
-          document.remove({
-            _id: req.params.id
-          }, function(err) {
-            if (err) {
-              res.send(err);
-            } else {
-              res.json({
-                'message': 'Document deleted successfully.'
-              });
-            }
-          });
+          if (req.decoded._id === document.owner.toString() ||
+            (document.access.indexOf(req.decoded.role._id) !== -1 && req.decoded.role.title === 'admin')) {
+            document.remove({
+              _id: req.params.id
+            }, function(err) {
+              if (err) {
+                res.send(err);
+              } else {
+                res.json({
+                  'message': 'Document deleted successfully.'
+                });
+              }
+            });
+          } else {
+            res.json({
+              message: 'You are not allowed to delete this document!'
+            });
+          }
         }
       });
     },
@@ -170,7 +183,13 @@
         if (err) {
           res.send(err);
         } else {
-          res.json(document);
+          if ((req.decoded._id === document.owner.toString()) || (document.access.indexOf(req.decoded.role._id) !== -1)) {
+            res.json(document);
+          } else {
+            res.json({
+              message: 'You are not allowed to access this document!'
+            });
+          }
         }
       });
     },
@@ -247,6 +266,25 @@
             }, {
               access: userRole
             }]
+          }, function(err, documents) {
+            if (err) {
+              res.send(err);
+            } else {
+              res.json(documents);
+            }
+          });
+        }
+      });
+    },
+
+    allUserCreated: function(req, res) {
+      var userId = req.params.id;
+      User.findById(userId, function(err, user) {
+        if (err) {
+          res.send(err);
+        } else {
+          Document.find({
+            owner: userId
           }, function(err, documents) {
             if (err) {
               res.send(err);

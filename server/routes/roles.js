@@ -7,5 +7,10 @@
     app.route('/api/roles')
       .get(Auth.authenticate, Roles.all)
       .post(Auth.authenticate, Roles.create);
+
+    app.route('/api/roles/:id')
+      .get(Auth.authenticate, Roles.find)
+      .put(Auth.authenticate, Roles.update)
+      .delete(Auth.authenticate, Roles.delete);
   };
 })();

@@ -8,7 +8,7 @@
       // Find the user
       User.findOne({
         username: req.body.username
-      }, function(err, user) {
+      }).populate('role').exec(function(err, user) {
 
         if (err) throw err;
 
@@ -35,6 +35,7 @@
 
             // return the information including token as JSON
             res.json({
+              message: 'User successfully logged in.',
               user: user,
               token: token
             });

@@ -4,7 +4,7 @@
   "description": "Document management system using node.js and mongoDB",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-node test/spec --verbose || :"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,12 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
+    "jasmine-node": "^1.14.5",
     "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.3.1",
+    "mongoose-seed": "^0.1.5",
     "morgan": "^1.6.1",
-    "nodemon": "^1.8.1"
+    "nodemon": "^1.8.1",
+    "superagent": "^1.6.1"
   }
 }

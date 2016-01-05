@@ -36,5 +36,8 @@
     // All documents accesscible by a user
     app.route('/api/users/:id/documents')
       .get(Auth.authenticate, Documents.allByUser);
+
+    app.route('/api/users/:id/mydocuments')
+      .get(Auth.authenticate, Documents.allUserCreated);
   };
 })();
