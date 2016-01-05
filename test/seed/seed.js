@@ -5,11 +5,14 @@ var db = require('../../config');
 var data = [{
   'model': 'Role',
   'documents': [{
-    title: 'user'
+    title: 'user',
+    description: 'Can create and view documents'
   }, {
-    title: 'staff'
+    title: 'staff',
+    description: 'Can create, view and edit documents'
   }, {
-    title: 'admin'
+    title: 'admin',
+    description: 'Can create, view, edit and delete documents'
   }]
 }];
 
