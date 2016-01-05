@@ -229,6 +229,20 @@
           });
       });
 
+      it('Documents accessible by a given role are returned', function(done) {
+        request
+          .get('http://localhost:8080/api/documents/role/user/0')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body instanceof Array).toBe(true);
+            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(res.body.length).toBe(4);
+            done();
+          });
+      });
+
       it('Documents can be searched by genre', function(done) {
         request
           .get('http://localhost:8080/api/documents/genre/science fiction')
