@@ -46,13 +46,13 @@
 
     all: function(req, res) {
       User.find({}, function(err, users) {
-          if (err) {
-            res.send(err);
-          } else {
-            res.json(users);
-          }
-        }).
-        // Sort by latest created
+        if (err) {
+          res.send(err);
+        } else {
+          res.json(users);
+        }
+      }).
+      // Sort by latest created
       sort({
         createdAt: -1
       });

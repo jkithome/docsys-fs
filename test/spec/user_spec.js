@@ -127,7 +127,7 @@
             expect(res.body).toBeDefined();
             expect(res.body.length).toBeGreaterThan(0);
             expect(res.body.length).toBe(5);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             expect(res.body instanceof Array).toBe(true);
             done();
           });
@@ -211,7 +211,7 @@
             expect(res.body).toBeDefined();
             expect(res.body.length).toBeGreaterThan(0);
             expect(res.body.length).toBe(4);
-            expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
             expect(res.body instanceof Array).toBe(true);
             done();
           });

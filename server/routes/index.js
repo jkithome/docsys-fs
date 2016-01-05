@@ -1,4 +1,5 @@
 module.exports = function(app) {
+  var port = process.env.PORT || 8080;
   require('./users')(app);
   require('./documents')(app);
   require('./roles')(app);

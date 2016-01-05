@@ -198,7 +198,7 @@
     allByGenre: function(req, res) {
       var genre = req.params.genre;
       // Create case insensitive regular expression
-      var re = new RegExp(genre, "gi");
+      var re = new RegExp(genre, 'gi');
       Document.find({
         genre: re
       }, function(err, documents) {
@@ -213,7 +213,7 @@
     // REturn all documents with a particular word in the content
     allByContent: function(req, res) {
       var searchterm = req.params.term;
-      var re = new RegExp(searchterm, "gi");
+      var re = new RegExp(searchterm, 'gi');
       Document.find({
         content: {
           $regex: re
@@ -239,15 +239,15 @@
           var roleId = roleO._id;
           // Find all documents with the role id in access field.
           Document.find({
-              access: roleId
-            }, function(err, documents) {
-              if (err) {
-                res.json(err);
-              } else {
-                res.json(documents);
-              }
-            })
-            .limit(req.params.limit);
+            access: roleId
+          }, function(err, documents) {
+            if (err) {
+              res.json(err);
+            } else {
+              res.json(documents);
+            }
+          })
+          .limit(req.params.limit);
         }
       });
     },
@@ -279,19 +279,13 @@
 
     allUserCreated: function(req, res) {
       var userId = req.params.id;
-      User.findById(userId, function(err, user) {
+      Document.find({
+        owner: userId
+      }, function(err, documents) {
         if (err) {
           res.send(err);
         } else {
-          Document.find({
-            owner: userId
-          }, function(err, documents) {
-            if (err) {
-              res.send(err);
-            } else {
-              res.json(documents);
-            }
-          });
+          res.json(documents);
         }
       });
     },
