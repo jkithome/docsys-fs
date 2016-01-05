@@ -10,6 +10,7 @@ module.exports = mongoose.model('Role', new Schema({
     required: true,
     default: 'user',
     // Allowed roles
-    enum: ['admin', 'staff', 'user']
-  }
+    enum: ['admin', 'staff', 'user', 'test']
+  },
+  description: String
 }));
