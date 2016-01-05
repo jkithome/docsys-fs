@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   var request = require('superagent');
-  var documentId, documentIdB, token, tokenB;
+  var documentId, documentIdB, token, tokenB, userId;
   var userHelper = require('../helpers/usersHelper');
 
   describe('Document spec', function() {
@@ -36,6 +36,7 @@
           .accept('application/json')
           .end(function(err, res) {
             token = res.body.token;
+            userId = res.body.user._id;
             request
               .post('http://localhost:8080/api/documents', {
                 title: 'The Matrix',
@@ -132,6 +133,23 @@
           });
       });
 
+      it('Document has roles that can access it defined', function(done) {
+        request
+          .post('http://localhost:8080/api/documents', {
+            title: 'Star Wars: The Force Awakens',
+            genre: 'Fantasy',
+            content: '30 years after the defeat of the Galactic Empire, a new threat rises. The First Order attempts to rule the galaxy and only a ragtag group of Heroes can stop them, along with the help of the Resistance.',
+          })
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body.message).toBe('Document created successfully.');
+            expect(res.body.doc.access).toBeDefined();
+            done();
+          });
+      });
+
       it('Document has date of creation', function(done) {
         request
           .post('http://localhost:8080/api/users/login', {
@@ -205,7 +223,7 @@
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
             expect(res.body instanceof Array).toBe(true);
-            expect(res.body.length).toBe(3);
+            expect(res.body.length).toBe(4);
             expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
             done();
           });
@@ -235,6 +253,32 @@
             expect(Object.prototype.toString.call(res.body[0])).toBe("[object Object]");
             expect(res.body instanceof Array).toBe(true);
             expect(res.body[0].title).toBe('The Matrix');
+            done();
+          });
+      });
+
+      it('Should return all documents created by a user', function(done) {
+        request
+          .get('http://localhost:8080/api/users/' + userId + '/' + 'mydocuments')
+          .set('x-access-token', token)
+          .accept('application./json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body instanceof Array).toBe(true);
+            expect(res.body.length).toBe(3);
+            done();
+          });
+      });
+
+      it('Should return all documents accessible by a user', function(done) {
+        request
+          .get('http://localhost:8080/api/users/' + userId + '/' + 'documents')
+          .set('x-access-token', token)
+          .accept('application./json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body instanceof Array).toBe(true);
+            expect(res.body.length).toBe(4);
             done();
           });
       });
