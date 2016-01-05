@@ -283,7 +283,6 @@
         if (err) {
           res.send(err);
         } else {
-          var userRole = user.role;
           Document.find({
             owner: userId
           }, function(err, documents) {
