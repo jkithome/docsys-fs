@@ -83,13 +83,39 @@
 
       it('Fetches a role', function(done) {
         request
-          .get('http://localhost:8080/api/roles' + roleId)
+          .get('http://localhost:8080/api/roles/' + roleId)
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(200);
             expect(res.body.title).toBe('test');
             expect(res.body.description).toBe('For testing only');
+            done();
+          });
+      });
+
+      it('Role is updated', function(done) {
+        request
+          .put('http://localhost:8080/api/roles/' + roleId, {
+            description: 'Role can be updated'
+          })
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body.message).toBe('Role updated successfully.');
+            done();
+          });
+      });
+
+      it('Role is deleted', function(done) {
+        request
+          .delete('http://localhost:8080/api/roles/' + roleId)
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body.message).toBe('Role deleted successfully.');
             done();
           });
       });
