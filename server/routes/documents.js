@@ -37,7 +37,7 @@
     app.route('/api/users/:id/documents')
       .get(Auth.authenticate, Documents.allByUser);
 
-    app.route('api/users/:id/mydocuments')
+    app.route('/api/users/:id/mydocuments')
       .get(Auth.authenticate, Documents.allUserCreated);
   };
 })();
