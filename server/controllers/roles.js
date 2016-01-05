@@ -54,7 +54,7 @@
               res.send(err);
             } else {
               res.json({
-                message: 'Role updated succesfully.'
+                message: 'Role updated successfully.'
               });
             }
           });
