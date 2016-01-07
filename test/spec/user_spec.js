@@ -40,6 +40,7 @@
           })
           .accept('application/json')
           .end(function(err, res) {
+            expect(res.status).toBe(500);
             expect(res.body.code).toEqual(11000);
             expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.users.$username_1 dup key: { : \"Tester\" }');
             done();
@@ -57,7 +58,7 @@
           })
           .accept('application/json')
           .end(function(err, res) {
-            expect(res.status).toEqual(200);
+            expect(res.status).toEqual(500);
             expect(res.body.message).toBe('User validation failed');
             expect(res.body.name).toBe('ValidationError');
             done();
@@ -75,7 +76,7 @@
           })
           .accept('application/json')
           .end(function(err, res) {
-            expect(res.status).toEqual(200);
+            expect(res.status).toEqual(500);
             expect(res.body.message).toBe('User validation failed');
             expect(res.body.name).toBe('ValidationError');
             done();
@@ -94,6 +95,7 @@
           })
           .accept('application/json')
           .end(function(err, res) {
+            expect(res.status).toBe(500);
             expect(res.body.code).toEqual(11000);
             expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.users.$email_1 dup key: { : "testing@api.com" }');
             done();
