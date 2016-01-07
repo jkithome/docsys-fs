@@ -31,7 +31,7 @@
     app.route('/api/documents/:id')
       .get(Auth.authenticate, Documents.find)
       .put(Auth.authenticate, Documents.update)
-      .delete(Auth.authenticate, Documents.delete);
+      .delete(Auth.authenticate, Documents.deleteOne);
 
     // All documents accesscible by a user
     app.route('/api/users/:id/documents')

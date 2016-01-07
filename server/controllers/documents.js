@@ -110,7 +110,7 @@
       });
     },
 
-    delete: function(req, res) {
+    deleteOne: function(req, res) {
       Document.findById(req.params.id, function(err, document) {
         if (err) {
           res.status(500).send(err);
