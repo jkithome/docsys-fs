@@ -47,7 +47,7 @@
     all: function(req, res) {
       User.find({}, function(err, users) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           res.json(users);
         }
@@ -70,7 +70,7 @@
         user.password = req.body.password;
         user.save(function(err) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             res.json({
               message: 'User created successfully.'
@@ -85,7 +85,7 @@
           title: Roles.schema.paths.title.defaultUser()
         }, function(err, role) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             user.role = role._id;
             saveUSer();
@@ -97,7 +97,7 @@
           title: req.body.role
         }, function(err, role) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             user.role = role._id;
             saveUSer();
@@ -123,7 +123,7 @@
     update: function(req, res) {
       User.findById(req.params.id, function(err, user) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           if (req.body.username) {
             user.username = req.body.username;
@@ -142,7 +142,7 @@
           }
           user.save(function(err) {
             if (err) {
-              res.send(err);
+              res.status(500).send(err);
             } else {
               res.json({
                 message: 'User updated succesfully.'
@@ -153,23 +153,17 @@
       });
     },
 
-    delete: function(req, res) {
-      User.findById(req.params.id, function(err, user) {
-        if (err) {
-          res.send(err);
-        } else {
-          user.remove({
+    deleteOne: function(req, res) {
+      User.remove({
             _id: req.params.id
           }, function(err) {
             if (err) {
-              res.send(err);
+              res.status(500).send(err);
             } else {
               res.json({
                 message: 'User deleted successfully.'
               });
-            }
-          });
-        }
+          }
       });
     }
   };

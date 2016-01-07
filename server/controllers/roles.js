@@ -9,7 +9,7 @@
 
       role.save(function(err) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           res.json({
             message: 'Role created successfully.',
@@ -22,7 +22,7 @@
     all: function(req, res) {
       Role.find({}, function(err, roles) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           res.json(roles);
         }
@@ -44,14 +44,14 @@
     update: function(req, res) {
       Role.findById(req.params.id, function(err, role) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           if (req.body.description) {
             role.description = req.body.description;
           }
           role.save(function(err) {
             if (err) {
-              res.send(err);
+              res.status(500).send(err);
             } else {
               res.json({
                 message: 'Role updated successfully.'
@@ -62,24 +62,18 @@
       });
     },
 
-    delete: function(req, res) {
-      Role.findById(req.params.id, function(err, role) {
-        if (err) {
-          res.send(err);
-        } else {
-          role.remove({
+    deleteOne: function(req, res) {
+      Role.remove({
             _id: req.params.id
           }, function(err) {
             if (err) {
-              res.send(err);
+              res.status(500).send(err);
             } else {
               res.json({
                 message: 'Role deleted successfully.'
               });
             }
           });
-        }
-      });
     }
   };
 })();

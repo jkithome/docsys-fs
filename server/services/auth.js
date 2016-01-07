@@ -22,7 +22,7 @@ module.exports = {
     } else {
       // If there is no token
       // return an error
-      return res.status(403).send({
+      return res.status(401).send({
         message: 'No token provided.'
       });
 
