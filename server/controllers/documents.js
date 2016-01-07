@@ -18,7 +18,7 @@
 
         document.save(function(err) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             res.json({
               message: 'Document created successfully.',
@@ -33,7 +33,7 @@
           title: aRole
         }, function(err, role) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             return callback(null, role._id);
           }
@@ -45,7 +45,7 @@
         var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
         async.map(granted, roleFind, function(err, results) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             document.access = results;
             saveDocument();
@@ -55,7 +55,7 @@
         var defaultRoles = ['user', 'admin', 'staff'];
         async.map(defaultRoles, roleFind, function(err, results) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             document.access = results;
             saveDocument();
@@ -67,7 +67,7 @@
     update: function(req, res) {
       Document.findById(req.params.id, function(err, document) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           if (req.decoded._id === document.owner.toString() ||
             (document.access.indexOf(req.decoded.role._id) !== -1 &&
@@ -85,7 +85,7 @@
 
               document.save(function(err) {
                 if (err) {
-                  res.send(err);
+                  res.status(500).send(err);
                 } else {
                   res.json({
                     message: 'Document updated successfully.'
@@ -99,7 +99,7 @@
                 title: aRole
               }, function(err, role) {
                 if (err) {
-                  res.send(err);
+                  res.status(500).send(err);
                 } else {
                   return callback(null, role._id);
                 }
@@ -111,7 +111,7 @@
               var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
               async.map(granted, roleFind, function(err, results) {
                 if (err) {
-                  res.send(err);
+                  res.status(500).send(err);
                 } else {
                   document.access = results;
                   saveDocument();
@@ -121,7 +121,7 @@
               saveDocument();
             }
           } else {
-            res.json({
+            res.status(403).json({
               message: 'You are not allowed to update this document!'
             });
           }
@@ -132,7 +132,7 @@
     delete: function(req, res) {
       Document.findById(req.params.id, function(err, document) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           // data exists, remove it.
           if (req.decoded._id === document.owner.toString() ||
@@ -141,7 +141,7 @@
               _id: req.params.id
             }, function(err) {
               if (err) {
-                res.send(err);
+                res.status(500).send(err);
               } else {
                 res.json({
                   'message': 'Document deleted successfully.'
@@ -149,7 +149,7 @@
               }
             });
           } else {
-            res.json({
+            res.status(403).json({
               message: 'You are not allowed to delete this document!'
             });
           }
@@ -162,7 +162,7 @@
       Document
         .find({}, function(err, documents) {
           if (err) {
-            res.send(err);
+            res.status(500).send(err);
           } else {
             res.json(documents);
           }
@@ -181,12 +181,12 @@
     find: function(req, res) {
       Document.findById(req.params.id, function(err, document) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           if ((req.decoded._id === document.owner.toString()) || (document.access.indexOf(req.decoded.role._id) !== -1)) {
             res.json(document);
           } else {
-            res.json({
+            res.status(403).json({
               message: 'You are not allowed to access this document!'
             });
           }
@@ -203,7 +203,7 @@
         genre: re
       }, function(err, documents) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           res.json(documents);
         }
@@ -220,7 +220,7 @@
         }
       }, function(err, documents) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           res.json(documents);
         }
@@ -234,7 +234,7 @@
         title: role
       }, function(err, roleO) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           var roleId = roleO._id;
           // Find all documents with the role id in access field.
@@ -256,7 +256,7 @@
       var userId = req.params.id;
       User.findById(userId, function(err, user) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           var userRole = user.role;
           // Find documents the users owns or can access.
@@ -268,7 +268,7 @@
             }]
           }, function(err, documents) {
             if (err) {
-              res.send(err);
+              res.status(500).send(err);
             } else {
               res.json(documents);
             }
@@ -283,7 +283,7 @@
         owner: userId
       }, function(err, documents) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           res.json(documents);
         }
@@ -301,7 +301,7 @@
         }
       }, function(err, documents) {
         if (err) {
-          res.send(err);
+          res.status(500).send(err);
         } else {
           res.json(documents);
         }
