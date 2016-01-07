@@ -62,7 +62,7 @@
       });
     },
 
-    delete: function(req, res) {
+    deleteOne: function(req, res) {
       Role.remove({
             _id: req.params.id
           }, function(err) {

@@ -11,6 +11,6 @@
     app.route('/api/roles/:id')
       .get(Auth.authenticate, Roles.find)
       .put(Auth.authenticate, Roles.update)
-      .delete(Auth.authenticate, Roles.delete);
+      .delete(Auth.authenticate, Roles.deleteOne);
   };
 })();
