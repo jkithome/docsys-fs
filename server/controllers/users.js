@@ -153,7 +153,7 @@
       });
     },
 
-    delete: function(req, res) {
+    deleteOne: function(req, res) {
       User.remove({
             _id: req.params.id
           }, function(err) {

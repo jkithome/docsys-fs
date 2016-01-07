@@ -18,7 +18,7 @@
     app.route('/api/users/:id')
       .get(Auth.authenticate, Users.find)
       .put(Auth.authenticate, Users.update)
-      .delete(Auth.authenticate, Users.delete);
+      .delete(Auth.authenticate, Users.deleteOne);
 
   };
 })();
