@@ -63,11 +63,7 @@
     },
 
     delete: function(req, res) {
-      Role.findById(req.params.id, function(err, role) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          role.remove({
+      Role.remove({
             _id: req.params.id
           }, function(err) {
             if (err) {
@@ -78,8 +74,6 @@
               });
             }
           });
-        }
-      });
     }
   };
 })();
