@@ -154,11 +154,7 @@
     },
 
     delete: function(req, res) {
-      User.findById(req.params.id, function(err, user) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          user.remove({
+      User.remove({
             _id: req.params.id
           }, function(err) {
             if (err) {
@@ -167,9 +163,7 @@
               res.json({
                 message: 'User deleted successfully.'
               });
-            }
-          });
-        }
+          }
       });
     }
   };
