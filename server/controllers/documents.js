@@ -4,6 +4,17 @@
   var User = require('../models/users');
   var Roles = require('../models/roles');
   var async = require('async');
+  var roleFind = function(aRole, callback) {
+      Roles.findOne({
+        title: aRole
+      }, function(err, role) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+            return callback(null, role._id);
+        }
+      });
+   };
 
   module.exports = {
 
@@ -27,19 +38,6 @@
           }
         });
       };
-
-      var roleFind = function(aRole, callback) {
-        Roles.findOne({
-          title: aRole
-        }, function(err, role) {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            return callback(null, role._id);
-          }
-        });
-      };
-
 
       if (req.body.access) {
         var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
@@ -93,19 +91,6 @@
                 }
               });
             };
-
-            var roleFind = function(aRole, callback) {
-              Roles.findOne({
-                title: aRole
-              }, function(err, role) {
-                if (err) {
-                  res.status(500).send(err);
-                } else {
-                  return callback(null, role._id);
-                }
-              });
-            };
-
 
             if (req.body.access) {
               var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
