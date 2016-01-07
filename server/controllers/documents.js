@@ -16,6 +16,18 @@
       });
    };
 
+   var accessRights = function(req, document, callback) {
+    var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
+      async.map(granted, roleFind, function(err, results) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          document.access = results;
+          callback();
+        }
+      });
+    };
+
   module.exports = {
 
     create: function(req, res) {
@@ -40,15 +52,7 @@
       };
 
       if (req.body.access) {
-        var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
-        async.map(granted, roleFind, function(err, results) {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            document.access = results;
-            saveDocument();
-          }
-        });
+        accessRights(req, document, saveDocument);
       } else {
         var defaultRoles = ['user', 'admin', 'staff'];
         async.map(defaultRoles, roleFind, function(err, results) {
@@ -93,15 +97,7 @@
             };
 
             if (req.body.access) {
-              var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
-              async.map(granted, roleFind, function(err, results) {
-                if (err) {
-                  res.status(500).send(err);
-                } else {
-                  document.access = results;
-                  saveDocument();
-                }
-              });
+              accessRights(req, document, saveDocument);
             } else {
               saveDocument();
             }
