@@ -21,7 +21,7 @@
           })
           .accept('application/json')
           .end(function(err, res) {
-            expect(res.status).toEqual(403);
+            expect(res.status).toEqual(401);
             expect(res.body.message).toBe('No token provided.');
             done();
           });
@@ -66,7 +66,7 @@
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
-            expect(res.status).toEqual(200);
+            expect(res.status).toEqual(500);
             expect(res.body.message).toBe('Document validation failed');
             expect(res.body.errors.title.message).toBe('Path `title` is required.');
             done();
@@ -84,7 +84,7 @@
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
-            expect(res.status).toEqual(200);
+            expect(res.status).toEqual(500);
             expect(res.body.code).toEqual(11000);
             expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.documents.$title_1 dup key: { : \"The Matrix\" }');
             done();
@@ -299,7 +299,7 @@
               .set('x-access-token', tokenator)
               .accept('application/json')
               .end(function(err, res) {
-                expect(res.status).toEqual(200);
+                expect(res.status).toEqual(403);
                 expect(Object.prototype.toString.call(res.body)).toBe('[object Object]');
                 expect(res.body.message).toBe('You are not allowed to access this document!');
                 done();
@@ -337,7 +337,7 @@
               .set('x-access-token', tokenator)
               .accept('application/json')
               .end(function(err, res) {
-                expect(res.status).toEqual(200);
+                expect(res.status).toEqual(403);
                 expect(res.body.message).toBe('You are not allowed to update this document!');
                 done();
               });
@@ -360,7 +360,7 @@
               .set('x-access-token', tokenator)
               .accept('application/json')
               .end(function(err, res) {
-                expect(res.status).toEqual(200);
+                expect(res.status).toEqual(403);
                 expect(res.body.message).toBe('You are not allowed to update this document!');
                 done();
               });
@@ -427,7 +427,7 @@
               .set('x-access-token', tokenator)
               .accept('application/json')
               .end(function(err, res) {
-                expect(res.status).toEqual(200);
+                expect(res.status).toEqual(403);
                 expect(res.body.message).toBe('You are not allowed to delete this document!');
                 done();
               });
@@ -448,7 +448,7 @@
               .set('x-access-token', tokenator)
               .accept('application/json')
               .end(function(err, res) {
-                expect(res.status).toEqual(200);
+                expect(res.status).toEqual(403);
                 expect(res.body.message).toBe('You are not allowed to delete this document!');
                 done();
               });
@@ -488,7 +488,7 @@
               .delete('http://localhost:8080/api/documents/' + documentId)
               .set('x-access-token', tokenator)
               .end(function(err, res) {
-                expect(res.status).toEqual(200);
+                expect(res.status).toEqual(403);
                 expect(res.body.message).toBe('You are not allowed to delete this document!');
                 done();
               });
