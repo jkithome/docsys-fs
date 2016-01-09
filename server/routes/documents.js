@@ -5,26 +5,23 @@
   module.exports = function(app) {
     // Create documents route
     app.route('/api/documents')
-      .post(Auth.authenticate, Documents.create);
-
-    // All documents by limit
-    app.route('/api/documents/all/:limit')
+      .post(Auth.authenticate, Documents.create)
       .get(Auth.authenticate, Documents.all);
 
     // All documents by genre
-    app.route('/api/documents/genre/:genre')
+    app.route('/api/documents/genre')
       .get(Auth.authenticate, Documents.allByGenre);
 
     // All documents with a given word in the content field
-    app.route('/api/documents/search/:term')
+    app.route('/api/documents/search')
       .get(Auth.authenticate, Documents.allByContent);
 
     // All documents created on a given date
-    app.route('/api/documents/:year/:month/:day/:limit')
+    app.route('/api/documents/date')
       .get(Auth.authenticate, Documents.allByDate);
 
     // All documents accessible by a given role
-    app.route('/api/documents/role/:role/:limit')
+    app.route('/api/documents/role')
       .get(Auth.authenticate, Documents.allByRole);
 
     // Route to find, update or delete a specific document
