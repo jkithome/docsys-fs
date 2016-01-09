@@ -163,7 +163,7 @@
         // Populate the owner field
         .populate('owner')
         // Return only a given number
-        .limit(req.params.limit)
+        .limit(req.query.limit)
         // By latest created
         .sort({
           createdAt: -1
@@ -189,7 +189,7 @@
 
     // Return all documents belonging to a particular genre
     allByGenre: function(req, res) {
-      var genre = req.params.genre;
+      var genre = req.query.genre;
       // Create case insensitive regular expression
       var re = new RegExp(genre, 'gi');
       Document.find({
@@ -200,12 +200,13 @@
         } else {
           res.json(documents);
         }
-      });
+      }).
+      limit(req.query.limit);
     },
 
     // REturn all documents with a particular word in the content
     allByContent: function(req, res) {
-      var searchterm = req.params.term;
+      var searchterm = req.query.term;
       var re = new RegExp(searchterm, 'gi');
       Document.find({
         content: {
@@ -217,12 +218,13 @@
         } else {
           res.json(documents);
         }
-      });
+      }).
+      limit(req.query.limit);
     },
 
     // Return all the documents that can be accessed by a role
     allByRole: function(req, res) {
-      var role = req.params.role;
+      var role = req.query.role;
       Roles.findOne({
         title: role
       }, function(err, roleO) {
@@ -240,7 +242,7 @@
               res.json(documents);
             }
           })
-          .limit(req.params.limit);
+          .limit(req.query.limit);
         }
       });
     },
@@ -265,7 +267,8 @@
             } else {
               res.json(documents);
             }
-          });
+          }).
+          limit(req.query.limit);
         }
       });
     },
@@ -280,12 +283,13 @@
         } else {
           res.json(documents);
         }
-      });
+      }).
+      limit(req.query.limit);
     },
 
     // Get all documents created on a specific date. Midnight to midnight
     allByDate: function(req, res) {
-      var start = new Date(req.params.year, (req.params.month - 1), req.params.day);
+      var start = new Date(req.query.year, (req.query.month - 1), req.query.day);
       var end = new Date(start.getTime() + (24 * 60 * 60 * 1000));
       Document.find({
         createdAt: {
@@ -299,7 +303,7 @@
           res.json(documents);
         }
       }).
-      limit(req.params.limit).
+      limit(req.query.limit).
       sort({
         createdAt: -1
       });
