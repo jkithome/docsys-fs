@@ -21,7 +21,7 @@
   var insertDocument = function(db, callback) {
     db.collection('roles').insertMany(data, function(err, result) {
       assert.equal(err, null);
-      console.log("Inserted a document into the roles collection.");
+      console.log('Inserted a document into the roles collection.');
       callback(result);
     });
   };
