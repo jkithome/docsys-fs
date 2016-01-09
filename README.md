@@ -9,11 +9,8 @@ This is a system for managing documents, users and roles. Users have defined rol
   - Run npm install to install required dependencies
 
 ## Testing
-Testing is done using superagent and jasmine node. Superagent is used to make requests to the server and tests done on the responses. Mongoose seed is used to seed initial users to help in testing. To test the system, open four tabs and navigate to the root folder of the project in each. Run the following commands in a tab in order:
+Testing is done using superagent and jasmine node. Superagent is used to make requests to the server and tests done on the responses. To test the system, navigate to the root folder of the project and make sure you are in the master branch by running git branch. Finally, run the following command in a tab in order:
 
-  - mongod
-  - node index.js
-  - node test/seed/seed.js
   - npm test
 
 ## Express Routes
