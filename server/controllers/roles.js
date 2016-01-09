@@ -64,16 +64,16 @@
 
     deleteOne: function(req, res) {
       Role.remove({
-            _id: req.params.id
-          }, function(err) {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              res.json({
-                message: 'Role deleted successfully.'
-              });
-            }
+        _id: req.params.id
+      }, function(err) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.json({
+            message: 'Role deleted successfully.'
           });
+        }
+      });
     }
   };
 })();

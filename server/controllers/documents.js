@@ -5,28 +5,28 @@
   var Roles = require('../models/roles');
   var async = require('async');
   var roleFind = function(aRole, callback) {
-      Roles.findOne({
-        title: aRole
-      }, function(err, role) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-            return callback(null, role._id);
-        }
-      });
-   };
+    Roles.findOne({
+      title: aRole
+    }, function(err, role) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        return callback(null, role._id);
+      }
+    });
+  };
 
-   var accessRights = function(req, document, callback) {
+  var accessRights = function(req, document, callback) {
     var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
-      async.map(granted, roleFind, function(err, results) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          document.access = results;
-          callback();
-        }
-      });
-    };
+    async.map(granted, roleFind, function(err, results) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        document.access = results;
+        callback();
+      }
+    });
+  };
 
   module.exports = {
 
@@ -220,15 +220,15 @@
           var roleId = roleO._id;
           // Find all documents with the role id in access field.
           Document.find({
-            access: roleId
-          }, function(err, documents) {
-            if (err) {
-              res.json(err);
-            } else {
-              res.json(documents);
-            }
-          })
-          .limit(req.params.limit);
+              access: roleId
+            }, function(err, documents) {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json(documents);
+              }
+            })
+            .limit(req.params.limit);
         }
       });
     },
