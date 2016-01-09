@@ -4,7 +4,9 @@
   "description": "Document management system using node.js and mongoDB",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine-node test/spec --verbose || :"
+    "pretest": "node test/helpers/clearDB.js &\nsleep 4 \n node index &\nsleep 4",
+    "test": "jasmine-node test/spec/*.js --verbose || :",
+    "posttest": "pkill node"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,7 @@
   var request = require('superagent');
   var token, roleId;
   var userHelper = require('../helpers/usersHelper');
+  var roleHelper = require('../helpers/rolesHelper');
 
   describe('Roles spec', function() {
     beforeEach(function(done) {

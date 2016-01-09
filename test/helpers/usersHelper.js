@@ -37,7 +37,7 @@
   };
 
   module.exports = {
-    seedUsers: function(next) {
+    seedUsers: function(callback) {
       request
         .post('http://localhost:8080/api/users/create', User1)
         .accept('application/json')
@@ -58,7 +58,7 @@
         .accept('application/json')
         .end();
 
-      next();
+      callback();
     }
   };
 

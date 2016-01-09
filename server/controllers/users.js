@@ -46,13 +46,13 @@
 
     all: function(req, res) {
       User.find({}, function(err, users) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.json(users);
-        }
-      }).
-      // Sort by latest created
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.json(users);
+          }
+        }).
+        // Sort by latest created
       sort({
         createdAt: -1
       });
@@ -155,15 +155,15 @@
 
     deleteOne: function(req, res) {
       User.remove({
-            _id: req.params.id
-          }, function(err) {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              res.json({
-                message: 'User deleted successfully.'
-              });
-          }
+        _id: req.params.id
+      }, function(err) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.json({
+            message: 'User deleted successfully.'
+          });
+        }
       });
     }
   };
