@@ -46,12 +46,12 @@
 
     all: function(req, res) {
       User.find({}, function(err, users) {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            res.json(users);
-          }
-        }).
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.json(users);
+        }
+      }).
         // Sort by latest created
       sort({
         createdAt: -1
@@ -70,7 +70,13 @@
         user.password = req.body.password;
         user.save(function(err) {
           if (err) {
-            res.status(500).send(err);
+            if(err.code === 11000) {
+              res.status(409).send(err);
+            } else if(err.name === 'ValidationError') {
+              res.status(400).send(err);
+            } else {
+              res.status(500).send(err);
+            }
           } else {
             res.json({
               message: 'User created successfully.'
@@ -142,7 +148,13 @@
           }
           user.save(function(err) {
             if (err) {
+              if(err.code === 11000) {
+              res.status(409).send(err);
+            } else if(err.name === 'ValidationError') {
+              res.status(400).send(err);
+            } else {
               res.status(500).send(err);
+            }
             } else {
               res.json({
                 message: 'User updated succesfully.'

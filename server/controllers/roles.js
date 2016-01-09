@@ -9,7 +9,13 @@
 
       role.save(function(err) {
         if (err) {
-          res.status(500).send(err);
+          if(err.code === 11000) {
+              res.status(409).send(err);
+            } else if(err.name === 'ValidationError') {
+              res.status(400).send(err);
+            } else {
+              res.status(500).send(err);
+            }
         } else {
           res.json({
             message: 'Role created successfully.',
@@ -51,7 +57,13 @@
           }
           role.save(function(err) {
             if (err) {
+              if(err.code === 11000) {
+              res.status(409).send(err);
+            } else if(err.name === 'ValidationError') {
+              res.status(400).send(err);
+            } else {
               res.status(500).send(err);
+            }
             } else {
               res.json({
                 message: 'Role updated successfully.'

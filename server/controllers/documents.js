@@ -16,7 +16,7 @@
     });
   };
 
-  var accessRights = function(req, document, callback) {
+  var accessRights = function(req, document, res, callback) {
     var granted = (req.body.access).trim().replace(/\s/g, '').split(',');
     async.map(granted, roleFind, function(err, results) {
       if (err) {
@@ -41,7 +41,13 @@
 
         document.save(function(err) {
           if (err) {
-            res.status(500).send(err);
+            if(err.code === 11000) {
+              res.status(409).send(err);
+            } else if(err.name === 'ValidationError') {
+              res.status(400).send(err);
+            } else {
+              res.status(500).send(err);
+            }
           } else {
             res.json({
               message: 'Document created successfully.',
@@ -52,7 +58,7 @@
       };
 
       if (req.body.access) {
-        accessRights(req, document, saveDocument);
+        accessRights(req, document, res, saveDocument);
       } else {
         var defaultRoles = ['user', 'admin', 'staff'];
         async.map(defaultRoles, roleFind, function(err, results) {
@@ -87,7 +93,13 @@
 
               document.save(function(err) {
                 if (err) {
-                  res.status(500).send(err);
+                  if(err.code === 11000) {
+                    res.status(409).send(err);
+                  } else if(err.name === 'ValidationError') {
+                    res.status(400).send(err);
+                  } else {
+                    res.status(500).send(err);
+                  }
                 } else {
                   res.json({
                     message: 'Document updated successfully.'
@@ -220,15 +232,15 @@
           var roleId = roleO._id;
           // Find all documents with the role id in access field.
           Document.find({
-              access: roleId
-            }, function(err, documents) {
-              if (err) {
-                res.json(err);
-              } else {
-                res.json(documents);
-              }
-            })
-            .limit(req.params.limit);
+            access: roleId
+          }, function(err, documents) {
+            if (err) {
+              res.json(err);
+            } else {
+              res.json(documents);
+            }
+          })
+          .limit(req.params.limit);
         }
       });
     },

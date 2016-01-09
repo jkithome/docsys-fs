@@ -41,7 +41,7 @@
               .set('x-access-token', token)
               .accept('application/json')
               .end(function(err, res) {
-                expect(res.status).toEqual(500);
+                expect(res.status).toEqual(409);
                 expect(res.body.code).toBe(11000);
                 expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.roles.$title_1 dup key: { : \"user\" }');
                 done();
@@ -57,7 +57,7 @@
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
-            expect(res.status).toEqual(500);
+            expect(res.status).toEqual(400);
             expect(res.body.message).toBe('Role validation failed');
             expect(res.body.name).toBe('ValidationError');
             expect(res.body.errors.title.message).toBe('Path `title` is required.');
