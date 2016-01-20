@@ -24,6 +24,7 @@
     "body-parser": "^1.14.2",
     "eslint": "^1.10.3",
     "express": "^4.13.3",
+    "gulp": "^3.9.0",
     "jasmine-node": "^1.14.5",
     "jsonwebtoken": "5.4.1",
     "mongoose": "^4.3.1",
