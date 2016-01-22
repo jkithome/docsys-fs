@@ -22,6 +22,14 @@
     "async": "^1.5.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.2",
+    "babel-eslint": "^4.1.6",
+    "babelify": "^7.2.0",
+    "browserify": "^11.2.0",
+    "browserify-shim": "^3.8.11",
+    "flux": "^2.1.1",
+    "fs": "0.0.2",
+    "history": "^1.17.0",
+    "jade": "~1.11.0",
     "eslint": "^1.10.3",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
@@ -42,7 +50,12 @@
     "mongoose": "^4.3.1",
     "morgan": "^1.6.1",
     "nodemon": "^1.8.1",
-    "superagent": "^1.6.1"
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
+    "react-router": "^1.0.3",
+    "reactify": "^1.1.1",
+    "superagent": "^1.6.1",
+    "vinyl-source-stream": "~1.1.0"
   },
   "devDependencies": {
     "eslint-plugin-react": "^3.14.0"
