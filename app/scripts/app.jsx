@@ -5,12 +5,11 @@
     ReactDOM = require('react-dom'),
     ReactRouter = require('react-router'),
     Router = ReactRouter.Router,
-    IndexRoute = ReactRouter.IndexRoute,
     Route = ReactRouter.Route,
-    LandingPage = require('./components/LandingPage/header.jsx'),
+    LandingPage = require('./components/LandingPage/header.jsx');
 
   ReactDOM.render((
-    <Router history={createBrowserHistory()}>
+    <Router>
       <Route path="/" component={LandingPage} >
       </Route>
     </Router>

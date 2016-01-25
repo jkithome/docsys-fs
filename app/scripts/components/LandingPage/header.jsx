@@ -1,29 +1,31 @@
 (function(){
   'use strict';
-  var React = require('react'),
+  var React = require('react');
 
     module.exports = React.createClass({
       render: function() {
         return(
+          <div>
           <header>
             <nav>
-              <div class="nav-wrapper">
-                <a href="#" class="brand-logo"><img class="logo-img" src="logo.gif"></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                  <li><a href="badges.html">Login</a></li>
+              <div className="nav-wrapper">
+                <a href="#" className="brand-logo"><img className="logo-img" src="../../images/logo.gif" /></a>
+                <ul id="nav-mobile" className="right hide-on-med-and-down">
+                  <li><a href="/login">Login</a></li>
                 </ul>
               </div>
             </nav>
           </header>
           <main>
-            <div class="container">
+            <div className="container">
               <h1>The simplest way to manage your documents.</h1>
-              <div class="center-btn">
-                <button class="join btn waves-effect waves-light" type="submit" name="action">GET STARTED
+              <div className="center-btn">
+                <button className="join btn waves-effect waves-light" type="submit" name="action"><a href= "/join" className = "join-btn">GET STARTED</a>
                 </button>
               </div>
             </div>
           </main>
+          </div>
           );
       }
   });
