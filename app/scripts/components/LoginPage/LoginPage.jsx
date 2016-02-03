@@ -27,13 +27,13 @@
                             <div className="row">
                               <div className="input-field col s12">
                                 <input id="last_name" type="text" className="validate" />
-                                <label for="last_name">Username *</label>
+                                <label htmlFor="last_name">Username *</label>
                               </div>
                             </div>
                             <div className="row">
                               <div className="input-field col s12">
                                 <input id="password" type="password" className="validate" />
-                                <label for="password">Password *</label>
+                                <label htmlFor="password">Password *</label>
                               </div>
                             </div>
                             <div className="row">
@@ -48,7 +48,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row col s12 m5">
+                  <div className="row col s12 m5">
                   </div>
               </main>
           </div>);
