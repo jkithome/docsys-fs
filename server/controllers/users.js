@@ -46,12 +46,12 @@
 
     all: function(req, res) {
       User.find({}, function(err, users) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.json(users);
-        }
-      }).
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.json(users);
+          }
+        }).
         // Sort by latest created
       sort({
         createdAt: -1
@@ -70,9 +70,9 @@
         user.password = req.body.password;
         user.save(function(err) {
           if (err) {
-            if(err.code === 11000) {
+            if (err.code === 11000) {
               res.status(409).send(err);
-            } else if(err.name === 'ValidationError') {
+            } else if (err.name === 'ValidationError') {
               res.status(400).send(err);
             } else {
               res.status(500).send(err);
@@ -88,8 +88,9 @@
       if (!req.body.role) {
         Roles.findOne({
           // Use default user
-          title: Roles.schema.paths.title.defaultUser()
+          title: Roles.schema.paths.title.default()
         }, function(err, role) {
+          console.log('role', role)
           if (err) {
             res.status(500).send(err);
           } else {
@@ -148,13 +149,13 @@
           }
           user.save(function(err) {
             if (err) {
-              if(err.code === 11000) {
-              res.status(409).send(err);
-            } else if(err.name === 'ValidationError') {
-              res.status(400).send(err);
-            } else {
-              res.status(500).send(err);
-            }
+              if (err.code === 11000) {
+                res.status(409).send(err);
+              } else if (err.name === 'ValidationError') {
+                res.status(400).send(err);
+              } else {
+                res.status(500).send(err);
+              }
             } else {
               res.json({
                 message: 'User updated succesfully.'
