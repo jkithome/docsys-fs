@@ -15,7 +15,7 @@
         // If user doesn't exist
         if (!user) {
           res.json({
-            message: 'User not found.'
+            error: 'User not found.'
           });
         } else if (user) {
           var validPassword = user.comparePassword(req.body.password);
@@ -23,7 +23,7 @@
           // If the password is wrong.
           if (!validPassword) {
             res.json({
-              message: 'Wrong password.'
+              error: 'Wrong password.'
             });
           } else {
 
@@ -119,7 +119,7 @@
       User.findById(req.params.id, function(err, user) {
         if (err) {
           res.json({
-            message: 'Error fetching user.'
+            error: 'Error fetching user.'
           });
         } else {
           res.json(user);
