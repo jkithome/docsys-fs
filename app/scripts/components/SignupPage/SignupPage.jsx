@@ -8,7 +8,9 @@
 
 
     module.exports = React.createClass({
-      mixins: [History],
+      contextTypes: {
+        router: React.PropTypes.object.isRequired
+      },
 
       getInitialState: function() {
         return {
@@ -49,7 +51,8 @@
           this.setState({result: data.error.message});
         } else {
           this.setState({result: 'Success!'});
-          this.history.pushState(null, '/dashboard');
+          window.Materialize.toast(data.message, 2000, 'success-toast');
+          this.context.router.push('/login');
         }
       },
 
