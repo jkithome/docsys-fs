@@ -90,7 +90,6 @@
           // Use default user
           title: Roles.schema.paths.title.default()
         }, function(err, role) {
-          console.log('role', role)
           if (err) {
             res.status(500).send(err);
           } else {
