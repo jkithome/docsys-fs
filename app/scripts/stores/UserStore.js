@@ -6,14 +6,14 @@
     BaseStore = require('./BaseStore');
 
   var UserStore = assign({}, BaseStore, {
-    fetchedUsers: null,
+    users: null,
     setUsers: function(users) {
-      this.fetchedUsers = users;
+      this.users = users;
       this.emitChange();
     },
 
     getUsers: function() {
-      return this.fetchedUsers;
+      return this.users;
     }
   });
 
@@ -24,6 +24,9 @@
         break;
       case DocsysConstants.USER_LOGIN:
         UserStore.setData(action.data);
+        break;
+      case DocsysConstants.USERS_GET:
+        UserStore.setUsers(action.data);
         break;
       default:
         // no operation for default
