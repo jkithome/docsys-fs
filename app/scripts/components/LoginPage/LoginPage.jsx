@@ -26,6 +26,7 @@
 
       handleLogin: function() {
         var data = UserStore.getData();
+        localStorage.setItem('x-access-token', data.token)
         console.log(data);
         if(data.error) {
           if(typeof data.error === 'string') {
