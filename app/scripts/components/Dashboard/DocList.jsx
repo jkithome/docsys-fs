@@ -1,28 +1,32 @@
 (function() {
   'use strict';
-  var React = require('react');
-  var DocList = React.createClass({
+  var React = require('react'),
+    moment = require('moment'),
+    DocList = React.createClass({
       render: function() {
         var renderDoc = function(document) {
+          {var date = moment(document.createdAt).format('Do MMMM YYYY');}
           return (
-            <div className="col s12 m12 l4" style="top: 0px;">
+            <div className="col s12 m12 l4" style={{top: '0px'}} key={document._id}>
               <div className="card">
                 <div className="card-image waves-effect waves-block waves-light">
-                  <a href={'/docs/' + document.id}><p>{document.title}">
-                    <img width="320" height="240" src="http://lorempixel.com/600/337/nature/" className="responsive-img wp-post-image" alt={document.tile} title={document.tile}> </a>
+                  <a href={'/docs/' + document._id}>
+                    <img width="320" height="240" src="http://lorempixel.com/600/337/nature/" className="responsive-img wp-post-image" alt={document.title} title={document.title} /> </a>
                 </div>
                 <div className="card-content">
-                  <a href={'/docs/' + document.id}><p>{document.title}</p></a>
-                  <p>{'document.name.first' + ' ' + 'document.name.last'}</p>
-                  <p>Genre</p>
-                  <p>Created</p>
+                  <a href={'/docs/' + document._id}><p className="green-text">{document.title}</p></a>
+                  <p className="brown-text">Owner: {document.owner.name.first} {document.owner.name.last}</p>
+                  <p className="brown-text">Genre: {document.genre}</p>
+                  <p className="brown-text">Created: {date}</p>
                 </div>
               </div>
             </div>
           );
         };
-        return (<div>{this.props.documents.map(renderDoc)}</div>);
+        return (<div>{this.props.documents.length !== 0
+                ? this.props.documents.map(renderDoc)
+                : <h1>No documents available.</h1>}</div>);
       }
-});
+    });
   module.exports = DocList;
 })();
