@@ -51,9 +51,10 @@
           } else {
             res.json(users);
           }
-        }).
+        })
+      .populate('role')
         // Sort by latest created
-      sort({
+      .sort({
         createdAt: -1
       });
     },
