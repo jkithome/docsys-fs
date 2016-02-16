@@ -3,7 +3,7 @@
   var React = require('react');
   var Statistics = React.createClass({
       render: function() {
-        var renderOrg = function(users, documents, myDocuments) {
+        var renderStatistics = function(users, documents, userDocuments) {
           return (
             <div id="card-stats">
               <div className="row">
@@ -27,7 +27,7 @@
                   <div className="card">
                     <div className="card-content blue-grey white-text">
                       <p className="card-stats-title"><i className="mdi-action-description"></i> My Documents</p>
-                      <h4 className="card-stats-number">{myDocuments.length}</h4>
+                      <h4 className="card-stats-number">{userDocuments.length}</h4>
                     </div>
                   </div>
                 </div>
@@ -35,6 +35,7 @@
             </div>
           );
         };
+        return(<div>{renderStatistics(this.props.users, this.props.documents, this.props.userDocuments)}</div>)
       }
 });
   module.exports = Statistics;
