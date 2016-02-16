@@ -8,7 +8,7 @@
           <div>
             <nav>
               <div className="nav-wrapper">
-                <a href="#" className="brand-logo"><img className="logo-img" src="logo.gif"></a>
+                <a href="#" className="brand-logo"><img className="logo-img" src="../../images/logo.gif" /></a>
                 <ul className="right hide-on-med-and-down">
                   <li><a href="/dashboard"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard">dashboard</i></a></li>
                   <li><a href="/create"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Create Document">note_add</i></a></li>
