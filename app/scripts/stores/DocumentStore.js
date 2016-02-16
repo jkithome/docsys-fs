@@ -19,9 +19,9 @@
 
     getDocuments: function() {
       return this.documents;
-    }
+    },
 
-      setCreatedDocument: function(document) {
+    setCreatedDocument: function(document) {
       this.createdDocument = document;
       this.emitChange();
     },
@@ -31,21 +31,21 @@
     },
 
     setUserDocuments: function(documents) {
-      this.Userdocuments = documents;
+      this.userDocuments = documents;
       this.emitChange();
     },
 
     getUserDocuments: function() {
-      return this.Userdocuments;
+      return this.userDocuments;
     },
 
     setByUserDocuments: function(documents) {
-      this.byUserdocuments = documents;
+      this.byUserDocuments = documents;
       this.emitChange();
     },
 
-    getByUSerDocuments: function() {
-      return this.byUserdocuments;
+    getByUserDocuments: function() {
+      return this.byUserDocuments;
     }
 
   });

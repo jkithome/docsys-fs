@@ -7,6 +7,7 @@
 
   var UserStore = assign({}, BaseStore, {
     users: null,
+
     setUsers: function(users) {
       this.users = users;
       this.emitChange();
