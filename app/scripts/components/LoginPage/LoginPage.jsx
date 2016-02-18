@@ -26,7 +26,7 @@
 
       handleLogin: function() {
         var data = UserStore.getData();
-        //localStorage.setItem('x-access-token', data.token);
+        localStorage.setItem('x-access-token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         console.log(data);
         if(data.error) {
@@ -78,7 +78,7 @@
                               <div className="input-field col s12">
                                 <i className="material-icons prefix">account_circle</i>
                                 <input name="username" id="username" type="text" className="validate" onChange={this.handleFieldChange} required />
-                                <label htmlFor="last_name">Username *</label>
+                                <label htmlFor="username">Username *</label>
                               </div>
                             </div>
                             <div className="row">
