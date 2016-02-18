@@ -16,6 +16,18 @@
 
     getByUserDocuments: function() {
       BaseActions.get('/api/users/' + userId + '/documents', DocsysConstants.USERACCESSDOCUMENTS_GET, token);
+    },
+
+    createDocument: function(document, access) {
+      var data = {
+        title: document.title,
+        genre: document.genre,
+        content: document.content,
+        access: access
+      };
+
+      BaseActions.post('/api/documents', data,
+        DocsysConstants.DOCUMENT_CREATE, token);
     }
   };
 })();
