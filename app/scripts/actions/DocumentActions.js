@@ -28,6 +28,25 @@
 
       BaseActions.post('/api/documents', data,
         DocsysConstants.DOCUMENT_CREATE, token);
+    },
+
+    getDocument: function(docId) {
+      BaseActions.get('/api/documents/' + docId, DocsysConstants.DOCUMENT_GET, token);
+    },
+
+    deleteDocument: function(docId) {
+      BaseActions.delete('/api/documents/' + docId, DocsysConstants.DOCUMENT_DELETE, token);
+    },
+
+    editDocument: function(document, access, docId) {
+      var data = {
+        title: document.title,
+        genre: document.genre,
+        content: document.content,
+        access: access
+      };
+
+      BaseActions.put('/api/documents/' + docId, data, DocsysConstants.DOCUMENT_EDIT, token);
     }
   };
 })();
