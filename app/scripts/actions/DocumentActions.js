@@ -47,6 +47,18 @@
       };
 
       BaseActions.put('/api/documents/' + docId, data, DocsysConstants.DOCUMENT_EDIT, token);
-    }
+    },
+
+    genreSearch: function(genre, limit) {
+      BaseActions.get('/api/documents/genre?genre=' + genre + '&limit=' + limit, DocsysConstants.GENRE_SEARCH, token);
+    },
+
+    contentSearch: function(content, limit) {
+      BaseActions.get('/api/documents/search?term=' + content + '&limit=' + limit, DocsysConstants.CONTENT_SEARCH, token);
+    },
+
+    dateSearch: function(date, month, year, limit) {
+      BaseActions.get('/api/documents/date?year=' + year + '&month=' + month + '&date=' + date + '&limit=' + limit, DocsysConstants.DATE_SEARCH, token);
+    },
   };
 })();
