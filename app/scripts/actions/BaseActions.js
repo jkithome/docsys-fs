@@ -17,11 +17,10 @@
         });
     },
 
-    delete: function(url, data, actionType, token) {
+    delete: function(url, actionType, token) {
       request
         .delete(url)
         .set('x-access-token', token)
-        .send(data || {})
         .end(function(err, res) {
           AppDispatcher.dispatch({
             actionType: actionType,
