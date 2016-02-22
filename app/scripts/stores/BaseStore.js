@@ -15,15 +15,16 @@
       return this.data;
     },
 
-    emitChange: function() {
-      this.emit('change');
+    emitChange: function(event) {
+      event ? this.emit(event) : this.emit('change');
     },
 
-    addChangeListener: function(callback) {
-      this.on('change', callback);
+    addChangeListener: function(callback, event) {
+      event ? this.on(event, callback) : this.on('change', callback);
     },
 
-    removeChangeListener: function(callback) {
+    removeChangeListener: function(callback, event) {
+      event ? this.removeListener(event, callback) :
       this.removeListener('change', callback);
     }
   });
