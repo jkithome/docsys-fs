@@ -5,6 +5,10 @@
     DocumentStore = require('../../stores/DocumentStore'),
     DocumentActions = require('../../actions/DocumentActions'),
     History = require('react-router').History,
+    userId = JSON.parse(localStorage.getItem('user'))._id,
+    userRoleId = JSON.parse(localStorage.getItem('user')).role._id,
+    userRoleTitle = JSON.parse(localStorage.getItem('user')).role.title,
+
 
     DocumentCard = React.createClass({
 
@@ -52,8 +56,8 @@
                   <i className="large material-icons">menu</i>
                 </a>
                 <ul>
-                  <li><a className="btn-floating red"><i className="material-icons" onClick={this.deleteDocument}>delete</i></a></li>
-                  <li><a className="modal-trigger btn-floating blue" href={'docs/edit/' + this.props.document._id} ><i className="material-icons">mode_edit</i></a></li>
+                  <li>{(userId === this.props.document.owner._id) || ((userRoleTitle === 'admin') && (this.props.document.access).indexOf(userRoleId) !== -1) ? <a className='btn-floating red'><i className="material-icons" onClick={this.deleteDocument}>delete</i></a>: <a className='btn-floating red disabled'><i className="material-icons">delete</i></a>  }</li>
+                  <li>{(userId === this.props.document.owner._id) || ((userRoleTitle === 'staff' ||userRoleTitle === 'admin') && (this.props.document.access).indexOf(userRoleId) !== -1) ? <a className='btn-floating blue' href={'docs/edit/' + this.props.document._id} ><i className="material-icons">mode_edit</i></a> : <a className='btn-floating blue disabled'><i className="material-icons">mode_edit</i></a> }</li>
                 </ul>
               </div>
             </div>
