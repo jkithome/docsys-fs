@@ -21,7 +21,7 @@
       },
 
       componentDidMount: function() {
-        DocumentStore.addChangeListener(this.handleSubmit);
+        DocumentStore.addChangeListener(this.handleSubmit, 'createDoc');
       },
 
       handleSubmit: function() {
