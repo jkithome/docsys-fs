@@ -15,6 +15,7 @@
     Dashboard = require('./components/Dashboard/index.jsx'),
     DocumentView = require('./components/DocumentView/DocumentView.jsx'),
     Search = require('./components/Search/Search.jsx'),
+    Profile = require('./components/Profile/Profile.jsx'),
     DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx');
 
   ReactDOM.render((
@@ -28,6 +29,8 @@
         <Route path="/dashboard" component={Dashboard} >
         </Route>
         <Route path="/search" component={Search} >
+        </Route>
+        <Route path="/profile" component={Profile} >
         </Route>
         <Route path="/docs/:docId" component={DocumentView} >
         </Route>
