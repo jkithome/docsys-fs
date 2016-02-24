@@ -3,10 +3,11 @@ html
   head
     include shared/head
   body
-    #ui-view
-    script(src="./js/app.js")
-    include shared/footer
-    script.
-      $(document).ready(function() {
-      $('select').material_select();
-      });
+    #wrapper
+      #ui-view
+      script(src="./js/app.js")
+      include shared/footer
+      script.
+        $(document).ready(function() {
+        $('select').material_select();
+        });

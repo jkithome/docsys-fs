@@ -5,7 +5,7 @@ module.exports = function(app) {
   require('./roles')(app);
 
 
-  app.get('/', function(req, res) {
+  app.get('*', function(req, res) {
     // Guide users to API
     res.sendFile('index.html', {
       root: './public/'
