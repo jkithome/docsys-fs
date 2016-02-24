@@ -1,0 +1,22 @@
+{
+  "name": "docsys",
+  "description": "Document management system using node.js and mongoDB",
+  "main": "index.js",
+  "authors": [
+    "Jeremy Kithome"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/andela-jkithome/docsys-fs",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#~0.97.5"
+  }
+}

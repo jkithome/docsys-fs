@@ -1,7 +1,9 @@
 // Dependencies needed for the API
 var express = require('express'),
+  path = require('path'),
   app = express(),
   bodyParser = require('body-parser'),
+  favicon = require('serve-favicon'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
   config = require('./config'),
@@ -17,6 +19,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(favicon(__dirname + '/app/images/favicon.gif'));
 
 // Use Morgan to log requests to the console
 app.use(morgan('dev'));

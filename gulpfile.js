@@ -25,7 +25,7 @@ gulp.task('less', function() {
     .pipe(less({
       paths: [path.join(__dirname, './app/styles')]
     }))
-    .pipe(gulp.dest('./public/css'));
+    .pipe(gulp.dest('./public/css/'));
 });
 
 gulp.task('jade', function() {
@@ -103,5 +103,5 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('default', ['nodemon', 'watch', 'build']);
-gulp.task('build', ['jade', 'less', 'browserify', 'bower']);
+gulp.task('default', ['nodemon', 'lint', 'watch', 'build']);
+gulp.task('build', ['jade', 'less', 'images', 'browserify', 'bower']);
