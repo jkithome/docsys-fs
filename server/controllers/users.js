@@ -29,15 +29,32 @@
 
             // If user is found and password is right
             // Create a token
-            var token = jwt.sign(user, req.app.get('superSecret'), {
+            var data = {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              username: user.username,
+              role: user.role,
+              createdAt: user.createdAt,
+              updatedAt: user.updatedAt
+            }
+            var token = jwt.sign(data, req.app.get('superSecret'), {
               expiresIn: 3600 // expires in 24 hours
             });
+            user.loggedIn = true;
+            user.token = token;
 
-            // return the information including token as JSON
-            res.json({
-              message: 'User successfully logged in.',
-              user: user,
-              token: token
+            user.save(function(err) {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                // return the information including token as JSON
+                res.json({
+                  message: 'User successfully logged in.',
+                  user: data,
+                  token: token
+                });
+              }
             });
           }
         }
