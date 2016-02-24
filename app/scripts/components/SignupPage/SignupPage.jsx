@@ -8,7 +8,9 @@
 
 
     module.exports = React.createClass({
-      mixins: [History],
+      contextTypes: {
+        router: React.PropTypes.object.isRequired
+      },
 
       getInitialState: function() {
         return {
@@ -44,12 +46,17 @@
 
       handleSignup: function() {
         var data = UserStore.getData();
-        if (data.error) {
-          window.Materialize.toast(data.error.message, 2000, 'error-toast');
-          this.setState({result: data.error.message});
+        if (data.code) {
+          console.log(data.errmsg);
+          if(data.errmsg.indexOf(this.state.username) !== -1) {
+            window.Materialize.toast('Username is already taken', 2000, 'error-toast');
+          } else if(data.errmsg.indexOf(this.state.email) !== -1) {
+            window.Materialize.toast('Email is already taken', 2000, 'error-toast');
+          }
         } else {
           this.setState({result: 'Success!'});
-          this.history.pushState(null, '/dashboard');
+          window.Materialize.toast(data.message, 2000, 'success-toast');
+          this.context.router.push('/login');
         }
       },
 

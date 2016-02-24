@@ -22,6 +22,9 @@
       case DocsysConstants.USER_SIGNUP:
         UserStore.setData(action.data);
         break;
+      case DocsysConstants.USER_LOGIN:
+        UserStore.setData(action.data);
+        break;
       default:
         // no operation for default
     }

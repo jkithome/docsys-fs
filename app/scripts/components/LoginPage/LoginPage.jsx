@@ -1,8 +1,56 @@
 (function(){
   'use strict';
-  var React = require('react');
+  var React = require('react'),
+    UserActions = require('../../actions/UserActions'),
+    UserStore = require('../../stores/UserStore'),
+    History = require('react-router').History;
 
     module.exports = React.createClass({
+      contextTypes: {
+        router: React.PropTypes.object.isRequired
+      },
+
+      getInitialState: function() {
+        return {
+          user: {
+            username: '',
+            password: ''
+          },
+          result: ''
+        };
+      },
+
+      componentDidMount: function() {
+        UserStore.addChangeListener(this.handleLogin);
+      },
+
+      handleLogin: function() {
+        var data = UserStore.getData();
+        console.log(data);
+        if(data.error) {
+          if(typeof data.error === 'string') {
+            window.Materialize.toast(data.error, 2000, 'error-toast');
+          }
+        } else {
+          this.setState({result: 'Success'});
+          window.Materialize.toast(data.message, 2000, 'success-toast');
+          this.context.router.push('/dashboard');
+        }
+      },
+
+      handleFieldChange: function(event) {
+        var field = event.target.name;
+        var value = event.target.value;
+        this.state.user[field] = value;
+        this.setState({user: this.state.user});
+      },
+
+      onSubmit: function(event) {
+        event.preventDefault();
+        UserActions.login(this.state.user);
+      },
+
+
       render: function() {
         return(
           <div>
@@ -11,7 +59,7 @@
                   <div className="nav-wrapper">
                     <a href="#" className="brand-logo"><img className="logo-img" src="../../images/logo.gif" /></a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
-                      <li><a href="/login">Register</a></li>
+                      <li><a href="/join">Register</a></li>
                     </ul>
                   </div>
                 </nav>
@@ -23,16 +71,18 @@
                     <div className="login-form">
                       <div className="login-card card-panel">
                         <div className="row">
-                          <form className="col s12">
+                          <form className="col s12" onSubmit={this.onSubmit}>
                             <div className="row">
                               <div className="input-field col s12">
-                                <input id="last_name" type="text" className="validate" />
+                                <i className="material-icons prefix">account_circle</i>
+                                <input name="username" id="username" type="text" className="validate" onChange={this.handleFieldChange} required />
                                 <label htmlFor="last_name">Username *</label>
                               </div>
                             </div>
                             <div className="row">
                               <div className="input-field col s12">
-                                <input id="password" type="password" className="validate" />
+                                <i className="material-icons prefix">security</i>
+                                <input name="password"id="password" type="password" className="validate"onChange={this.handleFieldChange} required />
                                 <label htmlFor="password">Password *</label>
                               </div>
                             </div>
