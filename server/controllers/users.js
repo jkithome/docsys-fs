@@ -61,7 +61,7 @@
 
     create: function(req, res) {
       var user = new User();
-      var saveUSer = function() {
+      var saveUser = function() {
         // Fetch user details from REST request.
         user.username = req.body.username;
         user.name.first = req.body.firstname;
@@ -95,7 +95,7 @@
             res.status(500).send(err);
           } else {
             user.role = role._id;
-            saveUSer();
+            saveUser();
           }
         });
       } else {
@@ -107,7 +107,7 @@
             res.status(500).send(err);
           } else {
             user.role = role._id;
-            saveUSer();
+            saveUser();
           }
         });
       }

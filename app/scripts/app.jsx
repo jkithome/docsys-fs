@@ -15,7 +15,9 @@
     Dashboard = require('./components/Dashboard/index.jsx'),
     DocumentView = require('./components/DocumentView/DocumentView.jsx'),
     Search = require('./components/Search/Search.jsx'),
-    DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx');
+    Profile = require('./components/Profile/Profile.jsx'),
+    DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx'),
+    ProfileEdit = require('./components/ProfileEdit/ProfileEdit.jsx');
 
   ReactDOM.render((
     <Router history={BrowserHistory}>
@@ -28,6 +30,10 @@
         <Route path="/dashboard" component={Dashboard} >
         </Route>
         <Route path="/search" component={Search} >
+        </Route>
+        <Route path="/profile" component={Profile} >
+        </Route>
+        <Route path="/profile/edit/:userId" component={ProfileEdit} >
         </Route>
         <Route path="/docs/:docId" component={DocumentView} >
         </Route>

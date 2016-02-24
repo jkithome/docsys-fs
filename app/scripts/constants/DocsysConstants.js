@@ -16,6 +16,8 @@
     USERACCESSDOCUMENTS_GET: null,
     GENRE_SEARCH: null,
     CONTENT_SEARCH: null,
-    DATE_SEARCH: null
+    DATE_SEARCH: null,
+    USER_GET: null,
+    USER_EDIT: null
   });
 })();

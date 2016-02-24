@@ -6,6 +6,12 @@
       render: function() {
         return(
           <div>
+            <ul id="dropdown1" className="dropdown-content">
+              <li className="divider"></li>
+              <li><i className="material-icons left">face</i><a href="/profile">Profile</a></li>
+              <li className="divider"></li>
+              <li><i className="material-icons left">exit_to_app</i><a href="#!">Logout</a></li>
+            </ul>
             <nav>
               <div className="nav-wrapper">
                 <a href="#" className="brand-logo"><img className="logo-img" src="../../images/logo.gif" /></a>
@@ -13,9 +19,7 @@
                   <li><a href="/dashboard"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard">dashboard</i></a></li>
                   <li><a className="modal-trigger" href="#modal1"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Create Document">note_add</i></a></li>
                   <li><a href="/search"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search">search</i></a></li>
-                  <li><a href="/about"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="About Us">info_outline</i></a></li>
-                  <li><a href="/profile"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Profile">account_circle</i></a></li>
-                  <li><a href="mobile.html"><i className="material-icons ">more_vert</i></a></li>
+                  <li><a className="dropdown-button" href="#!" data-activates="dropdown1">{JSON.parse(localStorage.getItem('user')).name.first}<i className="material-icons right">arrow_drop_down</i></a></li>
                 </ul>
               </div>
             </nav>

@@ -3,9 +3,13 @@
   var React = require('react'),
     DocumentActions = require('../../actions/DocumentActions'),
     DocumentStore = require('../../stores/DocumentStore'),
+    CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     Header = require('../Dashboard/header.jsx'),
 
     DocumentEdit = React.createClass({
+      contextTypes: {
+        router: React.PropTypes.object.isRequired
+      },
 
       getInitialState: function() {
         return {
@@ -30,7 +34,6 @@
 
       populateDocument: function() {
         var data = DocumentStore.getDocument();
-        console.log('doc', data);
         this.setState({ originalDocument: data });
       },
 
@@ -43,6 +46,7 @@
             }
           } else if (data.message === 'Document updated successfully.') {
             window.Materialize.toast('Document updated successfully.', 2000, 'success-toast');
+            this.context.router.push('/docs/' + this.props.params.docId);
           }
         }
 
@@ -59,6 +63,11 @@
         var field = event.target.name;
 
         this.setState({[field] : !this.state[field] });
+      },
+
+      onCancel: function(event) {
+        event.preventDefault();
+        this.context.router.push('/docs/' + this.props.params.docId);
       },
 
       onSubmit: function(event) {
@@ -85,6 +94,7 @@
             <Header/>
             {this.state.originalDocument ?
               <div className="container">
+                <CreateDocument/>
                 <div className="card-panel white z-depth-5">
                   <div className="row">
                     <form className="col s10 offset-s1">
@@ -116,17 +126,28 @@
                         </p>
                       </div>
                       <div className="row">
-                        <div className="center-btn">
-                          <button className="btn waves-effect waves-light modal-close blue center" type="submit" name="action" onClick={this.onSubmit}>Edit
-                            <i className="material-icons right">send</i>
+                        <div className="col s2 offset-s4">
+                          <button className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
+                            cancel
                           </button>
+                        </div>
+                        <div className="col s2">
+                          <button className="btn waves-effect blue center" type="submit" name="action" onClick={this.onSubmit}>
+                            edit
+                          </button>
+                        </div>
+                        <div className="section">
                         </div>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
-              : <p>Loading....</p>}
+              : <div className="container">
+                  <div className="progress">
+                      <div className="indeterminate"></div>
+                  </div>
+              </div>}
           </div>
         );
       }
