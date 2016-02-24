@@ -218,5 +218,26 @@
         }
       });
     },
+
+    session: function(req, res) {
+      User.findById(req.decoded._id, function(err,user) {
+        if(err) {
+          res.json({
+            error: 'Error fetching user.'
+          });
+        } else {
+          var token = req.body.token || req.query.token || req.headers['x-access-token'];
+          if(user.token === token && user.loggedIn === true) {
+            res.json({
+              loggedIn: true
+            });
+          } else {
+            res.json({
+              loggedIn: false
+            });
+          }
+        }
+      });
+    }
   };
 })();
