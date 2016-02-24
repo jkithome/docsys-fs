@@ -8,7 +8,7 @@
           <div>
             <ul id="dropdown1" className="dropdown-content">
               <li className="divider"></li>
-              <li><i className="material-icons left">face</i><a href="#!">Profile</a></li>
+              <li><i className="material-icons left">face</i><a href="/profile">Profile</a></li>
               <li className="divider"></li>
               <li><i className="material-icons left">exit_to_app</i><a href="#!">Logout</a></li>
             </ul>
