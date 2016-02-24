@@ -12,7 +12,9 @@
     LandingPage = require('./components/LandingPage/header.jsx'),
     SignUpPage = require('./components/SignUpPage/SignUpPage.jsx'),
     LoginPage = require('./components/LoginPage/LoginPage.jsx'),
-    Dashboard = require('./components/Dashboard/index.jsx');
+    Dashboard = require('./components/Dashboard/index.jsx'),
+    DocumentView = require('./components/DocumentView/DocumentView.jsx'),
+    DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx');
 
   ReactDOM.render((
     <Router history={BrowserHistory}>
@@ -23,6 +25,10 @@
         <Route path="/login" component={LoginPage} >
         </Route>
         <Route path="/dashboard" component={Dashboard} >
+        </Route>
+        <Route path="/docs/:docId" component={DocumentView} >
+        </Route>
+        <Route path="/docs/edit/:docId" component={DocumentEdit} >
         </Route>
       </Route>
     </Router>

@@ -21,13 +21,13 @@
 
       componentDidMount: function() {
         UserActions.getUsers();
-        UserStore.addChangeListener(this.populateUsers);
+        UserStore.addChangeListener(this.populateUsers, 'users');
         DocumentActions.getAllDocuments();
-        DocumentStore.addChangeListener(this.populateDocuments);
+        DocumentStore.addChangeListener(this.populateDocuments, 'documents');
         DocumentActions.getUserDocuments();
-        DocumentStore.addChangeListener(this.populateUserDocuments);
+        DocumentStore.addChangeListener(this.populateUserDocuments,'userDocuments');
         DocumentActions.getByUserDocuments();
-        DocumentStore.addChangeListener(this.populateByUserDocuments);
+        DocumentStore.addChangeListener(this.populateByUserDocuments, 'byUserDocuments');
       },
 
       populateUsers: function() {

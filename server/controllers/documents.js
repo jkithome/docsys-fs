@@ -109,7 +109,7 @@
             };
 
             if (req.body.access) {
-              accessRights(req, document, saveDocument);
+              accessRights(req, document, res, saveDocument);
             } else {
               saveDocument();
             }
@@ -184,7 +184,8 @@
             });
           }
         }
-      });
+      })
+      .populate('owner');
     },
 
     // Return all documents belonging to a particular genre

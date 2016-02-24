@@ -10,7 +10,7 @@
 
     setUsers: function(users) {
       this.users = users;
-      this.emitChange();
+      this.emitChange('users');
     },
 
     getUsers: function() {

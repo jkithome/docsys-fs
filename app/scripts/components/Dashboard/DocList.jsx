@@ -11,7 +11,7 @@
               <div className="card">
                 <div className="card-image waves-effect waves-block waves-light">
                   <a href={'/docs/' + document._id}>
-                    <img width="320" height="240" src="http://lorempixel.com/600/337/nature/" className="responsive-img wp-post-image" alt={document.title} title={document.title} /> </a>
+                    <img width="320" height="240" src={"../../images/image" + Math.ceil(Math.random() * 10) + ".jpg"} className=" wp-post-image" alt={document.title} title={document.title} /> </a>
                 </div>
                 <div className="card-content">
                   <a href={'/docs/' + document._id}><p className="green-text">{document.title}</p></a>
