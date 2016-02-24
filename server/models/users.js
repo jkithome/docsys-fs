@@ -22,6 +22,14 @@ var UserSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Role'
   },
+  loggedIn: {
+    type: Boolean,
+    Default: false
+  },
+  token: {
+    type: String,
+    Default: null
+  },
   timestamps: {
 
   }
