@@ -7,6 +7,8 @@
 
   var UserStore = assign({}, BaseStore, {
     users: null,
+    user: null,
+    userEdit: null,
 
     setUsers: function(users) {
       this.users = users;
@@ -15,6 +17,24 @@
 
     getUsers: function() {
       return this.users;
+    },
+
+    setUser: function(user) {
+      this.user = user;
+      this.emitChange('user');
+    },
+
+    getUser: function() {
+      return this.user;
+    },
+
+    setUserEdit: function(result) {
+      this.userEdit = result;
+      this.emitChange('userEdit');
+    },
+
+    getUserEdit: function() {
+      return this.userEdit;
     }
   });
 
@@ -28,6 +48,12 @@
         break;
       case DocsysConstants.USERS_GET:
         UserStore.setUsers(action.data);
+        break;
+      case DocsysConstants.USER_GET:
+        UserStore.setUser(action.data);
+        break;
+      case DocsysConstants.USER_EDIT:
+        UserStore.setUserEdit(action.data);
         break;
       default:
         // no operation for default
