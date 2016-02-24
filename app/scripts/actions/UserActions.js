@@ -18,6 +18,20 @@
         '/api/users',
         DocsysConstants.USERS_GET, token
       );
+    },
+
+    getUser: function(docId) {
+      BaseActions.get(
+        '/api/users/' + docId,
+        DocsysConstants.USER_GET, token
+      );
+    },
+
+    editUser: function(data, docId) {
+      BaseActions.put(
+        '/api/users/' + docId, data,
+        DocsysConstants.USER_EDIT, token
+      );
     }
   };
 })();
