@@ -14,6 +14,7 @@
     LoginPage = require('./components/LoginPage/LoginPage.jsx'),
     Dashboard = require('./components/Dashboard/index.jsx'),
     DocumentView = require('./components/DocumentView/DocumentView.jsx'),
+    Search = require('./components/Search/Search.jsx'),
     DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx');
 
   ReactDOM.render((
@@ -25,6 +26,8 @@
         <Route path="/login" component={LoginPage} >
         </Route>
         <Route path="/dashboard" component={Dashboard} >
+        </Route>
+        <Route path="/search" component={Search} >
         </Route>
         <Route path="/docs/:docId" component={DocumentView} >
         </Route>

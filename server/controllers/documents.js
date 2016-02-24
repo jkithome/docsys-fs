@@ -201,8 +201,9 @@
         } else {
           res.json(documents);
         }
-      }).
-      limit(req.query.limit);
+      })
+      .populate('owner')
+      .limit(req.query.limit);
     },
 
     // REturn all documents with a particular word in the content
@@ -219,8 +220,9 @@
         } else {
           res.json(documents);
         }
-      }).
-      limit(req.query.limit);
+      })
+      .populate('owner')
+      .limit(req.query.limit);
     },
 
     // Return all the documents that can be accessed by a role
@@ -243,6 +245,7 @@
               res.json(documents);
             }
           })
+          .populate('owner')
           .limit(req.query.limit);
         }
       });
@@ -311,8 +314,9 @@
         } else {
           res.json(documents);
         }
-      }).
-      limit(req.query.limit).
+      })
+      .populate('owner')
+      .limit(req.query.limit).
       sort({
         createdAt: -1
       });
