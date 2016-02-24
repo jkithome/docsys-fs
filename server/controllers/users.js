@@ -195,6 +195,28 @@
           });
         }
       });
-    }
+    },
+
+    logout: function(req, res) {
+      User.findById(req.params.id, function(err, user) {
+        if (err) {
+          res.json({
+            error: 'Error fetching user.'
+          });
+        } else {
+          user.loggedIn = false;
+          user.token = null;
+          user.save(function(err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+              res.json({
+                message: 'User logged out succesfully.'
+              });
+            }
+          });
+        }
+      });
+    },
   };
 })();
