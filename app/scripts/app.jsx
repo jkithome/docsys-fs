@@ -6,11 +6,14 @@
     ReactRouter = require('react-router'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
-    LandingPage = require('./components/LandingPage/header.jsx');
+    LandingPage = require('./components/LandingPage/header.jsx'),
+    SignUpPage = require('./components/SignUpPage/SignUpPage.jsx');
 
   ReactDOM.render((
     <Router>
-      <Route path="/" component={LandingPage} >
+      <Route path="/landingpage" component={LandingPage} >
+      </Route>
+      <Route path="/join" component={SignUpPage} >
       </Route>
     </Router>
     ), document.getElementById('ui-view'));

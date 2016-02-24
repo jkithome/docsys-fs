@@ -6,3 +6,7 @@ html
     #ui-view
     script(src="./js/app.js")
     include shared/footer
+    script.
+      $(document).ready(function() {
+      $('select').material_select();
+      });
