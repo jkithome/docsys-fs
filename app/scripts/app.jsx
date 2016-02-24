@@ -16,7 +16,8 @@
     DocumentView = require('./components/DocumentView/DocumentView.jsx'),
     Search = require('./components/Search/Search.jsx'),
     Profile = require('./components/Profile/Profile.jsx'),
-    DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx');
+    DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx'),
+    ProfileEdit = require('./components/ProfileEdit/ProfileEdit.jsx');
 
   ReactDOM.render((
     <Router history={BrowserHistory}>
@@ -31,6 +32,8 @@
         <Route path="/search" component={Search} >
         </Route>
         <Route path="/profile" component={Profile} >
+        </Route>
+        <Route path="/profile/edit/:userId" component={ProfileEdit} >
         </Route>
         <Route path="/docs/:docId" component={DocumentView} >
         </Route>
