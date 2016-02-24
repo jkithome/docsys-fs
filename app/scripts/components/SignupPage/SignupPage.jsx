@@ -1,8 +1,85 @@
 (function(){
   'use strict';
-  var React = require('react');
+  var React = require('react'),
+    Select = require('react-select'),
+    UserActions = require('../../actions/UserActions'),
+    UserStore = require('../../stores/UserStore'),
+    History = require('react-router').History;
+
 
     module.exports = React.createClass({
+      mixins: [History],
+
+      getInitialState: function() {
+        return {
+          firstname: '',
+          lastname: '',
+          username: '',
+          role: 'user',
+          email: '',
+          password: '',
+          roles: [
+            { value: 'admin', label: 'Admin' },
+            { value: 'staff', label: 'staff' },
+            { value: 'user',  label: 'User' }
+          ],
+          result: '',
+          confirmpassword: ''
+        };
+      },
+
+      componentDidMount: function() {
+        this.comparepswd();
+        UserStore.addChangeListener(this.handleSignup);
+      },
+
+      comparepswd: function(password, confirmpassword) {
+        if (password !== confirmpassword) {
+          window.Materialize.toast('Passwords Don\'t Match', 2000, 'error-toast');
+          return false;
+        } else {
+          return true;
+        }
+      },
+
+      handleSignup: function() {
+        var data = UserStore.getData();
+        if (data.error) {
+          window.Materialize.toast(data.error.message, 2000, 'error-toast');
+          this.setState({result: data.error.message});
+        } else {
+          this.setState({result: 'Success!'});
+          this.history.pushState(null, '/dashboard');
+        }
+      },
+
+      handleRoleSelect: function(event) {
+        this.setState({role: event.value});
+      },
+
+      handleFieldChange: function(event) {
+        var field = event.target.name;
+        var value = event.target.value;
+        if (field === 'confirmpassword') {
+          this.state.confirmpassword = value;
+        } else {
+          this.state[field] = value;
+        }
+      },
+
+      onSubmit: function(event) {
+        event.preventDefault();
+        if (this.comparepswd(this.state.password, this.state.confirmpassword)) {
+          UserActions.signup({
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            username: this.state.username,
+            role: this.state.role,
+            email: this.state.email,
+            password: this.state.password,
+          });
+        }
+      },
       render: function() {
         return(
           <div>
@@ -26,40 +103,52 @@
                         </div>
                       </div>
                       <div className="row">
-                        <form className="col s12">
+                        <form className="col s12" onSubmit={this.onSubmit}>
                           <div className="row">
                             <div className="input-field col s6">
-                              <input id="first_name" type="text" className="validate" />
-                              <label for="first_name">First Name *</label>
+                              <i className="material-icons prefix">face</i>
+                              <input name = "firstname" id="first_name" type="text" className="validate" onChange={this.handleFieldChange} required />
+                              <label htmlFor="first_name">First Name *</label>
                             </div>
                             <div className="input-field col s6">
-                              <input id="last_name" type="text" className="validate" />
-                              <label for="last_name">Last Name *</label>
+                              <i className="material-icons prefix">face</i>
+                              <input name = "lastname" id="last_name" type="text" className="validate" onChange={this.handleFieldChange} required />
+                              <label htmlFor="last_name">Last Name *</label>
                             </div>
                             <div className="input-field col s6">
-                              <input id="last_name" type="text" className="validate" />
-                              <label for="last_name">Username *</label>
+                              <i className="material-icons prefix">account_circle</i>
+                              <input name = "username" id="user_name" type="text" className="validate" onChange={this.handleFieldChange} required />
+                              <label htmlFor="user_name">Username *</label>
                             </div>
                             <div className="input-field col s6">
-                              <select>
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="admin">Administrator</option>
-                                <option value="staff">Staff</option>
-                                <option value="user">User</option>
-                              </select>
-                              <label>Role</label>
+                              <Select
+                                name="role"
+                                onChange={this.handleRoleSelect}
+                                options={this.state.roles}
+                                placeholder="Select Role"
+                                value={this.state.role}
+                              />
                             </div>
                           </div>
                           <div className="row">
                             <div className="input-field col s12">
-                              <input id="email" type="email" className="validate" />
-                              <label for="email">Email *</label>
+                              <i className="material-icons prefix">email</i>
+                              <input name = "email" id="email" type="email" className="validate" onChange={this.handleFieldChange} required />
+                              <label htmlFor="email">Email *</label>
                             </div>
                           </div>
                           <div className="row">
                             <div className="input-field col s12">
-                              <input id="password" type="password" className="validate" />
-                              <label for="password">Password *</label>
+                              <i className="material-icons prefix">security</i>
+                              <input name = "password" id="password" type="password" className="validate" onChange={this.handleFieldChange} required />
+                              <label htmlFor="password">Password *</label>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="input-field col s12">
+                              <i className="material-icons prefix">security</i>
+                              <input name = "confirmpassword" id="confirm_password" type="password" className="validate" onChange={this.handleFieldChange} required />
+                              <label htmlFor="password">Confirm Password *</label>
                             </div>
                           </div>
                           <div className="row">
