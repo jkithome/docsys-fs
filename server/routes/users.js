@@ -6,6 +6,9 @@
     // Login in user
     app.route('/api/users/login')
       .post(Users.login);
+    // Log out a user
+    app.route('/api/users/logout/:id')
+      .put(Auth.authenticate, Users.logout);
     // Create user
     app.route('/api/users/create')
       .post(Users.create);
