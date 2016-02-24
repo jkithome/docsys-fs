@@ -47,7 +47,6 @@
       handleSignup: function() {
         var data = UserStore.getData();
         if (data.code) {
-          console.log(data.errmsg);
           if(data.errmsg.indexOf(this.state.username) !== -1) {
             window.Materialize.toast('Username is already taken', 2000, 'error-toast');
           } else if(data.errmsg.indexOf(this.state.email) !== -1) {

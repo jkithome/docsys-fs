@@ -267,8 +267,12 @@
             } else {
               res.json(documents);
             }
-          }).
-          limit(req.query.limit);
+          })
+          .populate('owner')
+          .limit(req.query.limit)
+          .sort({
+            createdAt: -1
+          });
         }
       });
     },
@@ -283,8 +287,12 @@
         } else {
           res.json(documents);
         }
-      }).
-      limit(req.query.limit);
+      })
+      .populate('owner')
+      .limit(req.query.limit)
+      .sort({
+          createdAt: -1
+        });
     },
 
     // Get all documents created on a specific date. Midnight to midnight
