@@ -13,6 +13,9 @@
     app.route('/api/users/create')
       .post(Users.create);
 
+    app.route('/api/users/session')
+      .get(Auth.authenticate, Users.session);
+
     // Get all users
     app.route('/api/users')
       .get(Auth.authenticate, Users.all);
