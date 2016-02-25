@@ -13,7 +13,7 @@
       BaseActions.post('/api/users/login', user, DocsysConstants.USER_LOGIN);
     },
 
-    getUsers: function() {
+    getUsers: function(token) {
       BaseActions.get(
         '/api/users',
         DocsysConstants.USERS_GET, token
@@ -34,7 +34,7 @@
       );
     },
 
-    session: function() {
+    session: function(token) {
       BaseActions.get('/api/users/session', DocsysConstants.GET_SESSION, token);
     }
   };
