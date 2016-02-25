@@ -20,7 +20,8 @@
       },
 
     componentDidMount: function() {
-        UserActions.getUser(user._id);
+      var token = localStorage.getItem('x-access-token');
+        UserActions.getUser(user._id, token);
         UserStore.addChangeListener(this.populateUser, 'user');
       },
 

@@ -4,9 +4,9 @@
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
     History = require('react-router').History,
-    userName = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).name.first : null);
+    userName = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).name.first : null),
 
-    module.exports = React.createClass({
+    Header = React.createClass({
       contextTypes: {
         router: React.PropTypes.object.isRequired
       },
@@ -77,4 +77,5 @@
           );
       }
   });
+  module.exports = Header;
 })();

@@ -2,9 +2,9 @@
   'use strict';
   var React = require('react'),
     DocumentActions = require('../../actions/DocumentActions'),
-    DocumentStore = require('../../stores/DocumentStore');
+    DocumentStore = require('../../stores/DocumentStore'),
 
-    module.exports = React.createClass({
+    CreateDocument = React.createClass({
 
       getInitialState: function() {
         return {
@@ -116,4 +116,5 @@
           );
       }
   });
+  module.exports = createDocument;
 })();

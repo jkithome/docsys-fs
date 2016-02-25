@@ -1,8 +1,7 @@
 (function() {
   'use strict';
   var DocsysConstants = require('../constants/DocsysConstants'),
-    BaseActions = require('./BaseActions'),
-    token = localStorage.getItem('x-access-token');
+    BaseActions = require('./BaseActions');
 
   module.exports = {
     signup: function(user) {
@@ -20,14 +19,14 @@
       );
     },
 
-    getUser: function(docId) {
+    getUser: function(docId, token) {
       BaseActions.get(
         '/api/users/' + docId,
         DocsysConstants.USER_GET, token
       );
     },
 
-    editUser: function(data, docId) {
+    editUser: function(data, docId, token) {
       BaseActions.put(
         '/api/users/' + docId, data,
         DocsysConstants.USER_EDIT, token

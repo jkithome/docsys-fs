@@ -7,7 +7,7 @@
     History = require('react-router').History;
 
 
-    module.exports = React.createClass({
+    SignupPage = React.createClass({
       contextTypes: {
         router: React.PropTypes.object.isRequired
       },
@@ -175,4 +175,5 @@
           </div>);
       }
   });
+  module.exports = SignupPage;
 })();

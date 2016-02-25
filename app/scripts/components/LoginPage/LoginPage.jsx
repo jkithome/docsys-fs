@@ -3,9 +3,9 @@
   var React = require('react'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
-    History = require('react-router').History;
+    History = require('react-router').History,
 
-    module.exports = React.createClass({
+    LoginPage = React.createClass({
       contextTypes: {
         router: React.PropTypes.object.isRequired
       },
@@ -105,4 +105,5 @@
           </div>);
       }
   });
+  module.exports = LoginPage;
 })();
