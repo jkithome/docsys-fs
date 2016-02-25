@@ -1,20 +1,18 @@
 (function() {
   'use strict';
   var DocsysConstants = require('../constants/DocsysConstants'),
-    BaseActions = require('./BaseActions'),
-    token = localStorage.getItem('x-access-token'),
-    userId = JSON.parse(localStorage.getItem('user'))._id;
+    BaseActions = require('./BaseActions');
 
   module.exports = {
-    getAllDocuments: function() {
+    getAllDocuments: function(token) {
       BaseActions.get('/api/documents', DocsysConstants.DOCUMENTS_GET, token);
     },
 
-    getUserDocuments: function() {
+    getUserDocuments: function(userId,token) {
       BaseActions.get('/api/users/' + userId + '/mydocuments', DocsysConstants.USERDOCUMENTS_GET, token);
     },
 
-    getByUserDocuments: function() {
+    getByUserDocuments: function(userId,token) {
       BaseActions.get('/api/users/' + userId + '/documents', DocsysConstants.USERACCESSDOCUMENTS_GET, token);
     },
 

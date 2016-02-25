@@ -7,6 +7,8 @@
 
   var UserStore = assign({}, BaseStore, {
     users: null,
+    signUp: null,
+    session: null,
     user: null,
     userEdit: null,
 
@@ -28,6 +30,15 @@
       return this.user;
     },
 
+    setCreatedUser: function(user) {
+      this.user = signUp;
+      this.emitChange('signUp');
+    },
+
+    getCreatedUser: function() {
+      return this.signUp;
+    },
+
     setUserEdit: function(result) {
       this.userEdit = result;
       this.emitChange('userEdit');
@@ -35,13 +46,23 @@
 
     getUserEdit: function() {
       return this.userEdit;
+    },
+
+    setSession: function(session) {
+      this.session = session;
+      this.emitChange('session');
+    },
+
+    getSession: function() {
+      return this.session;
     }
+
   });
 
   AppDispatcher.register(function(action) {
     switch (action.actionType) {
       case DocsysConstants.USER_SIGNUP:
-        UserStore.setData(action.data);
+        UserStore.setCreatedUser(action.data);
         break;
       case DocsysConstants.USER_LOGIN:
         UserStore.setData(action.data);
@@ -54,6 +75,9 @@
         break;
       case DocsysConstants.USER_EDIT:
         UserStore.setUserEdit(action.data);
+        break;
+      case DocsysConstants.GET_SESSION:
+        UserStore.setSession(action.data);
         break;
       default:
         // no operation for default

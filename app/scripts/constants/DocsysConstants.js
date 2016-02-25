@@ -18,6 +18,7 @@
     CONTENT_SEARCH: null,
     DATE_SEARCH: null,
     USER_GET: null,
-    USER_EDIT: null
+    USER_EDIT: null,
+    GET_SESSION: null
   });
 })();

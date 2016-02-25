@@ -8,7 +8,7 @@
     data: null,
     setData: function(data) {
       this.data = data;
-      this.emitChange();
+      this.emitChange('login');
     },
 
     getData: function() {
