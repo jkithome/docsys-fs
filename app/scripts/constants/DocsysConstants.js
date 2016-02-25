@@ -19,6 +19,7 @@
     DATE_SEARCH: null,
     USER_GET: null,
     USER_EDIT: null,
-    GET_SESSION: null
+    GET_SESSION: null,
+    USER_LOGOUT: null
   });
 })();
