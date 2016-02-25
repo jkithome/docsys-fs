@@ -29,15 +29,32 @@
 
             // If user is found and password is right
             // Create a token
-            var token = jwt.sign(user, req.app.get('superSecret'), {
+            var data = {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              username: user.username,
+              role: user.role,
+              createdAt: user.createdAt,
+              updatedAt: user.updatedAt
+            }
+            var token = jwt.sign(data, req.app.get('superSecret'), {
               expiresIn: 3600 // expires in 24 hours
             });
+            user.loggedIn = true;
+            user.token = token;
 
-            // return the information including token as JSON
-            res.json({
-              message: 'User successfully logged in.',
-              user: user,
-              token: token
+            user.save(function(err) {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                // return the information including token as JSON
+                res.json({
+                  message: 'User successfully logged in.',
+                  user: data,
+                  token: token
+                });
+              }
             });
           }
         }
@@ -176,6 +193,49 @@
           res.json({
             message: 'User deleted successfully.'
           });
+        }
+      });
+    },
+
+    logout: function(req, res) {
+      User.findById(req.params.id, function(err, user) {
+        if (err) {
+          res.json({
+            error: 'Error fetching user.'
+          });
+        } else {
+          user.loggedIn = false;
+          user.token = null;
+          user.save(function(err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+              res.json({
+                message: 'User logged out succesfully.'
+              });
+            }
+          });
+        }
+      });
+    },
+
+    session: function(req, res) {
+      User.findById(req.decoded._id, function(err,user) {
+        if(err) {
+          res.json({
+            error: 'Error fetching user.'
+          });
+        } else {
+          var token = req.body.token || req.query.token || req.headers['x-access-token'];
+          if(user.token === token && user.loggedIn === true) {
+            res.json({
+              loggedIn: true
+            });
+          } else {
+            res.json({
+              loggedIn: false
+            });
+          }
         }
       });
     }
