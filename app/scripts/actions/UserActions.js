@@ -32,6 +32,10 @@
         '/api/users/' + docId, data,
         DocsysConstants.USER_EDIT, token
       );
+    },
+
+    session: function() {
+      BaseActions.get('/api/users/session', DocsysConstants.GET_SESSION, token);
     }
   };
 })();
