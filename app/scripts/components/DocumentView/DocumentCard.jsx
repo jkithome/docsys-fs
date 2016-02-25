@@ -5,9 +5,9 @@
     DocumentStore = require('../../stores/DocumentStore'),
     DocumentActions = require('../../actions/DocumentActions'),
     History = require('react-router').History,
-    userId = JSON.parse(localStorage.getItem('user'))._id,
-    userRoleId = JSON.parse(localStorage.getItem('user')).role._id,
-    userRoleTitle = JSON.parse(localStorage.getItem('user')).role.title,
+    userId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user'))._id : null),
+    userRoleId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).role._id : null),
+    userRoleTitle = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).role.title : null),
 
 
     DocumentCard = React.createClass({
