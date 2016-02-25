@@ -36,6 +36,10 @@
 
     session: function(token) {
       BaseActions.get('/api/users/session', DocsysConstants.GET_SESSION, token);
+    },
+
+    logout: function(userId, data, token) {
+      BaseActions.put('/api/users/logout/' + userId, data, DocsysConstants.USER_LOGOUT, token);
     }
   };
 })();
