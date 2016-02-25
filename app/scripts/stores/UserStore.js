@@ -31,8 +31,8 @@
       return this.user;
     },
 
-    setCreatedUser: function(user) {
-      this.user = signUp;
+    setCreatedUser: function(signUp) {
+      this.signUp = signUp;
       this.emitChange('signUp');
     },
 

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var React = require('react');
+  var React = require('react'),
 
     Main = React.createClass({
       propTypes: {

@@ -44,7 +44,7 @@
 
     onSubmit: function(event) {
         event.preventDefault();
-        var token = localStorage.getItem('x-access-token'),
+        var token = localStorage.getItem('x-access-token');
         if(this.state.search === 'date') {
           var date = (this.state.term).split(/[\/?\.]/),
               day = parseInt(date[0]),

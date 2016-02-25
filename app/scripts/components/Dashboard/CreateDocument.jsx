@@ -55,6 +55,7 @@
 
       onSubmit: function(event) {
         event.preventDefault();
+        var token = localStorage.getItem('x-access-token');
         var docAccess = '';
         if(this.state.user) {
           docAccess += 'user,'
@@ -65,7 +66,7 @@
         if(this.state.admin) {
           docAccess+= 'admin'
         }
-        DocumentActions.createDocument(this.state.document, docAccess.replace(/\,$/,'')
+        DocumentActions.createDocument(this.state.document, docAccess.replace(/\,$/,''), token
         );
       },
 
@@ -116,5 +117,5 @@
           );
       }
   });
-  module.exports = createDocument;
+  module.exports = CreateDocument;
 })();
