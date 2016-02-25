@@ -28,7 +28,6 @@
         var data = UserStore.getData();
         localStorage.setItem('x-access-token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        console.log(data);
         if(data.error) {
           if(typeof data.error === 'string') {
             window.Materialize.toast(data.error, 2000, 'error-toast');
