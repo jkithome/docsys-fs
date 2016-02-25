@@ -11,6 +11,7 @@
     session: null,
     user: null,
     userEdit: null,
+    logout: null,
 
     setUsers: function(users) {
       this.users = users;
@@ -55,7 +56,16 @@
 
     getSession: function() {
       return this.session;
-    }
+    },
+
+    setUserLogout: function(logout) {
+      this.logout = logout;
+      this.emitChange('logout');
+    },
+
+    getUserLogout: function() {
+      return this.logout;
+    },
 
   });
 
@@ -78,6 +88,9 @@
         break;
       case DocsysConstants.GET_SESSION:
         UserStore.setSession(action.data);
+        break;
+      case DocsysConstants.USER_LOGOUT:
+        UserStore.setUserLogout(action.data);
         break;
       default:
         // no operation for default

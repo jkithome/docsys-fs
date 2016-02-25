@@ -19,8 +19,9 @@
 
       componentDidMount: function() {
         var token = localStorage.getItem('x-access-token');
-        UserActions.session();
+        UserActions.session(token);
         UserStore.addChangeListener(this.getSession, 'session');
+        UserStore.addChangeListener(this.handleLogout, 'logout');
       },
 
       getSession: function() {
@@ -33,6 +34,25 @@
         }
       },
 
+      handleLogout: function() {
+        var data= UserStore.getUserLogout();
+        if(data.message) {
+          localStorage.removeItem('x-access-token');
+          localStorage.removeItem('user');
+          window.Materialize.toast(data.message, 2000, 'success-toast');
+          this.context.router.push('/');
+        } else {
+          window.Materialize.toast('Failed to logout User', 2000, 'error-toast');
+        }
+      },
+
+      logout: function(event) {
+        event.preventDefault();
+        var userId = (JSON.parse(localStorage.getItem('user')) ?JSON.parse(localStorage.getItem('user'))._id : null),
+          token = localStorage.getItem('x-access-token');
+        UserActions.logout(userId, null, token);
+      },
+
       render: function() {
         return(
           <div>
@@ -40,7 +60,7 @@
               <li className="divider"></li>
               <li><i className="material-icons left">face</i><a href="/profile">Profile</a></li>
               <li className="divider"></li>
-              <li><i className="material-icons left">exit_to_app</i><a href="#!">Logout</a></li>
+              <li><i className="material-icons left">exit_to_app</i><a onClick={this.logout}>Logout</a></li>
             </ul>
             <nav>
               <div className="nav-wrapper">
@@ -49,7 +69,7 @@
                   <li><a href="/dashboard"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard">dashboard</i></a></li>
                   <li><a className="modal-trigger" href="#modal1"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Create Document">note_add</i></a></li>
                   <li><a href="/search"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search">search</i></a></li>
-                  <li><a className="dropdown-button" href="#!" data-activates="dropdown1">{userName}<i className="material-icons right">arrow_drop_down</i></a></li>
+                  <li><a className="dropdown-button" data-activates="dropdown1">{userName}<i className="material-icons right">arrow_drop_down</i></a></li>
                 </ul>
               </div>
             </nav>

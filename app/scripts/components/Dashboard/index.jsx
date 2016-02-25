@@ -93,8 +93,8 @@
             <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
                 ? <DocList documents={this.state.documents} />
-                : <div class="progress">
-                      <div class="indeterminate"></div>
+                : <div className="progress">
+                      <div className="indeterminate"></div>
                   </div>}</div>
           </div>
           </div>
