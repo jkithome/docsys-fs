@@ -108,8 +108,8 @@
                 ? (this.state.documents.length !== 0)
                 ? <DocList documents={this.state.documents} />
                 : <h1>No documents found.</h1>
-                : <div class="progress">
-                    <div class="indeterminate"></div>
+                : <div className="progress">
+                    <div className="indeterminate"></div>
                 </div>}</div>
           </div>
         </div>
