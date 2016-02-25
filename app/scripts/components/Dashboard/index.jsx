@@ -20,19 +20,27 @@
       },
 
       componentDidMount: function() {
-        UserActions.getUsers();
+        var token = localStorage.getItem('x-access-token'),
+          userId = (JSON.parse(localStorage.getItem('user')) ?JSON.parse(localStorage.getItem('user'))._id : null);
+        UserActions.getUsers(token);
         UserStore.addChangeListener(this.populateUsers, 'users');
-        DocumentActions.getAllDocuments();
+        DocumentActions.getAllDocuments(token);
         DocumentStore.addChangeListener(this.populateDocuments, 'documents');
-        DocumentActions.getUserDocuments();
+        DocumentActions.getUserDocuments(userId,token);
         DocumentStore.addChangeListener(this.populateUserDocuments,'userDocuments');
-        DocumentActions.getByUserDocuments();
+        DocumentActions.getByUserDocuments(userId,token);
         DocumentStore.addChangeListener(this.populateByUserDocuments, 'byUserDocuments');
+      },
+
+      componentWillUnmount() {
+        UserStore.removeChangeListener(this.populateUsers, 'users');
+        DocumentStore.removeChangeListener(this.populateDocuments, 'documents');
+        DocumentStore.removeChangeListener(this.populateUserDocuments,'userDocuments');
+        DocumentStore.removeChangeListener(this.populateByUserDocuments, 'byUserDocuments');
       },
 
       populateUsers: function() {
         var data = UserStore.getUsers();
-        console.log(data);
         this.setState({
           users: data
         });
@@ -40,7 +48,6 @@
 
       populateDocuments: function() {
         var data = DocumentStore.getDocuments();
-        console.log(data);
         this.setState({
           documents: data
         });
@@ -48,7 +55,6 @@
 
       populateUserDocuments: function() {
         var data = DocumentStore.getUserDocuments();
-        console.log(data);
         this.setState({
           userDocuments: data
         });
@@ -56,7 +62,6 @@
 
       populateByUserDocuments: function() {
         var data = DocumentStore.getByUserDocuments();
-        console.log(data);
         this.setState({
           byUserDocuments: data
         });
@@ -88,7 +93,9 @@
             <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
                 ? <DocList documents={this.state.documents} />
-                : <p>Loading...</p>}</div>
+                : <div class="progress">
+                      <div class="indeterminate"></div>
+                  </div>}</div>
           </div>
           </div>
         );
