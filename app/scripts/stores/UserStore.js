@@ -7,6 +7,7 @@
 
   var UserStore = assign({}, BaseStore, {
     users: null,
+    signUp: null,
     session: null,
     user: null,
     userEdit: null,
@@ -27,6 +28,15 @@
 
     getUser: function() {
       return this.user;
+    },
+
+    setCreatedUser: function(user) {
+      this.user = signUp;
+      this.emitChange('signUp');
+    },
+
+    getCreatedUser: function() {
+      return this.signUp;
     },
 
     setUserEdit: function(result) {
@@ -52,7 +62,7 @@
   AppDispatcher.register(function(action) {
     switch (action.actionType) {
       case DocsysConstants.USER_SIGNUP:
-        UserStore.setData(action.data);
+        UserStore.setCreatedUser(action.data);
         break;
       case DocsysConstants.USER_LOGIN:
         UserStore.setData(action.data);
