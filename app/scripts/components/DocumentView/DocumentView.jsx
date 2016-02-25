@@ -32,7 +32,9 @@
           {
             this.state.document ?
               <DocumentCard document={this.state.document}/>
-              : <p>Loadin...</p>
+              : <div class="progress">
+                  <div class="indeterminate"></div>
+              </div>
           }
         </div>
       );
