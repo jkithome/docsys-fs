@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pretest": "node test/helpers/clearDB.js &\nsleep 4 \n node index &\nsleep 4",
-    "test": "jasmine-node test/spec/*.js --verbose || :",
+    "test:bend": "jasmine-node test/spec/*.js --verbose || :",
+    "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js  test/client/**/*test.js",
+    "test": "npm run test:bend && npm run test:fend",
     "posttest": "pkill node"
   },
   "repository": {
@@ -65,6 +67,13 @@
     "vinyl-source-stream": "~1.1.0"
   },
   "devDependencies": {
-    "eslint-plugin-react": "^3.14.0"
+    "chai": "^3.5.0",
+    "enzyme": "^2.0.0",
+    "eslint-plugin-react": "^3.14.0",
+    "jquery": "^2.2.1",
+    "localStorage": "^1.0.3",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "^0.14.7",
+    "react-tools": "^0.13.3"
   }
 }
