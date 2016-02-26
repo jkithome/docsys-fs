@@ -4,6 +4,7 @@
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
   var DashboardPath = '../../../../app/scripts/components/Dashboard/index.jsx';
+  var Header = '../../../../app/scripts/components/Dashboard/header.jsx';
   var React = require('react');
   var Dashboard = require(DashboardPath);
 

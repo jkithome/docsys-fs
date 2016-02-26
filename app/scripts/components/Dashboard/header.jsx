@@ -4,13 +4,10 @@
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
     History = require('react-router').History,
+    browserHistory = require('react-router').browserHistory,
     userName = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).name.first : null),
 
     Header = React.createClass({
-      contextTypes: {
-        router: React.PropTypes.object.isRequired
-      },
-
       getInitialState: function() {
         return {
           loggedIn: false
@@ -28,7 +25,7 @@
         var data = UserStore.getSession();
         if (!data.loggedIn) {
           window.Materialize.toast('Please log in first.', 4000, 'error-toast');
-          this.context.router.push('/');
+          browserHistory.push('/');
         } else {
           this.state.loggedIn = true;
         }
@@ -40,7 +37,7 @@
           localStorage.removeItem('x-access-token');
           localStorage.removeItem('user');
           window.Materialize.toast(data.message, 2000, 'success-toast');
-          this.context.router.push('/');
+          browserHistory.push('/');
         } else {
           window.Materialize.toast('Failed to logout User', 2000, 'error-toast');
         }
