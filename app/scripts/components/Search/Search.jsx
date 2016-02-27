@@ -27,6 +27,10 @@
       DocumentStore.addChangeListener(this.populateDocuments, 'search');
     },
 
+    componentWillUnmount() {
+      DocumentStore.removeChangeListener(this.populateDocuments, 'search');
+    },
+
     handleSearchSelect: function(event) {
         this.setState({search: event.value});
     },
