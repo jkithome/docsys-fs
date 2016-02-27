@@ -3,20 +3,17 @@
   var React = require('react'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
+    browserHistory = require('react-router').browserHistory,
     History = require('react-router').History,
 
     LoginPage = React.createClass({
-      contextTypes: {
-        router: React.PropTypes.object.isRequired
-      },
-
       getInitialState: function() {
         return {
           user: {
-            username: '',
-            password: ''
+            username: null,
+            password: null
           },
-          result: ''
+          result: null
         };
       },
 
@@ -24,18 +21,24 @@
         UserStore.addChangeListener(this.handleLogin, 'login');
       },
 
+      componentWillUnmount() {
+        UserStore.removeChangeListener(this.handleLogin, 'login');
+      },
+
       handleLogin: function() {
         var data = UserStore.getData();
         if(data.error) {
+          this.setState({result: 'Failed!'});
           if(typeof data.error === 'string') {
             window.Materialize.toast(data.error, 2000, 'error-toast');
           }
         } else {
+          this.setState({result: 'Success!'});
           localStorage.setItem('x-access-token', data.token);
           localStorage.setItem('user', JSON.stringify(data.user));
           this.setState({result: 'Success'});
           window.Materialize.toast(data.message, 2000, 'success-toast');
-          this.context.router.push('/dashboard');
+          browserHistory.push('/dashboard');
         }
       },
 
@@ -89,7 +92,7 @@
                             </div>
                             <div className="row">
                               <div className="center-btn">
-                                <button className="btn waves-effect waves-light" type="submit" name="action">LOGIN
+                                <button id="loginButton" className="btn waves-effect waves-light" type="submit" name="action">LOGIN
                                   <i className="material-icons right">send</i>
                                 </button>
                               </div>
