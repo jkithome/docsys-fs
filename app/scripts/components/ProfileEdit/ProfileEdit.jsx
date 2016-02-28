@@ -4,14 +4,11 @@
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
     CreateDocument = require('../Dashboard/CreateDocument.jsx'),
+    browserHistory = require('react-router').browserHistory,
     Select = require('react-select'),
     Header = require('../Dashboard/header.jsx'),
 
     UserEdit = React.createClass({
-      contextTypes: {
-        router: React.PropTypes.object.isRequired
-      },
-
       getInitialState: function() {
         return {
           user: null,
@@ -33,9 +30,14 @@
 
       componentDidMount: function() {
         var token = localStorage.getItem('x-access-token');
-        UserActions.getUser(this.props.params.userId, token);
+        UserActions.getUser((this.props.params ? this.props.params.userId : null), token);
         UserStore.addChangeListener(this.populateUser, 'user');
         UserStore.addChangeListener(this.handleSubmit, 'userEdit');
+      },
+
+      componentWillUnmount() {
+        UserStore.removeChangeListener(this.populateUser, 'user');
+        UserStore.removeChangeListener(this.handleSubmit, 'userEdit');
       },
 
       comparepswd: function(password, confirmpassword) {
@@ -56,6 +58,7 @@
         var data = UserStore.getUserEdit();
         if(data) {
           if(data.code) {
+            this.setState({result: 'Failed!'});
             if(data.errmsg.indexOf(this.state.username) !== -1) {
               window.Materialize.toast('Username already exists', 2000, 'error-toast');
             } else if(data.errmsg.indexOf(this.state.email) !== -1) {
@@ -63,8 +66,9 @@
             }
           } else if (data.message === 'User updated succesfully.') {
             this.setState({result: 'Success!'});
+            this.setState({result: 'Success!'});
             window.Materialize.toast(data.message, 2000, 'success-toast');
-            this.context.router.push('/profile');
+            browserHistory.push('/profile');
           }
         }
 
@@ -86,7 +90,7 @@
 
       onCancel: function(event) {
         event.preventDefault();
-        this.context.router.push('/profile');
+        browserHistory.push('/profile');
       },
 
       onSubmit: function(event) {
@@ -109,7 +113,7 @@
           if(this.state.password) {
             data.password = this.state.password
           }
-          UserActions.editUser(data, this.props.params.userId, token);
+          UserActions.editUser(data, (this.props.params ? this.props.params.userId : null), token);
         }
       },
 
@@ -125,7 +129,7 @@
                   <div className="row">
                     <h2 className="center-align">Edit Profile</h2>
                   </div>
-                  <form className="col s10 offset-s1" onSubmit={this.onSubmit}>
+                  <form className="col s10 offset-s1">
                     <div className="row">
                       <div className="col s4 offset-s4">
                         <label htmlFor="firstname">First Name</label>
@@ -205,12 +209,12 @@
                     </div>
                     <div className="row">
                       <div className="col s2 offset-s4">
-                        <button className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
+                        <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
                           cancel
                         </button>
                       </div>
                       <div className="col s2">
-                        <button className="btn waves-effect blue center" type="submit" name="action">
+                        <button id="submit" className="btn waves-effect blue center" onClick={this.onSubmit}>
                           update
                         </button>
                       </div>
