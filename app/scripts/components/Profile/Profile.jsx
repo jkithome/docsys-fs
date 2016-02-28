@@ -33,7 +33,7 @@
 
     handleClick: function(event) {
       event.preventDefault();
-      browserHistory.push('/profile/edit/' + user._id)
+      browserHistory.push('/profile/edit/' + (user ? user._id : null))
     },
 
     render: function() {
@@ -76,7 +76,7 @@
                     </div>
                     <div className="row">
                       <div className="center-btn">
-                        <button className="btn waves-effect blue center" onClick={this.handleClick}>
+                        <button id="update" className="btn waves-effect blue center" onClick={this.handleClick}>
                           update
                         </button>
                       </div>
