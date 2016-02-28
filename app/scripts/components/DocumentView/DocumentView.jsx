@@ -15,7 +15,8 @@
     },
 
     componentDidMount: function() {
-      DocumentActions.getDocument(this.props.params.docId);
+      var token = localStorage.getItem('x-access-token');
+      DocumentActions.getDocument(this.props.params.docId, token);
       DocumentStore.addChangeListener(this.populateDocument, 'document');
     },
 

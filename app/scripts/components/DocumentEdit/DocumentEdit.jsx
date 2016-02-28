@@ -27,7 +27,8 @@
       },
 
       componentDidMount: function() {
-        DocumentActions.getDocument(this.props.params.docId);
+        var token = localStorage.getItem('x-access-token');
+        DocumentActions.getDocument(this.props.params.docId, token);
         DocumentStore.addChangeListener(this.populateDocument, 'document');
         DocumentStore.addChangeListener(this.handleSubmit, 'editDoc');
       },
@@ -72,6 +73,7 @@
 
       onSubmit: function(event) {
         event.preventDefault();
+        var token = localStorage.getItem('x-access-token');
         var docId = this.props.params.docId;
         var docAccess = '';
         if(this.state.user) {
@@ -83,7 +85,7 @@
         if(this.state.admin) {
           docAccess+= 'admin'
         }
-        DocumentActions.editDocument(this.state.document, docAccess.replace(/\,$/,''), docId
+        DocumentActions.editDocument(this.state.document, docAccess.replace(/\,$/,''), docId, token
         );
       },
 

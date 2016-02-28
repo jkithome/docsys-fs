@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  var React = require('react');
+  var React = require('react'),
 
-    module.exports = React.createClass({
+    Main = React.createClass({
       propTypes: {
         children: React.PropTypes.element.isRequired
       },
@@ -13,4 +13,5 @@
         );
       }
     });
+  module.exports = Main;
 })();

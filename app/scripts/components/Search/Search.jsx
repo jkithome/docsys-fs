@@ -44,6 +44,7 @@
 
     onSubmit: function(event) {
         event.preventDefault();
+        var token = localStorage.getItem('x-access-token');
         if(this.state.search === 'date') {
           var date = (this.state.term).split(/[\/?\.]/),
               day = parseInt(date[0]),
@@ -51,13 +52,13 @@
               year = parseInt(date[2]),
               limit = this.state.limit ? this.state.limit : 0;
               console.log(date);
-          DocumentActions.dateSearch(day, month, year, limit);
+          DocumentActions.dateSearch(day, month, year, limit, token);
         } else if(this.state.search === 'genre') {
           var limit = this.state.limit? this.state.limit: 0;
-          DocumentActions.genreSearch(this.state.term, limit);
+          DocumentActions.genreSearch(this.state.term, limit, token);
         } else if(this.state.search === 'content') {
           var limit = this.state.limit? this.state.limit: 0;
-          DocumentActions.contentSearch(this.state.term, limit);
+          DocumentActions.contentSearch(this.state.term, limit, token);
         }
       },
 

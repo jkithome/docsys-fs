@@ -4,10 +4,10 @@
     Select = require('react-select'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
-    History = require('react-router').History;
+    History = require('react-router').History,
 
 
-    module.exports = React.createClass({
+    SignupPage = React.createClass({
       contextTypes: {
         router: React.PropTypes.object.isRequired
       },
@@ -32,7 +32,7 @@
 
       componentDidMount: function() {
         this.comparepswd();
-        UserStore.addChangeListener(this.handleSignup);
+        UserStore.addChangeListener(this.handleSignup, 'signUp');
       },
 
       comparepswd: function(password, confirmpassword) {
@@ -45,7 +45,7 @@
       },
 
       handleSignup: function() {
-        var data = UserStore.getData();
+        var data = UserStore.getCreatedUser();
         if (data.code) {
           if(data.errmsg.indexOf(this.state.username) !== -1) {
             window.Materialize.toast('Username is already taken', 2000, 'error-toast');
@@ -105,7 +105,7 @@
                     <div className="card-panel">
                       <div className="row">
                         <div className="card-panel teal">
-                          <h2 className="black-text">SIGN UP TODAY</h2>
+                          <h2 className="black-text">Sign Up Today</h2>
                         </div>
                       </div>
                       <div className="row">
@@ -175,4 +175,5 @@
           </div>);
       }
   });
+  module.exports = SignupPage;
 })();

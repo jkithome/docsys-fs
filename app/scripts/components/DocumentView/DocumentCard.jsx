@@ -23,6 +23,7 @@
       deleteDocument: function(event) {
         var that = this;
         event.preventDefault();
+        var token = localStorage.getItem('x-access-token');
         window.swal({
           title: "Are you sure?",
           text: "You will not be able to recover this document!",
@@ -33,7 +34,7 @@
           closeOnConfirm: true
         },
           function(){
-            DocumentActions.deleteDocument(that.props.document._id); });
+            DocumentActions.deleteDocument(that.props.document._id, token); });
 
       },
 

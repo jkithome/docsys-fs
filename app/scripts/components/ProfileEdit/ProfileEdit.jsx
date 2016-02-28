@@ -32,7 +32,8 @@
       },
 
       componentDidMount: function() {
-        UserActions.getUser(this.props.params.userId);
+        var token = localStorage.getItem('x-access-token');
+        UserActions.getUser(this.props.params.userId, token);
         UserStore.addChangeListener(this.populateUser, 'user');
         UserStore.addChangeListener(this.handleSubmit, 'userEdit');
       },
@@ -90,6 +91,7 @@
 
       onSubmit: function(event) {
         event.preventDefault();
+        var token = localStorage.getItem('x-access-token');
         if (this.comparepswd(this.state.password, this.state.confirmpassword)) {
           var data= {}
           if(this.state.firstname) {
@@ -107,7 +109,7 @@
           if(this.state.password) {
             data.password = this.state.password
           }
-          UserActions.editUser(data, this.props.params.userId);
+          UserActions.editUser(data, this.props.params.userId, token);
         }
       },
 
