@@ -195,27 +195,36 @@
         sinon.spy(mockEvent, 'preventDefault');
         var profileEdit = enzyme.mount(<ProfileEdit />);
         profileEdit.setState({user :{
-      "_id": "56cf451bacc801dd33939b79",
-      "updatedAt": "2016-02-28T08:28:38.818Z",
-      "createdAt": "2016-02-25T18:16:59.000Z",
-      "password": "$2a$10$OCYrOBL1sImfZVdLv2dh0ezBwMMGFdx6R/6tuz3ovalkDkaV6XMYC",
-      "email": "jerry@erry.com",
-      "username": "Jemmy",
-      "role": "56cf451b09db67e133ab284d",
-      "__v": 0,
-      "loggedIn": true,
-      "token": "eyJ0eX",
-      "name": {
-        "last": "Kithome",
-        "first": "Jeremy"
-      }
-    }});
+          "_id": "56cf451bacc801dd33939b79",
+          "updatedAt": "2016-02-28T08:28:38.818Z",
+          "createdAt": "2016-02-25T18:16:59.000Z",
+          "password": "$2a$10$OCYrOBL1sImfZVdLv2dh0ezBwMMGFdx6R/6tuz3ovalkDkaV6XMYC",
+          "email": "jerry@erry.com",
+          "username": "Jemmy",
+          "role": "56cf451b09db67e133ab284d",
+          "__v": 0,
+          "loggedIn": true,
+          "token": "eyJ0eX",
+          "name": {
+            "last": "Kithome",
+            "first": "Jeremy"
+          }
+        }});
         var inst = profileEdit.instance();
         sinon.spy(inst, 'onCancel');
         profileEdit.find('#cancel').simulate('click', mockEvent);
         expect(mockEvent.preventDefault.called).to.eql(true);
         expect(browserHistory.push.called).to.eql(true);
         browserHistory.push.restore();
+      });
+
+      it('should return true if the passwords match', function() {
+        var profileEdit = enzyme.mount(<ProfileEdit />);
+        var instance = profileEdit.instance();
+        sinon.spy(instance, 'comparepswd');
+        instance.comparepswd('password', 'password');
+        expect(instance.comparepswd.returnValues[0]).to.eql(true);
+        instance.comparepswd.restore();
       });
   });
 })();

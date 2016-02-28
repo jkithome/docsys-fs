@@ -148,5 +148,15 @@
         expect(mockEvent.preventDefault.called).to.eql(true);
         expect(UserActions.signup.called).to.eql(true);
       });
+
+      it('should return true if the passwords match', function() {
+        var signup = enzyme.mount(<SignUp />);
+        var instance = signup.instance();
+        sinon.spy(instance, 'comparepswd');
+        instance.comparepswd('password', 'password');
+        expect(instance.comparepswd.returnValues[0]).to.eql(true);
+        instance.comparepswd.restore();
+      });
+
   });
 })();
