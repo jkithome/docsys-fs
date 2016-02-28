@@ -43,7 +43,7 @@
           .end(function(err, res) {
             expect(res.status).toBe(409);
             expect(res.body.code).toEqual(11000);
-            expect(res.body.errmsg).toContain('E11000 duplicate key error index: demoDb.users.$username_1 dup key: { : \"Tester\" }');
+            expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.users.$username_1 dup key: { : \"Tester\" }');
             done();
           });
       });
@@ -98,7 +98,7 @@
           .end(function(err, res) {
             expect(res.status).toBe(409);
             expect(res.body.code).toEqual(11000);
-            expect(res.body.errmsg).toContain('E11000 duplicate key error index: demoDb.users.$email_1 dup key: { : "testing@api.com" }');
+            expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.users.$email_1 dup key: { : "testing@api.com" }');
             done();
           });
       });

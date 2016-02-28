@@ -71,6 +71,7 @@
     "enzyme": "^2.0.0",
     "eslint-plugin-react": "^3.14.0",
     "jquery": "^2.2.1",
+    "jsdom": "^8.0.4",
     "localStorage": "^1.0.3",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
