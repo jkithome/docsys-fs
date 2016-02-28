@@ -92,7 +92,7 @@
                             </div>
                             <div className="row">
                               <div className="center-btn">
-                                <button id="loginButton" className="btn waves-effect waves-light" type="submit" name="action">LOGIN
+                                <button className="btn waves-effect waves-light" type="submit" name="action">LOGIN
                                   <i className="material-icons right">send</i>
                                 </button>
                               </div>

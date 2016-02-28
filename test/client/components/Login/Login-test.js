@@ -145,51 +145,53 @@
         instance.handleFieldChange.restore();
       });
 
-      // it('should call the logout action on click', function() {
-      //   var mockEvent = {
-      //     preventDefault: function() {}
-      //   };
-      //   sinon.stub(browserHistory, 'push').returns(true);
-      //   sinon.stub(UserActions, 'login').returns(true);
-      //   var data = {
-      //     username: 'jere',
-      //     password: 'password'
-      //   };
-      //   var user = {
-      //     "message": "User successfully logged in.",
-      //     "user": {
-      //       "_id": "56cf451bacc801dd33939b79",
-      //       "name": {
-      //         "first": "Jeremy",
-      //         "last": "Kithome"
-      //       },
-      //       "email": "jerry@erry.com",
-      //       "username": "Jemmy",
-      //       "role": {
-      //         "_id": "56cf451b09db67e133ab284d",
-      //         "description": "Can create and view documents",
-      //         "title": "user"
-      //       },
-      //       "createdAt": "2016-02-25T18:16:59.000Z",
-      //       "updatedAt": "2016-02-25T18:17:31.419Z",
-      //       "iat": 1456519988,
-      //       "exp": 1456523588
-      //     },
-      //     "token": "eyJ"
-      //   };
-      //   sinon.spy(mockEvent, 'preventDefault');
-      //   var login = enzyme.mount(<Login />);
-      //   var inst = login.instance();
-      //   sinon.spy(inst, 'onSubmit');
-      //   UserStore.setData(user);
-      //   expect(login.find('#loginButton').length).to.eql(1);
-      //   login.find('#loginButton').simulate('click', mockEvent);
-      //   // expect(mockEvent.preventDefault.called).to.eql(true);
-      //   // expect(UserActions.login.withArgs(data).called).to.eql(true);
-      //   expect(inst.onSubmit.calledOnce).to.eql(true);
-      //   expect(browserHistory.push.called).to.eql(true);
-      //   UserStore.setData.restore();
-      //   browserHistory.push.restore();
-      // });
+      it('should call the login action on click', function() {
+        var mockEvent = {
+          preventDefault: function() {}
+        };
+        sinon.stub(browserHistory, 'push').returns(true);
+        sinon.stub(UserActions, 'login').returns(true);
+        var data = {
+          username: 'jere',
+          password: 'password'
+        };
+        var user = {
+          "message": "User successfully logged in.",
+          "user": {
+            "_id": "56cf451bacc801dd33939b79",
+            "name": {
+              "first": "Jeremy",
+              "last": "Kithome"
+            },
+            "email": "jerry@erry.com",
+            "username": "Jemmy",
+            "role": {
+              "_id": "56cf451b09db67e133ab284d",
+              "description": "Can create and view documents",
+              "title": "user"
+            },
+            "createdAt": "2016-02-25T18:16:59.000Z",
+            "updatedAt": "2016-02-25T18:17:31.419Z",
+            "iat": 1456519988,
+            "exp": 1456523588
+          },
+          "token": "eyJ"
+        };
+        sinon.spy(mockEvent, 'preventDefault');
+        var login = enzyme.mount(<Login />);
+        login.setState({user: {
+          username: 'jere',
+          password: 'password'
+        }})
+        var inst = login.instance();
+        sinon.spy(inst, 'onSubmit');
+        UserStore.setData(user);
+        login.find('form').simulate('submit', mockEvent);
+        expect(mockEvent.preventDefault.called).to.eql(true);
+        expect(UserActions.login.withArgs(data).called).to.eql(true);
+        expect(inst.onSubmit.calledOnce).to.eql(true);
+        expect(browserHistory.push.called).to.eql(true);
+        browserHistory.push.restore();
+      });
   });
 })();
