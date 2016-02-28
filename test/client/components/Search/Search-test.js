@@ -6,6 +6,7 @@
   var sinon = require('sinon');
   var SearchPage = '../../../../app/scripts/components/Search/Search.jsx';
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
+  var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
   var React = require('react');
   var Search = require(SearchPage);
 
@@ -109,5 +110,22 @@
     expect(search.state().search).to.eql(event.value);
     instance.handleSearchSelect.restore();
   });
+  it('should call document search action on click', function() {
+        var mockEvent = {
+          preventDefault: function() {}
+        };
+        sinon.stub(DocumentActions, 'genreSearch').returns(true);
+        sinon.spy(mockEvent, 'preventDefault');
+        var search = enzyme.mount(<Search />);
+        search.setState({search: 'genre',
+          term: 'katniss',
+          limit: 100
+        });
+        var inst = search.instance();
+        sinon.spy(inst, 'onSubmit');
+        search.find('#search').simulate('click', mockEvent);
+        expect(mockEvent.preventDefault.called).to.eql(true);
+        expect(DocumentActions.genreSearch.called).to.eql(true);
+  })
 });
 })();
