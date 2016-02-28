@@ -5,6 +5,7 @@
   var enzyme = require('enzyme');
   var sinon = require('sinon');
   var HeaderPath = '../../../../app/scripts/components/Dashboard/header.jsx';
+  var UserActions = require('../../../../app/scripts/actions/UserActions');
   var browserHistory = require('react-router').browserHistory;
   var UserStore = require('../../../../app/scripts/stores/UserStore');
   var React = require('react');
@@ -99,7 +100,7 @@
         UserStore.getUserLogout.restore();
       });
 
-  it('sets the correct state if the response is valid', function() {
+  it('sets the correct state if the session is valid', function() {
       var header = enzyme.mount(<Header />);
         // Trigger a change in the UserStore
         UserStore.setSession({loggedIn: true});
@@ -108,7 +109,7 @@
         expect(header.state().loggedIn).to.eql(true);
       });
 
-      it('sets the correct state if the response is invalid', function() {
+      it('sets the correct state if the session is invalid', function() {
         sinon.stub(browserHistory, 'push').returns(true);
         var header = enzyme.mount(<Header />);
         // Trigger a change in the UserStore
@@ -120,19 +121,18 @@
         browserHistory.push.restore();
       });
 
-    // it('should call the logout action on click', function() {
-    //     var mockEvent = {
-    //       preventDefault: function() {}
-    //     };
-    //     sinon.stub(UserActions, 'logout').returns(true);
-    //     sinon.spy(mockEvent, 'preventDefault');
-    //     var header = enzyme.mount(<Header />);
-    //     var inst = header.instance();
-    //     sinon.spy(inst, 'logout');
-    //     header.find('form').simulate('submit', mockEvent);
-    //     expect(mockEvent.preventDefault.called).to.eql(true);
-    //     expect(UserActions.logout.called).to.eql(true);
-    //     expect(inst.logout.calledOnce).to.eql(true);
-    //   });
+    it('should call the logout action on click', function() {
+        var mockEvent = {
+          preventDefault: function() {}
+        };
+        sinon.stub(UserActions, 'logout').returns(true);
+        sinon.spy(mockEvent, 'preventDefault');
+        var header = enzyme.mount(<Header />);
+        var inst = header.instance();
+        sinon.spy(inst, 'logout');
+        header.find('#logout').simulate('click', mockEvent);
+        expect(mockEvent.preventDefault.called).to.eql(true);
+        expect(UserActions.logout.called).to.eql(true);
+      });
 });
 })();

@@ -62,7 +62,7 @@
               <li className="divider"></li>
               <li><i className="material-icons left">face</i><a href="/profile">Profile</a></li>
               <li className="divider"></li>
-              <li><i className="material-icons left">exit_to_app</i><a onClick={this.logout}>Logout</a></li>
+              <li><i className="material-icons left">exit_to_app</i><a id="logout" onClick={this.logout}>Logout</a></li>
             </ul>
             <nav>
               <div className="nav-wrapper">
