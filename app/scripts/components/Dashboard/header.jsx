@@ -21,6 +21,11 @@
         UserStore.addChangeListener(this.handleLogout, 'logout');
       },
 
+      componentWillUnmount() {
+        UserStore.removeChangeListener(this.getSession, 'session');
+        UserStore.removeChangeListener(this.handleLogout, 'logout');
+      },
+
       getSession: function() {
         var data = UserStore.getSession();
         if (!data.loggedIn) {
