@@ -87,7 +87,7 @@
           .end(function(err, res) {
             expect(res.status).toEqual(409);
             expect(res.body.code).toEqual(11000);
-            expect(res.body.errmsg).toBe('E11000 duplicate key error index: demoDb.documents.$title_1 dup key: { : \"The Matrix\" }');
+            expect(res.body.errmsg).toContain('E11000 duplicate key error index: demoDb.documents.$title_1 dup key: { : \"The Matrix\" }');
             done();
           });
       });
