@@ -14,6 +14,5 @@
       var component = enzyme.shallow(<Main children={<div>'Child Component'</div>}/>);
       expect(component.contains(<div>'Child Component'</div>)).to.eql(true);
     });
-
-});
+  });
 })();

@@ -85,78 +85,77 @@
         browserHistory.push.restore();
       });
 
-      it('sets the correct state if the response has an error', function() {
-        var signup = enzyme.mount(<SignUp />);
-        // Trigger a change in the UserStore
-        UserStore.setCreatedUser({
-          code: 11000,
-          errmsg: 'Duplicate username'
-        });
-        expect(UserStore.getCreatedUser()).to.be.an('object');
-        expect(signup.state().result).to.be.a('string');
-        expect(signup.state().result).to.eql('Failed!');
+    it('sets the correct state if the response has an error', function() {
+      var signup = enzyme.mount(<SignUp />);
+      // Trigger a change in the UserStore
+      UserStore.setCreatedUser({
+        code: 11000,
+        errmsg: 'Duplicate username'
       });
+      expect(UserStore.getCreatedUser()).to.be.an('object');
+      expect(signup.state().result).to.be.a('string');
+      expect(signup.state().result).to.eql('Failed!');
+    });
 
-      it('should correctly handle field change', function() {
-        var signup = enzyme.mount(<SignUp />);
-        var event = {
-          target: {
-            name: 'firstname',
-            value: 'katniss'
-          },
-          preventDefault: function() {}
-        };
-        var instance = signup.instance();
-        sinon.spy(instance, 'handleFieldChange');
-        instance.handleFieldChange(event);
-        expect(signup.state()[event.target.name]).to.eql(event.target.value);
-        instance.handleFieldChange.restore();
-      });
+    it('should correctly handle field change', function() {
+      var signup = enzyme.mount(<SignUp />);
+      var event = {
+        target: {
+          name: 'firstname',
+          value: 'katniss'
+        },
+        preventDefault: function() {}
+      };
+      var instance = signup.instance();
+      sinon.spy(instance, 'handleFieldChange');
+      instance.handleFieldChange(event);
+      expect(signup.state()[event.target.name]).to.eql(event.target.value);
+      instance.handleFieldChange.restore();
+    });
 
-      it('should correctly handle search select', function() {
-        var signup = enzyme.mount(<SignUp />);
-        var event = {
-            value: 'content',
-        };
-        var instance = signup.instance();
-        sinon.spy(instance, 'handleRoleSelect');
-        instance.handleRoleSelect(event);
-        expect(signup.state().role).to.eql(event.value);
-        instance.handleRoleSelect.restore();
-      });
+    it('should correctly handle search select', function() {
+      var signup = enzyme.mount(<SignUp />);
+      var event = {
+          value: 'content',
+      };
+      var instance = signup.instance();
+      sinon.spy(instance, 'handleRoleSelect');
+      instance.handleRoleSelect(event);
+      expect(signup.state().role).to.eql(event.value);
+      instance.handleRoleSelect.restore();
+    });
 
-      it('should call the signup action on click', function() {
-        var mockEvent = {
-          preventDefault: function() {}
-        };
-        sinon.stub(UserActions, 'signup').returns(true);
+    it('should call the signup action on click', function() {
+      var mockEvent = {
+        preventDefault: function() {}
+      };
+      sinon.stub(UserActions, 'signup').returns(true);
 
 
-        sinon.spy(mockEvent, 'preventDefault');
-        var signup = enzyme.mount(<SignUp />);
-        signup.setState({username: 'username',
-          firstname: 'firstname',
-          lastname: 'lastname',
-          role: 'user',
-          email: 'email@email.com',
-          password: 'password',
-          confirmpassword: 'password'
-        })
-        var inst = signup.instance();
-        sinon.spy(inst, 'onSubmit');
-        signup.find('form').simulate('submit', mockEvent);
-        expect(mockEvent.preventDefault.called).to.eql(true);
-        expect(UserActions.signup.called).to.eql(true);
-      });
+      sinon.spy(mockEvent, 'preventDefault');
+      var signup = enzyme.mount(<SignUp />);
+      signup.setState({username: 'username',
+        firstname: 'firstname',
+        lastname: 'lastname',
+        role: 'user',
+        email: 'email@email.com',
+        password: 'password',
+        confirmpassword: 'password'
+      })
+      var inst = signup.instance();
+      sinon.spy(inst, 'onSubmit');
+      signup.find('form').simulate('submit', mockEvent);
+      expect(mockEvent.preventDefault.called).to.eql(true);
+      expect(UserActions.signup.called).to.eql(true);
+    });
 
-      it('should return true if the passwords match', function() {
-        var signup = enzyme.mount(<SignUp />);
-        var instance = signup.instance();
-        sinon.spy(instance, 'comparepswd');
-        instance.comparepswd('password', 'password');
-        expect(instance.comparepswd.returnValues[0]).to.eql(true);
-        instance.comparepswd.restore();
-      });
-
+    it('should return true if the passwords match', function() {
+      var signup = enzyme.mount(<SignUp />);
+      var instance = signup.instance();
+      sinon.spy(instance, 'comparepswd');
+      instance.comparepswd('password', 'password');
+      expect(instance.comparepswd.returnValues[0]).to.eql(true);
+      instance.comparepswd.restore();
+    });
   });
 })();

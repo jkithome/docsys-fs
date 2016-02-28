@@ -9,16 +9,16 @@
   var Landing = require(LandingPage);
 
   describe('Landing component', function() {
-  it('renders the correct content', function() {
-    expect(enzyme.shallow(<Landing />).text()).to.have.string('The simplest way to manage your documents.');
-    expect(enzyme.shallow(<Landing />).text()).to.have.string('GET STARTED');
-  });
+    it('renders the correct content', function() {
+      expect(enzyme.shallow(<Landing />).text()).to.have.string('The simplest way to manage your documents.');
+      expect(enzyme.shallow(<Landing />).text()).to.have.string('GET STARTED');
+    });
 
-  it('renders the correct component', function() {
-    expect(enzyme.shallow(<Landing />).is('#landing')).to.eql(true);
-    expect(enzyme.mount(<Landing />).find('.container').length).to.eql(1);
-    expect(enzyme.mount(<Landing />).find('.join-btn').length).to.eql(1);
-    expect(enzyme.mount(<Landing />).find('#nav-mobile').length).to.eql(1);
+    it('renders the correct component', function() {
+      expect(enzyme.shallow(<Landing />).is('#landing')).to.eql(true);
+      expect(enzyme.mount(<Landing />).find('.container').length).to.eql(1);
+      expect(enzyme.mount(<Landing />).find('.join-btn').length).to.eql(1);
+      expect(enzyme.mount(<Landing />).find('#nav-mobile').length).to.eql(1);
+    });
   });
-});
 })();

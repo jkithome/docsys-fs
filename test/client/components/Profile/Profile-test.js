@@ -16,32 +16,32 @@
 
     before(function() {
       window.Materialize.toast = sinon.spy();
-    var user = {
-    _id: "56cf451bacc801dd33939b79",
-    name: {
-      first: "Jeremy",
-      last: "Kithome"
-    },
-    email: "jerry@erry.com",
-    username: "Jemmy",
-    role: {
-      _id: "56cf451b09db67e133ab284d",
-      description: "Can create and view documents",
-      title: "user"
-    },
-    createdAt: "2016-02-25T18:16:59.000Z",
-    updatedAt: "2016-02-25T18:17:31.419Z",
-    iat: 1456519988,
-    exp: 1456523588
-  };
-    var storage = sinon.stub(localStorage, 'getItem');
-    storage.withArgs('user').returns({"_id":"56cf451bacc801dd33939b79","name":{"first":"Jeremy","last":"Kithome"},"email":"jerry@erry.com","username":"Jemmy","role":{"_id":"56cf451b09db67e133ab284d","description":"Can create and view documents","title":"user"},"createdAt":"2016-02-25T18:16:59.000Z","updatedAt":"2016-02-26T20:53:08.387Z","iat":1456594454,"exp":1456598054});
-    storage.withArgs('x-access-token').returns('faketoken');
-  });
+      var user = {
+      _id: "56cf451bacc801dd33939b79",
+      name: {
+        first: "Jeremy",
+        last: "Kithome"
+      },
+      email: "jerry@erry.com",
+      username: "Jemmy",
+      role: {
+        _id: "56cf451b09db67e133ab284d",
+        description: "Can create and view documents",
+        title: "user"
+      },
+      createdAt: "2016-02-25T18:16:59.000Z",
+      updatedAt: "2016-02-25T18:17:31.419Z",
+      iat: 1456519988,
+      exp: 1456523588
+    };
+      var storage = sinon.stub(localStorage, 'getItem');
+      storage.withArgs('user').returns({"_id":"56cf451bacc801dd33939b79","name":{"first":"Jeremy","last":"Kithome"},"email":"jerry@erry.com","username":"Jemmy","role":{"_id":"56cf451b09db67e133ab284d","description":"Can create and view documents","title":"user"},"createdAt":"2016-02-25T18:16:59.000Z","updatedAt":"2016-02-26T20:53:08.387Z","iat":1456594454,"exp":1456598054});
+      storage.withArgs('x-access-token').returns('faketoken');
+    });
 
-  after(function() {
-    localStorage.getItem.restore();
-  });
+    after(function() {
+      localStorage.getItem.restore();
+    });
 
     it('renders the profile component', function() {
       // Render Dashboard page in the document
@@ -98,56 +98,56 @@
     });
 
     it('calls the user get change listener', function() {
-        sinon.spy(UserStore, 'getUser');
-        enzyme.mount(<Profile />); // Mount the component
-        // Trigger a change in the UserStore
-        UserStore.setUser({
-          "_id": "56cf451bacc801dd33939b79",
-          "name": {
-            "first": "Jeremy",
-            "last": "Kithome"
-          },
-          "email": "jerry@erry.com",
-          "username": "Jemmy",
-          "role": {
-            "_id": "56cf451b09db67e133ab284d",
-            "description": "Can create and view documents",
-            "title": "user"
-          },
-          "createdAt": "2016-02-25T18:16:59.000Z",
-          "updatedAt": "2016-02-25T18:17:31.419Z",
-          "iat": 1456519988,
-          "exp": 1456523588
-        });
-        // The populateUser function should be called
-        expect(UserStore.getUser.called).to.eql(true);
-        UserStore.getUser.restore();
+      sinon.spy(UserStore, 'getUser');
+      enzyme.mount(<Profile />); // Mount the component
+      // Trigger a change in the UserStore
+      UserStore.setUser({
+        "_id": "56cf451bacc801dd33939b79",
+        "name": {
+          "first": "Jeremy",
+          "last": "Kithome"
+        },
+        "email": "jerry@erry.com",
+        "username": "Jemmy",
+        "role": {
+          "_id": "56cf451b09db67e133ab284d",
+          "description": "Can create and view documents",
+          "title": "user"
+        },
+        "createdAt": "2016-02-25T18:16:59.000Z",
+        "updatedAt": "2016-02-25T18:17:31.419Z",
+        "iat": 1456519988,
+        "exp": 1456523588
       });
+      // The populateUser function should be called
+      expect(UserStore.getUser.called).to.eql(true);
+      UserStore.getUser.restore();
+    });
 
     it('sets the correct state if the response is valid', function() {
-        var profile = enzyme.mount(<Profile />);
-        // Trigger a change in the UserStore
-        UserStore.setUser({
-          "_id": "56cf451bacc801dd33939b79",
-          "name": {
-            "first": "Jeremy",
-            "last": "Kithome"
-          },
-          "email": "jerry@erry.com",
-          "username": "Jemmy",
-          "role": {
-            "_id": "56cf451b09db67e133ab284d",
-            "description": "Can create and view documents",
-            "title": "user"
-          },
-          "createdAt": "2016-02-25T18:16:59.000Z",
-          "updatedAt": "2016-02-25T18:17:31.419Z",
-          "iat": 1456519988,
-          "exp": 1456523588
-        });
-        expect(UserStore.getUser()).to.be.an('object');
-        expect(profile.state().user).to.be.an('object');
+      var profile = enzyme.mount(<Profile />);
+      // Trigger a change in the UserStore
+      UserStore.setUser({
+        "_id": "56cf451bacc801dd33939b79",
+        "name": {
+          "first": "Jeremy",
+          "last": "Kithome"
+        },
+        "email": "jerry@erry.com",
+        "username": "Jemmy",
+        "role": {
+          "_id": "56cf451b09db67e133ab284d",
+          "description": "Can create and view documents",
+          "title": "user"
+        },
+        "createdAt": "2016-02-25T18:16:59.000Z",
+        "updatedAt": "2016-02-25T18:17:31.419Z",
+        "iat": 1456519988,
+        "exp": 1456523588
       });
+      expect(UserStore.getUser()).to.be.an('object');
+      expect(profile.state().user).to.be.an('object');
+    });
 
     it('redirects to profile edit page when edit button is clicked', function() {
       var mockEvent = {
@@ -175,11 +175,11 @@
         exp: 1456523588
       }})
       var inst = profile.instance();
-        sinon.spy(inst, 'handleClick');
-        profile.find('#update').simulate('click', mockEvent);
-        expect(mockEvent.preventDefault.called).to.eql(true);
-        expect(browserHistory.push.called).to.eql(true);
-        browserHistory.push.restore();
-    })
+      sinon.spy(inst, 'handleClick');
+      profile.find('#update').simulate('click', mockEvent);
+      expect(mockEvent.preventDefault.called).to.eql(true);
+      expect(browserHistory.push.called).to.eql(true);
+      browserHistory.push.restore();
+    });
   });
 })();
