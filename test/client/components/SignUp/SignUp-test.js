@@ -124,5 +124,29 @@
         expect(signup.state().role).to.eql(event.value);
         instance.handleRoleSelect.restore();
       });
+
+      it('should call the signup action on click', function() {
+        var mockEvent = {
+          preventDefault: function() {}
+        };
+        sinon.stub(UserActions, 'signup').returns(true);
+
+
+        sinon.spy(mockEvent, 'preventDefault');
+        var signup = enzyme.mount(<SignUp />);
+        signup.setState({username: 'username',
+          firstname: 'firstname',
+          lastname: 'lastname',
+          role: 'user',
+          email: 'email@email.com',
+          password: 'password',
+          confirmpassword: 'password'
+        })
+        var inst = signup.instance();
+        sinon.spy(inst, 'onSubmit');
+        signup.find('form').simulate('submit', mockEvent);
+        expect(mockEvent.preventDefault.called).to.eql(true);
+        expect(UserActions.signup.called).to.eql(true);
+      });
   });
 })();
