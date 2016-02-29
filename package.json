@@ -10,8 +10,7 @@
     "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js  test/client/**/*test.js",
     "test": "npm run test:bend && npm run test:fend",
     "posttest": "pkill node",
-    "codecov": "cat coverage/*/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
-    "postinstall": "bower install && gulp"
+    "codecov": "cat coverage/*/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js"
   },
   "repository": {
     "type": "git",
@@ -37,7 +36,7 @@
     "flux": "^2.1.1",
     "fs": "0.0.2",
     "gulp": "^3.9.0",
-    "gulp-bower": "0.0.10",
+    "gulp-bower": "0.0.13",
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^1.1.1",
