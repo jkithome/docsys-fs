@@ -76,7 +76,6 @@
     "chai": "^3.5.0",
     "codecov.io": "^0.1.6",
     "enzyme": "^2.0.0",
-    "eslint-plugin-react": "^3.14.0",
     "jquery": "^2.2.1",
     "jsdom": "^8.0.4",
     "karma": "^0.13.21",
