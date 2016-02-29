@@ -4,35 +4,36 @@
     Select = require('react-select'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
+    browserHistory = require('react-router').browserHistory,
     History = require('react-router').History,
 
 
     SignupPage = React.createClass({
-      contextTypes: {
-        router: React.PropTypes.object.isRequired
-      },
-
       getInitialState: function() {
         return {
-          firstname: '',
-          lastname: '',
-          username: '',
+          firstname: null,
+          lastname: null,
+          username: null,
           role: 'user',
-          email: '',
-          password: '',
+          email: null,
+          password: null,
           roles: [
             { value: 'admin', label: 'Admin' },
             { value: 'staff', label: 'staff' },
             { value: 'user',  label: 'User' }
           ],
-          result: '',
-          confirmpassword: ''
+          result: null,
+          confirmpassword: null
         };
       },
 
       componentDidMount: function() {
         this.comparepswd();
         UserStore.addChangeListener(this.handleSignup, 'signUp');
+      },
+
+      componentWillUnmount() {
+        UserStore.removeChangeListener(this.handleSignup, 'signUp');
       },
 
       comparepswd: function(password, confirmpassword) {
@@ -47,6 +48,7 @@
       handleSignup: function() {
         var data = UserStore.getCreatedUser();
         if (data.code) {
+          this.setState({result: 'Failed!'});
           if(data.errmsg.indexOf(this.state.username) !== -1) {
             window.Materialize.toast('Username is already taken', 2000, 'error-toast');
           } else if(data.errmsg.indexOf(this.state.email) !== -1) {
@@ -55,7 +57,7 @@
         } else {
           this.setState({result: 'Success!'});
           window.Materialize.toast(data.message, 2000, 'success-toast');
-          this.context.router.push('/login');
+          browserHistory.push('/login');
         }
       },
 

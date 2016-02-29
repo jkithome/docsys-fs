@@ -16,9 +16,13 @@
 
     componentDidMount: function() {
       var token = localStorage.getItem('x-access-token');
-      DocumentActions.getDocument(this.props.params.docId, token);
+      DocumentActions.getDocument((this.props.params ? this.props.params.docId : null), token);
       DocumentStore.addChangeListener(this.populateDocument, 'document');
     },
+
+    componentWillUnmount() {
+        DocumentStore.removeChangeListener(this.populateDocument, 'document');
+      },
 
     populateDocument: function() {
       var data = DocumentStore.getDocument();

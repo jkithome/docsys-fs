@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var config = require('../../config');
+  var config = require('../../../config');
   var MongoClient = require('mongodb').MongoClient;
   var assert = require('assert');
   var ObjectId = require('mongodb').ObjectID;

@@ -5,12 +5,9 @@
     DocumentStore = require('../../stores/DocumentStore'),
     CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     Header = require('../Dashboard/header.jsx'),
+    browserHistory = require('react-router').browserHistory,
 
     DocumentEdit = React.createClass({
-      contextTypes: {
-        router: React.PropTypes.object.isRequired
-      },
-
       getInitialState: function() {
         return {
           originalDocument: null,
@@ -22,16 +19,22 @@
 
           user: false,
           staff: false,
-          admin: false
+          admin: false,
+          result: null
         };
       },
 
       componentDidMount: function() {
         var token = localStorage.getItem('x-access-token');
-        DocumentActions.getDocument(this.props.params.docId, token);
+        DocumentActions.getDocument(this.props.params ? this.props.params.docId : null, token);
         DocumentStore.addChangeListener(this.populateDocument, 'document');
         DocumentStore.addChangeListener(this.handleSubmit, 'editDoc');
       },
+
+      componentWillUnmount() {
+      DocumentStore.removeChangeListener(this.populateDocument, 'document');
+      DocumentStore.removeChangeListener(this.handleSubmit, 'editDoc');
+    },
 
       populateDocument: function() {
         var data = DocumentStore.getDocument();
@@ -42,12 +45,14 @@
         var data = DocumentStore.getEditedDocument();
         if(data) {
           if(data.code) {
+            this.setState({result: 'Failed!'});
             if(data.errmsg.indexOf(this.state.document.title) !== -1) {
               window.Materialize.toast('Title already exists', 2000, 'error-toast');
             }
           } else if (data.message === 'Document updated successfully.') {
+            this.setState({result: 'Success!'});
             window.Materialize.toast('Document updated successfully.', 2000, 'success-toast');
-            this.context.router.push('/docs/' + this.props.params.docId);
+            browserHistory.push('/docs/' + (this.props.params ? this.props.params.docId : null));
           }
         }
 
@@ -68,13 +73,13 @@
 
       onCancel: function(event) {
         event.preventDefault();
-        this.context.router.push('/docs/' + this.props.params.docId);
+        browserHistory.push('/docs/' + (this.props.params ? this.props.params.docId : null));
       },
 
       onSubmit: function(event) {
         event.preventDefault();
         var token = localStorage.getItem('x-access-token');
-        var docId = this.props.params.docId;
+        var docId = (this.props.params ? this.props.params.docId : null);
         var docAccess = '';
         if(this.state.user) {
           docAccess += 'user,'
@@ -129,12 +134,12 @@
                       </div>
                       <div className="row">
                         <div className="col s2 offset-s4">
-                          <button className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
+                          <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
                             cancel
                           </button>
                         </div>
                         <div className="col s2">
-                          <button className="btn waves-effect blue center" type="submit" name="action" onClick={this.onSubmit}>
+                          <button id="submit" className="btn waves-effect blue center" onClick={this.onSubmit}>
                             edit
                           </button>
                         </div>

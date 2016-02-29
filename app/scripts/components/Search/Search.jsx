@@ -27,6 +27,10 @@
       DocumentStore.addChangeListener(this.populateDocuments, 'search');
     },
 
+    componentWillUnmount() {
+      DocumentStore.removeChangeListener(this.populateDocuments, 'search');
+    },
+
     handleSearchSelect: function(event) {
         this.setState({search: event.value});
     },
@@ -74,7 +78,7 @@
             <div className="divider"></div>
             <div className="card-panel">
               <div className="row">
-                <form className="col s12" onSubmit={this.onSubmit}>
+                <form className="col s12">
                   <div className="input-field col s4">
                     <Select
                       name="search"
@@ -93,7 +97,7 @@
                     <label htmlFor="limit">Result limit</label>
                   </div>
                   <div className="center-btn">
-                    <button className="btn waves-effect waves-light" type="submit" name="action">SEARCH
+                    <button id="search" className="btn waves-effect waves-light" onClick={this.onSubmit}>SEARCH
                       <i className="material-icons right">search</i>
                     </button>
                   </div>

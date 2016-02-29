@@ -5,7 +5,7 @@
     Header = React.createClass({
       render: function() {
         return(
-          <div>
+          <div id="landing">
           <header>
             <nav>
               <div className="nav-wrapper">

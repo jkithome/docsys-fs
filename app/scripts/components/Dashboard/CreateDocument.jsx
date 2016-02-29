@@ -16,7 +16,8 @@
 
           user: false,
           staff: false,
-          admin: false
+          admin: false,
+          result: null
         };
       },
 
@@ -24,16 +25,22 @@
         DocumentStore.addChangeListener(this.handleSubmit, 'createDoc');
       },
 
+      componentWillUnmount() {
+      DocumentStore.removeChangeListener(this.handleSubmit, 'createDoc');
+    },
+
       handleSubmit: function() {
         var data = DocumentStore.getCreatedDocument();
         if(data) {
           if(data.code) {
+            this.setState({result: 'Failed!'});
             if(data.errmsg.indexOf(this.state.document.title) !== -1) {
               window.Materialize.toast('Title already exists', 2000, 'error-toast');
             }
           } else if (data.name === 'ValidationError') {
             window.Materialize.toast('Required fields missing', 2000, 'error-toast');
           } else if (data.message === 'Document created successfully.') {
+            this.setState({result: 'Success!'});
             window.Materialize.toast('Document created successfully.', 2000, 'success-toast');
           }
         }

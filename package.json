@@ -4,9 +4,13 @@
   "description": "Document management system using node.js and mongoDB",
   "main": "index.js",
   "scripts": {
-    "pretest": "node test/helpers/clearDB.js &\nsleep 4 \n node index &\nsleep 4",
-    "test": "jasmine-node test/spec/*.js --verbose || :",
-    "posttest": "pkill node"
+    "start": "nodemon index.js",
+    "pretest": "node test/server/helpers/clearDB.js &\nsleep 4 \n node index &\nsleep 4",
+    "test:bend": "jasmine-node test/server/spec/*.js --verbose || :",
+    "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js  test/client/**/*test.js",
+    "test": "npm run test:bend && npm run test:fend",
+    "posttest": "pkill node",
+    "codecov": "cat coverage/*/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js"
   },
   "repository": {
     "type": "git",
@@ -65,6 +69,33 @@
     "vinyl-source-stream": "~1.1.0"
   },
   "devDependencies": {
-    "eslint-plugin-react": "^3.14.0"
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.5.0",
+    "browserify-istanbul": "^1.0.0",
+    "chai": "^3.5.0",
+    "codecov.io": "^0.1.6",
+    "enzyme": "^2.0.0",
+    "eslint-plugin-react": "^3.14.0",
+    "jquery": "^2.2.1",
+    "jsdom": "^8.0.4",
+    "karma": "^0.13.21",
+    "karma-browserify": "^5.0.2",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-mocha": "^0.2.2",
+    "karma-mocha-reporter": "^1.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-requirejs": "^0.2.5",
+    "karma-sinon-chai": "^1.2.0",
+    "localStorage": "^1.0.3",
+    "mocha": "^2.4.5",
+    "phantomjs": "^2.1.3",
+    "phantomjs-prebuilt": "^2.1.4",
+    "react-addons-test-utils": "^0.14.7",
+    "react-tools": "^0.13.3",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
+    "watchify": "^3.7.0"
   }
 }
