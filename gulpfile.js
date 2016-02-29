@@ -73,7 +73,7 @@ gulp.task('images', function() {
 
 gulp.task('bower', function() {
   return bower()
-    .pipe(gulp.dest('public/lib/'));
+    .pipe(gulp.dest('./public/lib/'));
 });
 
 gulp.task('browserify', function() {
