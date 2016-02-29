@@ -10,7 +10,7 @@
     Route = ReactRouter.Route,
     Main = require('./components/Main/Main.jsx'),
     LandingPage = require('./components/LandingPage/header.jsx'),
-    SignUpPage = require('./components/SignUpPage/SignUpPage.jsx'),
+    SignUpPage = require('./components/SignupPage/SignupPage.jsx'),
     LoginPage = require('./components/LoginPage/LoginPage.jsx'),
     Dashboard = require('./components/Dashboard/index.jsx'),
     DocumentView = require('./components/DocumentView/DocumentView.jsx'),
