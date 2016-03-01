@@ -19,16 +19,16 @@
       );
     },
 
-    getUser: function(docId, token) {
+    getUser: function(UserId, token) {
       BaseActions.get(
-        '/api/users/' + docId,
+        '/api/users/' + UserId,
         DocsysConstants.USER_GET, token
       );
     },
 
-    editUser: function(data, docId, token) {
+    editUser: function(data, userId, token) {
       BaseActions.put(
-        '/api/users/' + docId, data,
+        '/api/users/' + userId, data,
         DocsysConstants.USER_EDIT, token
       );
     },

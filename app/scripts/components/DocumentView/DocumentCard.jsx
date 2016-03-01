@@ -4,6 +4,7 @@
     moment = require('moment'),
     DocumentStore = require('../../stores/DocumentStore'),
     DocumentActions = require('../../actions/DocumentActions'),
+    browserHistory = require('react-router').browserHistory,
     History = require('react-router').History,
     userId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user'))._id : null),
     userRoleId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).role._id : null),
@@ -12,12 +13,12 @@
 
     DocumentCard = React.createClass({
 
-      contextTypes: {
-        router: React.PropTypes.object.isRequired
-      },
-
       componentDidMount: function() {
         DocumentStore.addChangeListener(this.deleteResult, 'deleteDoc');
+      },
+
+      componentWillUnmount() {
+        DocumentStore.removeChangeListener(this.deleteResult, 'deleteDoc');
       },
 
       deleteDocument: function(event) {
@@ -34,14 +35,14 @@
           closeOnConfirm: true
         },
           function(){
-            DocumentActions.deleteDocument(that.props.document._id, token); });
+            DocumentActions.deleteDocument((that.props.document ? this.props.document._id : null), token); });
 
       },
 
       deleteResult: function() {
         var data = DocumentStore.getDeletedDocument();
         window.Materialize.toast(data.message, 2000, 'success-toast');
-          this.context.router.push('/dashboard');
+          browserHistory.push('/dashboard');
       },
 
       render: function() {
@@ -69,7 +70,7 @@
                   <i className="large material-icons">menu</i>
                 </a>
                 <ul>
-                  <li>{(userId === this.props.document.owner._id) || ((userRoleTitle === 'admin') && (this.props.document.access).indexOf(userRoleId) !== -1) ? <a className='btn-floating red'><i className="material-icons" onClick={this.deleteDocument}>delete</i></a>: <a className='btn-floating red disabled'><i className="material-icons">delete</i></a>  }</li>
+                  <li>{(userId === this.props.document.owner._id) || ((userRoleTitle === 'admin') && (this.props.document.access).indexOf(userRoleId) !== -1) ? <a id="delete"className='btn-floating red'><i className="material-icons" onClick={this.deleteDocument}>delete</i></a>: <a className='btn-floating red disabled'><i className="material-icons">delete</i></a>  }</li>
                   <li>{(userId === this.props.document.owner._id) || ((userRoleTitle === 'staff' ||userRoleTitle === 'admin') && (this.props.document.access).indexOf(userRoleId) !== -1) ? <a className='btn-floating blue' href={'docs/edit/' + this.props.document._id} ><i className="material-icons">mode_edit</i></a> : <a className='btn-floating blue disabled'><i className="material-icons">mode_edit</i></a> }</li>
                 </ul>
               </div>

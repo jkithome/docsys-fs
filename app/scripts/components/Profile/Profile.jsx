@@ -4,15 +4,12 @@
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
     Header = require('../Dashboard/header.jsx'),
+    browserHistory = require('react-router').browserHistory,
     CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     user = JSON.parse(localStorage.getItem('user')),
 
 
     Profile = React.createClass({
-    contextTypes: {
-        router: React.PropTypes.object.isRequired
-      },
-
     getInitialState: function() {
         return {
           user: null
@@ -21,8 +18,12 @@
 
     componentDidMount: function() {
       var token = localStorage.getItem('x-access-token');
-        UserActions.getUser(user._id, token);
+        UserActions.getUser((user ? user._id : null), token);
         UserStore.addChangeListener(this.populateUser, 'user');
+      },
+
+    componentWillUnmount() {
+        UserStore.removeChangeListener(this.populateUser, 'user');
       },
 
     populateUser: function() {
@@ -32,7 +33,7 @@
 
     handleClick: function(event) {
       event.preventDefault();
-      this.context.router.push('/profile/edit/' + user._id)
+      browserHistory.push('/profile/edit/' + (user ? user._id : null))
     },
 
     render: function() {
@@ -75,7 +76,7 @@
                     </div>
                     <div className="row">
                       <div className="center-btn">
-                        <button className="btn waves-effect blue center" onClick={this.handleClick}>
+                        <button id="update" className="btn waves-effect blue center" onClick={this.handleClick}>
                           update
                         </button>
                       </div>

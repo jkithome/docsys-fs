@@ -23,9 +23,10 @@
             </div>
           );
         };
-        return (<div>{this.props.documents.length !== 0
-                ? this.props.documents.map(renderDoc)
-                : <h1>No documents available.</h1>}</div>);
+        return (<div>{this.props.documents ? (this.props.documents.length !== 0
+                        ? this.props.documents.map(renderDoc)
+                        : <h1>No documents available.</h1>) :
+       <h1>No documents available.</h1>}</div>);
       }
     });
   module.exports = DocList;

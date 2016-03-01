@@ -5,8 +5,9 @@
     USER_SIGNUP: null,
     USER_LOGIN: null,
     USERS_GET: null,
-    USER_UPDATE: null,
-    USER_DELETE: null,
+    USER_GET: null,
+    USER_EDIT: null,
+    USER_LOGOUT: null,
     DOCUMENT_GET: null,
     DOCUMENT_CREATE: null,
     DOCUMENTS_GET: null,
@@ -17,9 +18,6 @@
     GENRE_SEARCH: null,
     CONTENT_SEARCH: null,
     DATE_SEARCH: null,
-    USER_GET: null,
-    USER_EDIT: null,
-    GET_SESSION: null,
-    USER_LOGOUT: null
+    GET_SESSION: null
   });
 })();
