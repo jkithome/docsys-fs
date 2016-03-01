@@ -10,7 +10,7 @@
     "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js  test/client/**/*test.js",
     "test": "npm run test:bend && npm run test:fend",
     "posttest": "pkill node",
-    "codecov": "cat coverage/*/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
+    "codecov": "cat coverage/lcov/lcov.info | codecov",
     "postinstall": "gulp build"
   },
   "repository": {
