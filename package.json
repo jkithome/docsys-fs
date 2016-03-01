@@ -7,10 +7,10 @@
     "start": "nodemon index.js",
     "pretest": "node test/server/helpers/clearDB.js &\nsleep 4 \n node index &\nsleep 4",
     "test:bend": "jasmine-node test/server/spec/*.js --verbose || :",
-    "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js  test/client/**/*test.js",
+    "test:fend": "/usr/local/bin/karma start",
     "test": "npm run test:bend && npm run test:fend",
     "posttest": "pkill node",
-    "codecov": "cat coverage/lcov/lcov.info | codecov",
+    "codecov": "cat coverage/lcov/lcov.info | codecov.io",
     "postinstall": "gulp build"
   },
   "repository": {
@@ -105,7 +105,6 @@
     "localStorage": "^1.0.3",
     "lolex": "^1.4.0",
     "mocha": "^2.4.5",
-    "phantomjs": "^2.1.3",
     "phantomjs-prebuilt": "^2.1.4",
     "react-addons-test-utils": "^0.14.7",
     "react-hot-loader": "^1.3.0",

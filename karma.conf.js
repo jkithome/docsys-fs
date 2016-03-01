@@ -38,13 +38,13 @@ module.exports = function(config) {
         },
 
         plugins: [
-            'karma-less-preprocessor',
             'karma-browserify',
             'karma-coverage',
             'karma-mocha',
             'karma-requirejs',
             'karma-sinon-chai',
-            'karma-chrome-launcher'
+            'karma-chrome-launcher',
+            "karma-phantomjs-launcher"
         ],
 
         reporters: ['progress', 'coverage'],
@@ -52,7 +52,7 @@ module.exports = function(config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['Chrome'],
+        browsers: ['Chrome','PhantomJS'],
         singleRun: false,
         coverageReporter: {
             dir: 'coverage/',
