@@ -3,6 +3,7 @@
   var React = require('react'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
+    localStorage = require('localStorage'),
     Header = require('../Dashboard/header.jsx'),
     browserHistory = require('react-router').browserHistory,
     CreateDocument = require('../Dashboard/CreateDocument.jsx'),
