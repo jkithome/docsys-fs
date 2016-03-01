@@ -4,11 +4,10 @@
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
   var sinon = require('sinon');
-  var SearchPage = '../../../../app/scripts/components/Search/Search.jsx';
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
   var React = require('react');
-  var Search = require(SearchPage);
+  var Search = require('../../../../app/scripts/components/Search/Search.jsx');
 
   describe('Search component', function() {
     it('renders the correct content', function() {

@@ -3,9 +3,8 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var MainPath = '../../../../app/scripts/components/Main/Main.jsx';
   var React = require('react');
-  var Main = require(MainPath);
+  var Main = require('../../../../app/scripts/components/Main/Main.jsx');
 
   describe('Main component', function() {
 

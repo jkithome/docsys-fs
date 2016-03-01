@@ -3,13 +3,12 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var ProfileEditPath = '../../../../app/scripts/components/ProfileEdit/ProfileEdit.jsx';
   var sinon = require('sinon');
   var UserActions = require('../../../../app/scripts/actions/UserActions');
   var UserStore = require('../../../../app/scripts/stores/UserStore');
   var browserHistory = require('react-router').browserHistory;
   var React = require('react');
-  var ProfileEdit = require(ProfileEditPath);
+  var ProfileEdit = require('../../../../app/scripts/components/ProfileEdit/ProfileEdit.jsx');
 
   describe('ProfileEdit', function() {
     window.Materialize = {};

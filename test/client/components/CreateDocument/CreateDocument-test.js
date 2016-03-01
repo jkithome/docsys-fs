@@ -4,11 +4,10 @@
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
   var sinon = require('sinon');
-  var CreateDocumentPath = '../../../../app/scripts/components/Dashboard/CreateDocument.jsx';
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
   var React = require('react');
-  var CreateDocument = require(CreateDocumentPath);
+  var CreateDocument = require('../../../../app/scripts/components/Dashboard/CreateDocument.jsx');
 
   describe('CreateDocument component', function() {
 
@@ -19,7 +18,7 @@
 
     it('renders the CreateDocument component', function() {
       // Render CreateDocument component in the document
-      var createDocument = enzyme.shallow( <CreateDocument /> );
+      var createDocument = enzyme.shallow(<CreateDocument />);
 
       // Test the orgs state
       expect(createDocument.state().document.title).to.eql(null);
@@ -29,27 +28,27 @@
     });
 
     it('renders the correct content', function() {
-      var createDocument = enzyme.mount( <CreateDocument /> );
+      var createDocument = enzyme.mount(<CreateDocument />);
       expect(createDocument.text()).to.have.string('Title');
       expect(createDocument.text()).to.have.string('Genre');
       expect(createDocument.text()).to.have.string('Content');
     });
 
     it('renders the correct component', function() {
-      expect(enzyme.mount( <CreateDocument /> ).find('.modal-content').length).to.eql(1);
-      expect(enzyme.mount( <CreateDocument /> ).find('form').length).to.eql(1);
+      expect(enzyme.mount(<CreateDocument />).find('.modal-content').length).to.eql(1);
+      expect(enzyme.mount(<CreateDocument />).find('form').length).to.eql(1);
     });
 
     it('calls componentDidMount', function() {
       sinon.spy(CreateDocument.prototype, 'componentDidMount');
-      enzyme.mount( <CreateDocument /> ); // Mount the component
+      enzyme.mount(<CreateDocument />); // Mount the component
       expect(CreateDocument.prototype.componentDidMount.calledOnce).to.eql(true);
       CreateDocument.prototype.componentDidMount.restore();
     });
 
     it('calls componentWillUnmount', function() {
       sinon.spy(CreateDocument.prototype, 'componentWillUnmount');
-      let createDocument = enzyme.mount( <CreateDocument /> ); // Mount the component
+      var createDocument = enzyme.mount(<CreateDocument />); // Mount the component
       createDocument.unmount();
       expect(CreateDocument.prototype.componentWillUnmount.calledOnce).to.eql(true);
       CreateDocument.prototype.componentWillUnmount.restore();
@@ -57,13 +56,13 @@
 
     it('calls registered callbacks on mount', function() {
       sinon.spy(DocumentStore, 'addChangeListener');
-      enzyme.mount( <CreateDocument /> ); // Mount the component
+      enzyme.mount(<CreateDocument />); // Mount the component
       expect(DocumentStore.addChangeListener.callCount).to.eql(1);
       DocumentStore.addChangeListener.restore();
     });
 
     it('should correctly handle field change', function() {
-      var createDocument = enzyme.mount( <CreateDocument /> );
+      var createDocument = enzyme.mount(<CreateDocument />);
       var event = {
         target: {
           name: 'genre',
@@ -79,7 +78,7 @@
     });
 
     it('should correctly handles role select', function() {
-      var createDocument = enzyme.mount( <CreateDocument /> );
+      var createDocument = enzyme.mount(<CreateDocument />);
       var event = {
         target: {
           name: 'user'
@@ -94,7 +93,7 @@
 
     it('calls the document change listener', function() {
       sinon.spy(DocumentStore, 'getCreatedDocument');
-      enzyme.mount( <CreateDocument /> ); // Mount the component
+      enzyme.mount(<CreateDocument />); // Mount the component
       // Trigger a change in the DocumentStore
       DocumentStore.setCreatedDocument({ message: 'Document created successfully.' });
       // The getCreatedDocument function should be called
@@ -103,7 +102,7 @@
     });
 
     it('responds correctly if the document was created successfully', function() {
-      var createDocument = enzyme.mount( <CreateDocument /> );
+      var createDocument = enzyme.mount(<CreateDocument />);
       // Trigger a change in the DocumentStore
       DocumentStore.setCreatedDocument({ message: 'Document created successfully.' });
       expect(DocumentStore.getCreatedDocument()).to.be.an('object');
@@ -112,7 +111,7 @@
     });
 
     it('responds correctly if the response has an error', function() {
-      var createDocument = enzyme.mount( <CreateDocument /> );
+      var createDocument = enzyme.mount(<CreateDocument />);
       // Trigger a change in the DocumentStore
       createDocument.setState({ title: 'title' })
       DocumentStore.setCreatedDocument({
@@ -132,7 +131,7 @@
 
 
       sinon.spy(mockEvent, 'preventDefault');
-      var createDocument = enzyme.mount( <CreateDocument /> );
+      var createDocument = enzyme.mount(<CreateDocument />);
       createDocument.setState({
         document: {
           title: 'A time to kill',
