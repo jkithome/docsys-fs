@@ -57,6 +57,6 @@
 
     dateSearch: function(date, month, year, limit, token) {
       BaseActions.get('/api/documents/date?year=' + year + '&month=' + month + '&date=' + date + '&limit=' + limit, DocsysConstants.DATE_SEARCH, token);
-    },
+    }
   };
 })();
