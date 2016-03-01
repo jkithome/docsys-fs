@@ -4,9 +4,8 @@
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
   var sinon = require('sinon');
-  var StatisticsPath = '../../../../app/scripts/components/Dashboard/Statistics.jsx';
   var React = require('react');
-  var Statistics = require(StatisticsPath);
+  var Statistics = require('../../../../app/scripts/components/Dashboard/Statistics.jsx');
 
   describe('Statistics component', function() {
     var users = [{},{},{}];

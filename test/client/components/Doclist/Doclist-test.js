@@ -3,13 +3,12 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var DocListPath = '../../../../app/scripts/components/Dashboard/DocList.jsx';
   var sinon = require('sinon');
   var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var browserHistory = require('react-router').browserHistory;
   var React = require('react');
-  var DocList = require(DocListPath);
+  var DocList = require('../../../../app/scripts/components/Dashboard/DocList.jsx');
 
   describe('DocList', function() {
     window.Materialize = {};

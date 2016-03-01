@@ -3,14 +3,13 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var LoginPath = '../../../../app/scripts/components/LoginPage/LoginPage.jsx';
   var sinon = require('sinon');
   var UserActions = require('../../../../app/scripts/actions/UserActions');
   var browserHistory = require('react-router').browserHistory;
   var localStorage = require('localStorage');
   var UserStore = require('../../../../app/scripts/stores/UserStore');
   var React = require('react');
-  var Login = require(LoginPath);
+  var Login = require('../../../../app/scripts/components/LoginPage/LoginPage.jsx');
 
   describe('Login', function() {
     window.Materialize = {};

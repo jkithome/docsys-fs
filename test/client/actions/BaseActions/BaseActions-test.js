@@ -9,12 +9,12 @@
 
   describe('BaseActions', function() {
     var fakeToken = 'token';
-    let fakeActionType = 'FAKE_IT';
-    let response = {
+    var fakeActionType = 'FAKE_IT';
+    var response = {
       body: 'response',
       statusCode: 400
     };
-    let fakeURL = '/api/testing';
+    var fakeURL = '/api/testing';
 
     before(function() {
       sinon.stub(AppDispatcher, 'dispatch').returns(true);

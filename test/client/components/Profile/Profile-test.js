@@ -3,13 +3,12 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var ProfilePath = '../../../../app/scripts/components/Profile/Profile.jsx';
   var sinon = require('sinon');
   var UserActions = require('../../../../app/scripts/actions/UserActions');
   var browserHistory = require('react-router').browserHistory;
   var UserStore = require('../../../../app/scripts/stores/UserStore');
   var React = require('react');
-  var Profile = require(ProfilePath);
+  var Profile = require('../../../../app/scripts/components/Profile/Profile.jsx');
 
   describe('Profile', function() {
     window.Materialize = {};
@@ -37,10 +36,6 @@
       var storage = sinon.stub(localStorage, 'getItem');
       storage.withArgs('user').returns({"_id":"56cf451bacc801dd33939b79","name":{"first":"Jeremy","last":"Kithome"},"email":"jerry@erry.com","username":"Jemmy","role":{"_id":"56cf451b09db67e133ab284d","description":"Can create and view documents","title":"user"},"createdAt":"2016-02-25T18:16:59.000Z","updatedAt":"2016-02-26T20:53:08.387Z","iat":1456594454,"exp":1456598054});
       storage.withArgs('x-access-token').returns('faketoken');
-    });
-
-    after(function() {
-      localStorage.getItem.restore();
     });
 
     it('renders the profile component', function() {

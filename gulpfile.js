@@ -3,13 +3,17 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   eslint = require('gulp-eslint'),
   bower = require('gulp-bower'),
+  isparta = require('isparta'),
   jade = require('gulp-jade'),
   nodemon = require('gulp-nodemon'),
   browserify = require('browserify'),
   source = require('vinyl-source-stream'),
+  cover = require('gulp-coverage'),
   imagemin = require('gulp-imagemin'),
   path = require('path'),
   reactify = require('reactify'),
+  mocha = require('gulp-mocha'),
+  istanbul = require('gulp-istanbul'),
   babelify = require('babelify');
 
 var paths = {
@@ -73,7 +77,7 @@ gulp.task('images', function() {
 
 gulp.task('bower', function() {
   return bower()
-    .pipe(gulp.dest('./public/lib/'));
+    .pipe(gulp.dest('public/lib/'));
 });
 
 gulp.task('browserify', function() {
