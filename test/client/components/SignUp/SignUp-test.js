@@ -3,13 +3,12 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var SignUpPath = '../../../../app/scripts/components/SignupPage/SignupPage.jsx';
   var sinon = require('sinon');
   var UserActions = require('../../../../app/scripts/actions/UserActions');
   var browserHistory = require('react-router').browserHistory;
   var UserStore = require('../../../../app/scripts/stores/UserStore');
   var React = require('react');
-  var SignUp = require(SignUpPath);
+  var SignUp = require('../../../../app/scripts/components/SignupPage/SignupPage.jsx');
 
   describe('SignUp', function() {
     window.Materialize = {};
@@ -47,7 +46,7 @@
 
     it('calls componentWillUnmount', function() {
       sinon.spy(SignUp.prototype, 'componentWillUnmount');
-      let signup = enzyme.mount(<SignUp />); // Mount the component
+      var signup = enzyme.mount(<SignUp />); // Mount the component
       signup.unmount();
       expect(SignUp.prototype.componentWillUnmount.calledOnce).to.eql(true);
       SignUp.prototype.componentWillUnmount.restore();

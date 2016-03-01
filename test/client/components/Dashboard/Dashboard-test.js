@@ -3,12 +3,11 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var DashboardPath = '../../../../app/scripts/components/Dashboard/index.jsx';
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var UserStore = require('../../../../app/scripts/stores/UserStore');
   var sinon = require('sinon');
   var React = require('react');
-  var Dashboard = require(DashboardPath);
+  var Dashboard = require('../../../../app/scripts/components/Dashboard/index.jsx');
 
   describe('Dashboard', function() {
     var users = [{
@@ -58,7 +57,7 @@
 
     it('renders the Dashboard component', function() {
       // Render Dashboard page in the document
-      var dashboard = enzyme.shallow( <Dashboard /> );
+      var dashboard = enzyme.shallow(<Dashboard />);
 
       // Test the orgs state
       expect(dashboard.state().users).to.eql(null);
@@ -68,54 +67,54 @@
     });
 
     it('renders the correct component', function() {
-      var dashboard = enzyme.mount( <Dashboard /> );
+      var dashboard = enzyme.mount(<Dashboard />);
       expect(dashboard.find('.divider').length).to.be.at.least(3);
       expect(dashboard.find('.section').length).to.eql(3);
     });
 
     it('renders the correct content', function() {
-      expect(enzyme.shallow( <Dashboard /> ).text()).to.have.string('MY DOCUMENTS');
-      expect(enzyme.shallow( <Dashboard /> ).text()).to.have.string('ACCESSIBLE DOCUMENTS');
+      expect(enzyme.shallow(<Dashboard />).text()).to.have.string('MY DOCUMENTS');
+      expect(enzyme.shallow(<Dashboard />).text()).to.have.string('ACCESSIBLE DOCUMENTS');
     });
 
     it('calls componentDidMount', function() {
       sinon.spy(Dashboard.prototype, 'componentDidMount');
-      enzyme.mount( <Dashboard /> ); // Mount the component
+      enzyme.mount(<Dashboard />); // Mount the component
       expect(Dashboard.prototype.componentDidMount.calledOnce).to.eql(true);
       Dashboard.prototype.componentDidMount.restore();
     });
 
     it('calls componentWillUnmount', function() {
       sinon.spy(Dashboard.prototype, 'componentWillUnmount');
-      var dashboard = enzyme.mount( <Dashboard /> ); // Mount the component
+      var dashboard = enzyme.mount(<Dashboard />); // Mount the component
       dashboard.unmount();
       expect(Dashboard.prototype.componentWillUnmount.calledOnce).to.eql(true);
       Dashboard.prototype.componentWillUnmount.restore();
     });
 
     it('should call users get change listener', function() {
-      var dashboard = enzyme.mount( <Dashboard /> );
+      var dashboard = enzyme.mount(<Dashboard />);
       UserStore.setUsers(users);
       expect(UserStore.getUsers()).to.be.an('array');
       expect(dashboard.state().users.length).to.eql(1)
     });
 
     it('should call documents get change listener', function() {
-      var dashboard = enzyme.mount( <Dashboard /> );
+      var dashboard = enzyme.mount(<Dashboard />);
       DocumentStore.setDocuments(docs);
       expect(DocumentStore.getDocuments()).to.be.an('array');
       expect(dashboard.state().documents.length).to.eql(1);
     });
 
     it('should call user document get change listener', function() {
-      var dashboard = enzyme.mount( <Dashboard /> );
+      var dashboard = enzyme.mount(<Dashboard />);
       DocumentStore.setUserDocuments(docs);
       expect(DocumentStore.getUserDocuments()).to.be.an('array');
       expect(dashboard.state().userDocuments.length).to.eql(1);
     });
 
     it('should call accessicle by documentschange listener', function() {
-      var dashboard = enzyme.mount( <Dashboard /> );
+      var dashboard = enzyme.mount(<Dashboard />);
       DocumentStore.setByUserDocuments(docs);
       expect(DocumentStore.getByUserDocuments()).to.be.an('array');
       expect(dashboard.state().byUserDocuments.length).to.eql(1);

@@ -3,13 +3,12 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var DocumentCardPath = '../../../../app/scripts/components/DocumentView/DocumentCard.jsx';
   var sinon = require('sinon');
   var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var browserHistory = require('react-router').browserHistory;
   var React = require('react');
-  var DocumentCard = require(DocumentCardPath);
+  var DocumentCard = require('../../../../app/scripts/components/DocumentView/DocumentCard.jsx');
 
   describe('DocumentCard', function() {
     window.Materialize = {};

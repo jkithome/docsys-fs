@@ -4,9 +4,8 @@
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
   var sinon = require('sinon');
-  var LandingPage = '../../../../app/scripts/components/LandingPage/header.jsx';
   var React = require('react');
-  var Landing = require(LandingPage);
+  var Landing = require('../../../../app/scripts/components/LandingPage/header.jsx');
 
   describe('Landing component', function() {
     it('renders the correct content', function() {

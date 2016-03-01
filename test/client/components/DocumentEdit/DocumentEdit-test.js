@@ -3,13 +3,12 @@
 
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
-  var DocumentEditPath = '../../../../app/scripts/components/DocumentEdit/DocumentEdit.jsx';
   var sinon = require('sinon');
   var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var browserHistory = require('react-router').browserHistory;
   var React = require('react');
-  var DocumentEdit = require(DocumentEditPath);
+  var DocumentEdit = require('../../../../app/scripts/components/DocumentEdit/DocumentEdit.jsx');
 
   describe('DocumentEdit', function() {
     window.Materialize = {};

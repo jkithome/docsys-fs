@@ -4,12 +4,11 @@
   var expect = require('chai').expect;
   var enzyme = require('enzyme');
   var sinon = require('sinon');
-  var HeaderPath = '../../../../app/scripts/components/Dashboard/header.jsx';
   var UserActions = require('../../../../app/scripts/actions/UserActions');
   var browserHistory = require('react-router').browserHistory;
   var UserStore = require('../../../../app/scripts/stores/UserStore');
   var React = require('react');
-  var Header = require(HeaderPath);
+  var Header = require('../../../../app/scripts/components/Dashboard/header.jsx');
 
   describe('Header component', function() {
     window.Materialize = {};

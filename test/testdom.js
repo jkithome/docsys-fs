@@ -2,7 +2,7 @@
 
 var jsdom = require('jsdom');
 var localStorage = require('localStorage');
-var doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
+var doc = jsdom.jsdom('<!doctype html><html><body><div id="ui-view"></div></body></html>');
 
 var exposedProperties = ['window', 'navigator', 'document'];
 
