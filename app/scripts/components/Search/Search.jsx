@@ -54,14 +54,21 @@
               month = parseInt(date[1]),
               year = parseInt(date[2]),
               limit = this.state.limit ? this.state.limit : 0;
-              console.log(date);
-          DocumentActions.dateSearch(day, month, year, limit, token);
+          DocumentActions.search({
+            year: year,
+            month: month,
+            date: day
+          }, limit, token);
         } else if(this.state.search === 'genre') {
           var limit = this.state.limit? this.state.limit: 0;
-          DocumentActions.genreSearch(this.state.term, limit, token);
+          DocumentActions.search({
+            genre: this.state.term
+          }, limit, token);
         } else if(this.state.search === 'content') {
           var limit = this.state.limit? this.state.limit: 0;
-          DocumentActions.contentSearch(this.state.term, limit, token);
+          DocumentActions.search({
+            search: this.state.term
+          }, limit, token);
         }
       },
 
@@ -77,7 +84,7 @@
             <div className="card-panel">
               <div className="row">
                 <form className="col s12">
-                  <div className="input-field col s4">
+                  <div className="col s2">
                     <Select
                       name="search"
                       onChange={this.handleSearchSelect}
@@ -94,7 +101,7 @@
                     <input name="limit" id="limit" type="number" min="1" className="validate" onChange={this.handleFieldChange} required />
                     <label htmlFor="limit">Result limit</label>
                   </div>
-                  <div className="center-btn">
+                  <div className="col s2">
                     <button id="search" className="btn waves-effect waves-light" onClick={this.onSubmit}>SEARCH
                       <i className="material-icons right">search</i>
                     </button>
