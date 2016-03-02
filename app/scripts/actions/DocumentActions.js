@@ -47,16 +47,14 @@
       BaseActions.put('/api/documents/' + docId, data, DocsysConstants.DOCUMENT_EDIT, token);
     },
 
-    genreSearch: function(genre, limit, token) {
-      BaseActions.get('/api/documents/genre?genre=' + genre + '&limit=' + limit, DocsysConstants.GENRE_SEARCH, token);
-    },
-
-    contentSearch: function(content, limit, token) {
-      BaseActions.get('/api/documents/search?term=' + content + '&limit=' + limit, DocsysConstants.CONTENT_SEARCH, token);
-    },
-
-    dateSearch: function(date, month, year, limit, token) {
-      BaseActions.get('/api/documents/date?year=' + year + '&month=' + month + '&date=' + date + '&limit=' + limit, DocsysConstants.DATE_SEARCH, token);
+    search: function(data, limit, token) {
+      if (data.genre) {
+        BaseActions.get('/api/documents?genre=' + data.genre + '&limit=' + limit, DocsysConstants.DOCUMENT_SEARCH, token);
+      } else if (data.search) {
+        BaseActions.get('/api/documents?search=' + data.search + '&limit=' + limit, DocsysConstants.DOCUMENT_SEARCH, token);
+      } else if (data.year) {
+        BaseActions.get('/api/documents?year=' + data.year + '&month=' + data.month + '&date=' + data.date + '&limit=' + limit, DocsysConstants.DOCUMENT_SEARCH, token);
+      }
     }
   };
 })();
