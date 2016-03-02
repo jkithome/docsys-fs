@@ -74,8 +74,8 @@
                       </div>
                     </div>
                     <div className="row">
-                      <div className="center-btn">
-                        <button id="update" className="btn waves-effect blue center" onClick={this.handleClick}>
+                      <div className="col s2 offset-s5">
+                        <button id="update" className="btn waves-effect teal center" onClick={this.handleClick}>
                           update
                         </button>
                       </div>

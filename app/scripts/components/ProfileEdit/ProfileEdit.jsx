@@ -212,7 +212,7 @@
                         </button>
                       </div>
                       <div className="col s2">
-                        <button id="submit" className="btn waves-effect blue center" onClick={this.onSubmit}>
+                        <button id="submit" className="btn waves-effect teal center" onClick={this.onSubmit}>
                           update
                         </button>
                       </div>
