@@ -4,7 +4,6 @@
   var DocumentStore = require('../../stores/DocumentStore'),
     DocumentActions = require('../../actions/DocumentActions'),
     Header = require('../Dashboard/header.jsx'),
-    CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     DocumentCard = require('./DocumentCard.jsx'),
 
     DocumentView = React.createClass({
@@ -33,7 +32,6 @@
       return (
         <div>
           <Header/>
-          <CreateDocument/>
           {
             this.state.document ?
               <DocumentCard document={this.state.document}/>

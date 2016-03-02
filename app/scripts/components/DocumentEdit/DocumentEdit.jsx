@@ -3,7 +3,6 @@
   var React = require('react'),
     DocumentActions = require('../../actions/DocumentActions'),
     DocumentStore = require('../../stores/DocumentStore'),
-    CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     Header = require('../Dashboard/header.jsx'),
     browserHistory = require('react-router').browserHistory,
 
@@ -101,7 +100,6 @@
             <Header/>
             {this.state.originalDocument ?
               <div className="container">
-                <CreateDocument/>
                 <div className="card-panel white z-depth-5">
                   <div className="row">
                     <form className="col s10 offset-s1">

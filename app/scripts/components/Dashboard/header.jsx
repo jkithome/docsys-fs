@@ -70,7 +70,7 @@
                 <a href="#" className="brand-logo"><img className="logo-img" src="../../images/logo.gif" /></a>
                 <ul className="right hide-on-med-and-down">
                   <li><a href="/dashboard"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard">dashboard</i></a></li>
-                  <li><a className="modal-trigger" href="#modal1"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Create Document">note_add</i></a></li>
+                  <li><a href="/create"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Create Document">note_add</i></a></li>
                   <li><a href="/search"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search">search</i></a></li>
                   <li><a className="dropdown-button" data-activates="dropdown1">{userName}<i className="material-icons right">arrow_drop_down</i></a></li>
                 </ul>

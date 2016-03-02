@@ -8,7 +8,6 @@
     Header = require('./header.jsx'),
     Statistics = require('./Statistics.jsx'),
     DocList = require('./DocList.jsx'),
-    CreateDocument = require('./CreateDocument.jsx'),
     Dashboard = React.createClass({
       getInitialState: function() {
         return {
@@ -71,7 +70,6 @@
         return ( <div>
           <Header/>
           <div className="container">
-            <CreateDocument/>
             <div className="section">
               <h5 className="white-text">STATISTICS</h5>
             </div>

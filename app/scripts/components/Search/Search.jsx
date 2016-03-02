@@ -3,7 +3,6 @@
   var React = require('react');
   var DocumentStore = require('../../stores/DocumentStore'),
     DocumentActions = require('../../actions/DocumentActions'),
-    CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     Select = require('react-select'),
     Header = require('../Dashboard/header.jsx'),
     DocList = require('../Dashboard/DocList.jsx'),
@@ -71,7 +70,6 @@
         <div>
           <Header/>
           <div className="container">
-            <CreateDocument/>
             <div className="section">
               <h5 className="white-text">SEARCH DOCUMENTS</h5>
             </div>
