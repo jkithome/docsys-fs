@@ -152,22 +152,75 @@
 
     // Return all documents.
     all: function(req, res) {
-      Document
-        .find({}, function(err, documents) {
+      var genre = req.query.genre,
+        search = req.query.search,
+        role = req.query.role,
+        year = req.query.year,
+        month = req.query.month,
+        date = req.query.date,
+        start,
+        end;
+
+      var $query = {};
+
+      if(genre) {
+        $query.genre = new RegExp(genre, 'gi');
+      }
+      if(search) {
+        $query.content = {
+          $regex: new RegExp(search, 'gi')
+        }
+      }
+      if(year && month && date) {
+        start = new Date(year, (month - 1), date);
+        end = new Date(start.getTime() + (24 * 60 * 60 * 1000));
+        $query.createdAt = {
+          $gte: start,
+          $lt: end
+        }
+      }
+
+
+      if(role) {
+        Roles.findOne({
+          title: role
+        }, function(err, roleO) {
           if (err) {
             res.status(500).send(err);
           } else {
-            res.json(documents);
+            var roleId = roleO._id;
+            // Find all documents with the role id in access field.
+            Document.find({
+              access: roleId
+            }, function(err, documents) {
+              if (err) {
+                res.json(err);
+              } else {
+                res.json(documents);
+              }
+            })
+            .populate('owner')
+            .limit(req.query.limit);
           }
-        })
-        // Populate the owner field
-        .populate('owner')
-        // Return only a given number
-        .limit(req.query.limit)
-        // By latest created
-        .sort({
-          createdAt: -1
         });
+      } else {
+          Document
+            .find($query, function(err, documents) {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                res.json(documents);
+              }
+            })
+            // Populate the owner field
+            .populate('owner')
+            // Return only a given number
+            .limit(req.query.limit)
+            // By latest created
+            .sort({
+              createdAt: -1
+            });
+        }
     },
 
     // Find a single document
@@ -186,69 +239,6 @@
         }
       })
       .populate('owner');
-    },
-
-    // Return all documents belonging to a particular genre
-    allByGenre: function(req, res) {
-      var genre = req.query.genre;
-      // Create case insensitive regular expression
-      var re = new RegExp(genre, 'gi');
-      Document.find({
-        genre: re
-      }, function(err, documents) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.json(documents);
-        }
-      })
-      .populate('owner')
-      .limit(req.query.limit);
-    },
-
-    // REturn all documents with a particular word in the content
-    allByContent: function(req, res) {
-      var searchterm = req.query.term;
-      var re = new RegExp(searchterm, 'gi');
-      Document.find({
-        content: {
-          $regex: re
-        }
-      }, function(err, documents) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.json(documents);
-        }
-      })
-      .populate('owner')
-      .limit(req.query.limit);
-    },
-
-    // Return all the documents that can be accessed by a role
-    allByRole: function(req, res) {
-      var role = req.query.role;
-      Roles.findOne({
-        title: role
-      }, function(err, roleO) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          var roleId = roleO._id;
-          // Find all documents with the role id in access field.
-          Document.find({
-            access: roleId
-          }, function(err, documents) {
-            if (err) {
-              res.json(err);
-            } else {
-              res.json(documents);
-            }
-          })
-          .populate('owner')
-          .limit(req.query.limit);
-        }
-      });
     },
 
     allByUser: function(req, res) {
@@ -297,29 +287,6 @@
       .sort({
           createdAt: -1
         });
-    },
-
-    // Get all documents created on a specific date. Midnight to midnight
-    allByDate: function(req, res) {
-      var start = new Date(req.query.year, (req.query.month - 1), req.query.day);
-      var end = new Date(start.getTime() + (24 * 60 * 60 * 1000));
-      Document.find({
-        createdAt: {
-          $gte: start,
-          $lt: end
-        }
-      }, function(err, documents) {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.json(documents);
-        }
-      })
-      .populate('owner')
-      .limit(req.query.limit).
-      sort({
-        createdAt: -1
-      });
     }
   };
 })();
