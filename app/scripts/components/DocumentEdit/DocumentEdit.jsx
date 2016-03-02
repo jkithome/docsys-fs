@@ -100,26 +100,43 @@
             <Header/>
             {this.state.originalDocument ?
               <div className="container">
-                <div className="card-panel white z-depth-5">
+                <div className="card-panel white z-depth-5" >
                   <div className="row">
-                    <form className="col s10 offset-s1">
-                      <div className="row">
-                        <div className="input-field col s6">
-                          <textarea name="title" id="title" className="materialize-textarea" defaultValue={this.state.originalDocument.title} onChange={this.handleFieldChange}></textarea>
-                          <label htmlFor="title">Title</label>
-                        </div>
-                        <div className="input-field col s6">
-                          <textarea name="genre" id="genre" className="materialize-textarea"
-                            defaultValue={this.state.originalDocument.genre}
-                            onChange={this.handleFieldChange}></textarea>
-                          <label htmlFor="textarea1">Genre</label>
-                        </div>
-                        <div className="input-field col s12">
-                          <textarea name="content" id="content" className="materialize-textarea"
+                    <h2 className="center-align">Edit Document</h2>
+                  </div>
+                  <form className="col s10 offset-s1">
+                    <div className="row">
+                      <div className="col s6 offset-s3">
+                        <label htmlFor="title">Title</label>
+                        <input className="green-text" id="title"
+                          name="title"
+                          defaultValue={this.state.originalDocument.title}
+                          onChange={this.handleFieldChange}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col s6 offset-s3">
+                        <label htmlFor="genre">Genre</label>
+                        <input className="green-text" id="genre"
+                          name="genre"
+                          defaultValue={this.state.originalDocument.genre}
+                          onChange={this.handleFieldChange}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col s6 offset-s3">
+                        <label htmlFor="username">Username</label>
+                        <textarea name="content" id="content" className="materialize-textarea green-text"
                           defaultValue={this.state.originalDocument.content}
                           onChange={this.handleFieldChange}></textarea>
-                          <label htmlFor="content">Content</label>
-                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col s6 offset-s3">
                         <p>Roles Allowed Access</p>
                         <p>
                           <input name="user" type="checkbox" id="user" defaultChecked={this.state.user} onChange={this.handleRoleSelect}/>
@@ -130,22 +147,22 @@
                           <label htmlFor="admin">Admin &nbsp; &nbsp;</label>
                         </p>
                       </div>
-                      <div className="row">
-                        <div className="col s2 offset-s4">
-                          <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
-                            cancel
-                          </button>
-                        </div>
-                        <div className="col s2">
-                          <button id="submit" className="btn waves-effect blue center" onClick={this.onSubmit}>
-                            edit
-                          </button>
-                        </div>
-                        <div className="section">
-                        </div>
+                    </div>
+                    <div className="row">
+                      <div className="col s2 offset-s4">
+                        <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
+                          cancel
+                        </button>
                       </div>
-                    </form>
-                  </div>
+                      <div className="col s2">
+                        <button id="submit" className="btn waves-effect teal center" onClick={this.onSubmit}>
+                          edit
+                        </button>
+                      </div>
+                      <div className="section">
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
               : <div className="container">
