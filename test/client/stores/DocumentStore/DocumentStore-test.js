@@ -36,8 +36,8 @@
             AppDispatcher.dispatch(DocumentAction);
 
             expect(DocumentStore.setDocuments.called).to.eql(true);
-            var users = DocumentStore.getDocuments();
-            expect(users).to.eql(DocumentAction.data);
+            var documents = DocumentStore.getDocuments();
+            expect(documents).to.eql(DocumentAction.data);
         });
 
         it('adds a fetched document', function() {
@@ -49,8 +49,8 @@
             AppDispatcher.dispatch(DocumentAction);
 
             expect(DocumentStore.setDocument.called).to.eql(true);
-            var users = DocumentStore.getDocument();
-            expect(users).to.eql(DocumentAction.data);
+            var document = DocumentStore.getDocument();
+            expect(document).to.eql(DocumentAction.data);
         });
 
         it('adds a created document', function() {
@@ -62,8 +62,8 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setCreatedDocument.called).to.eql(true);
-            var user = DocumentStore.getCreatedDocument();
-            expect(user).to.eql(documentAction.data);
+            var document = DocumentStore.getCreatedDocument();
+            expect(document).to.eql(documentAction.data);
         });
 
         it('adds an edited document', function() {
@@ -75,11 +75,11 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setEditedDocument.called).to.eql(true);
-            var user = DocumentStore.getEditedDocument();
-            expect(user).to.eql(documentAction.data);
+            var document = DocumentStore.getEditedDocument();
+            expect(document).to.eql(documentAction.data);
         });
 
-        it('adds a document', function() {
+        it('adds a deleted document', function() {
             sinon.spy(DocumentStore, 'setDeletedDocument');
             var documentAction = {
                 actionType: constants.DOCUMENT_DELETE,
@@ -88,11 +88,11 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setDeletedDocument.called).to.eql(true);
-            var user = DocumentStore.getDeletedDocument();
-            expect(user).to.eql(documentAction.data);
+            var document = DocumentStore.getDeletedDocument();
+            expect(document).to.eql(documentAction.data);
         });
 
-        it('adds user document', function() {
+        it('adds user documents', function() {
             sinon.spy(DocumentStore, 'setUserDocuments');
             var documentAction = {
                 actionType: constants.USERDOCUMENTS_GET,
@@ -101,8 +101,8 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setUserDocuments.called).to.eql(true);
-            var user = DocumentStore.getUserDocuments();
-            expect(user).to.eql(documentAction.data);
+            var documents = DocumentStore.getUserDocuments();
+            expect(documents).to.eql(documentAction.data);
         });
 
         it('adds searched genre document', function() {
@@ -114,11 +114,11 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setSearchedDocumentsGenre.called).to.eql(true);
-            var user = DocumentStore.getSearchedDocuments();
-            expect(user).to.eql(documentAction.data);
+            var documents = DocumentStore.getSearchedDocuments();
+            expect(documents).to.eql(documentAction.data);
         });
 
-        it('adds searched genre document', function() {
+        it('adds searched content document', function() {
             sinon.spy(DocumentStore, 'setSearchedDocumentsContent');
             var documentAction = {
                 actionType: constants.CONTENT_SEARCH,
@@ -127,8 +127,8 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setSearchedDocumentsContent.called).to.eql(true);
-            var user = DocumentStore.getSearchedDocuments();
-            expect(user).to.eql(documentAction.data);
+            var documents = DocumentStore.getSearchedDocuments();
+            expect(documents).to.eql(documentAction.data);
         });
 
         it('adds searched genre document', function() {
@@ -140,8 +140,8 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setSearchedDocumentsDate.called).to.eql(true);
-            var user = DocumentStore.getSearchedDocuments();
-            expect(user).to.eql(documentAction.data);
+            var documents = DocumentStore.getSearchedDocuments();
+            expect(documents).to.eql(documentAction.data);
         });
 
         it('adds documents accessible by a user', function() {
@@ -153,8 +153,8 @@
             AppDispatcher.dispatch(documentAction);
 
             expect(DocumentStore.setByUserDocuments.called).to.eql(true);
-            var user = DocumentStore.getSearchedDocuments();
-            expect(user).to.eql(documentAction.data);
+            var documents = DocumentStore.getSearchedDocuments();
+            expect(documents).to.eql(documentAction.data);
         });
     })
 
