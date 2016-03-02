@@ -36,7 +36,7 @@
           closeOnConfirm: true
         },
           function(){
-            DocumentActions.deleteDocument((that.props.document ? this.props.document._id : null), token); });
+            DocumentActions.deleteDocument((that.props.document ? that.props.document._id : null), token); });
 
       },
 
