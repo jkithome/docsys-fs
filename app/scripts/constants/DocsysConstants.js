@@ -15,9 +15,7 @@
     DOCUMENT_DELETE: null,
     USERDOCUMENTS_GET: null,
     USERACCESSDOCUMENTS_GET: null,
-    GENRE_SEARCH: null,
-    CONTENT_SEARCH: null,
-    DATE_SEARCH: null,
+    DOCUMENT_SEARCH: null,
     GET_SESSION: null
   });
 })();
