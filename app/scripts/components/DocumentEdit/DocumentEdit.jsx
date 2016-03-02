@@ -129,7 +129,7 @@
                     </div>
                     <div className="row">
                       <div className="col s6 offset-s3">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="content">Content</label>
                         <textarea name="content" id="content" className="materialize-textarea green-text"
                           defaultValue={this.state.originalDocument.content}
                           onChange={this.handleFieldChange}></textarea>
