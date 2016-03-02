@@ -22,7 +22,7 @@
 
       // Test the orgs state
       expect(createDocument.state().document.title).to.eql(null);
-      expect(createDocument.state().document.title).to.eql(null);
+      expect(createDocument.state().document.genre).to.eql(null);
       expect(createDocument.state().user).to.eql(false);
       expect(createDocument.state().staff).to.eql(false);
     });
