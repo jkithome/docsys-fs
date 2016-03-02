@@ -43,7 +43,6 @@
           {this.state.user
             ?<div className="row">
               <div className="container">
-                <CreateDocument/>
                 <div className="col s3">
                   <div className="card-panel white">
                     <img className="responsive-img" src={"../../images/profile.jpg"}/>
