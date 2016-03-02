@@ -65,7 +65,7 @@
 
     getUserLogout: function() {
       return this.logout;
-    },
+    }
 
   });
 
