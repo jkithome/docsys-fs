@@ -3,7 +3,6 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   eslint = require('gulp-eslint'),
   bower = require('gulp-bower'),
-  isparta = require('isparta'),
   jade = require('gulp-jade'),
   nodemon = require('gulp-nodemon'),
   browserify = require('browserify'),
@@ -12,8 +11,6 @@ var gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
   path = require('path'),
   reactify = require('reactify'),
-  mocha = require('gulp-mocha'),
-  istanbul = require('gulp-istanbul'),
   babelify = require('babelify');
 
 var paths = {
