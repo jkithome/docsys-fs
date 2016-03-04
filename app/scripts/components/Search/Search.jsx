@@ -13,6 +13,7 @@
         documents: null,
         search: 'genre',
         term: null,
+        date: null,
         limit: null,
         searches: [
             { value: 'genre', label: 'genre' },
@@ -24,6 +25,10 @@
 
     componentDidMount: function() {
       DocumentStore.addChangeListener(this.populateDocuments, 'search');
+      window.$('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+      });
     },
 
     componentWillUnmount() {
@@ -49,11 +54,12 @@
         event.preventDefault();
         var token = localStorage.getItem('x-access-token');
         if(this.state.search === 'date') {
-          var date = (this.state.term).split(/[\/?\.]/),
-              day = parseInt(date[0]),
+          var date = (this.state.date).split(/[\-]/),
+              year = parseInt(date[0]),
               month = parseInt(date[1]),
-              year = parseInt(date[2]),
+              day = parseInt(date[2]),
               limit = this.state.limit ? this.state.limit : 0;
+              console.log(date);
           DocumentActions.search({
             year: year,
             month: month,
@@ -83,26 +89,33 @@
             <div className="divider"></div>
             <div className="card-panel">
               <div className="row">
-                <form className="col s12">
-                  <div className="col s2">
+                <form className="col s12 m12 l12">
+                  <div className="col s12 m6 l3 ">
                     <Select
                       name="search"
                       onChange={this.handleSearchSelect}
                       options={this.state.searches}
                       placeholder="Select Query Type"
                       value={this.state.search}
+                      style={{marginTop: 20}}
                     />
                   </div>
-                  <div className="input-field col s4">
-                    <input name="term" id="term" type="text" className="validate" onChange={this.handleFieldChange} required />
-                    <label htmlFor="term">Search term or date(DD/MM/YYYY)</label>
+                  {(this.state.search === 'genre' || this.state.search === 'content') ?
+                    <div className="input-field col s12 m6 l3">
+                      <input name="term" id="term" type="text" className="validate white green-text  search-box" onChange={this.handleFieldChange} required />
+                      <label className="label-text" htmlFor="term">Search term</label>
+                    </div>
+                    :
+                    <div className="input-field col s12 m6 l3">
+                      <input name="date" id="date" type="date" className="datepicker  white green-text search-box" onChange={this.handleFieldChange} required />
+                    </div>
+                  }
+                  <div className="input-field col s12 m6 l3">
+                    <input name="limit" id="limit" type="number" min="1" className="validate white green-text search-box" onChange={this.handleFieldChange} required />
+                    <label className="label-text" htmlFor="limit">Result limit</label>
                   </div>
-                  <div className="input-field col s4">
-                    <input name="limit" id="limit" type="number" min="1" className="validate" onChange={this.handleFieldChange} required />
-                    <label htmlFor="limit">Result limit</label>
-                  </div>
-                  <div className="col s2">
-                    <button id="search" className="btn waves-effect waves-light" onClick={this.onSubmit}>SEARCH
+                  <div className="col s12 m6 l3 center-xs">
+                    <button id="search" className="btn waves-effect waves-light" onClick={this.onSubmit} style={{marginTop: 20, marginRight: 10}}>SEARCH
                       <i className="material-icons right">search</i>
                     </button>
                   </div>
@@ -118,9 +131,8 @@
                 ? (this.state.documents.length !== 0)
                 ? <DocList documents={this.state.documents} />
                 : <h1>No documents found.</h1>
-                : <div className="progress">
-                    <div className="indeterminate"></div>
-                </div>}</div>
+                : <div></div>}
+            </div>
           </div>
         </div>
       );
