@@ -13,7 +13,7 @@
   describe('Header component', function() {
     window.Materialize = {};
     before(function() {
-        window.Materialize.toast = sinon.spy();
+      window.Materialize.toast = sinon.spy();
     });
     it('renders the header component', function() {
       // Render Header component
