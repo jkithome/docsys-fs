@@ -14,6 +14,9 @@
       genre: 'genre',
       content: 'content',
     };
+    var search = {
+      genre: 'crime'
+    }
     var userId = 3;
     var limit = 10;
     var date = 10;
@@ -113,29 +116,11 @@
         ).called).to.eql(true);
       });
 
-      it('genre search', function() {
-        DocumentActions.genreSearch(genre,limit,fakeToken);
+      it('searches douments', function() {
+        DocumentActions.search(search,limit,fakeToken);
         expect(BaseActions.get.withArgs(
-          '/api/documents/genre?genre=' + genre + '&limit=' + limit,
-          AppConstants.GENRE_SEARCH,
-          fakeToken
-        ).called).to.eql(true);
-      });
-
-      it('content search', function() {
-        DocumentActions.contentSearch(content,limit,fakeToken);
-        expect(BaseActions.get.withArgs(
-          '/api/documents/search?term=' + content + '&limit=' + limit,
-          AppConstants.CONTENT_SEARCH,
-          fakeToken
-        ).called).to.eql(true);
-      });
-
-      it('date search', function() {
-        DocumentActions.dateSearch(date, month, year, limit, fakeToken);
-        expect(BaseActions.get.withArgs(
-          '/api/documents/date?year=' + year + '&month=' + month + '&date=' + date + '&limit=' + limit,
-          AppConstants.DATE_SEARCH,
+          '/api/documents?genre=' + search.genre + '&limit=' + limit,
+          AppConstants.DOCUMENT_SEARCH,
           fakeToken
         ).called).to.eql(true);
       });
