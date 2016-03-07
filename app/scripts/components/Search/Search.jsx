@@ -79,10 +79,9 @@
         <div>
           <Header/>
           <div className="container">
-            <div className="section">
+            <div className="section section-title">
               <h5 className="white-text shadow">SEARCH DOCUMENTS</h5>
             </div>
-            <div className="divider"></div>
             <div className="card-panel">
               <div className="row">
                 <form className="col s12 m12 l12">
@@ -118,11 +117,9 @@
                 </form>
               </div>
             </div>
-            <div className="divider"></div>
-            <div className="section">
+            <div className="section section-title">
               <h5 className="white-text shadow">RESULTS</h5>
             </div>
-            <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
                 ? (this.state.documents.length !== 0)
                 ? <DocList documents={this.state.documents} />
