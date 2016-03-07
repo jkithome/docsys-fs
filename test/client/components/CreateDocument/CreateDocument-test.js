@@ -6,7 +6,6 @@
   var sinon = require('sinon');
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
-  var localStorage = require('localStorage');
   var React = require('react');
   var CreateDocument = require('../../../../app/scripts/components/DocumentCreate/CreateDocument.jsx');
   var browserHistory = require('react-router').browserHistory;

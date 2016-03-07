@@ -3,7 +3,6 @@
   var React = require('react'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
-    localStorage = require('localStorage'),
     History = require('react-router').History,
     browserHistory = require('react-router').browserHistory,
     userName = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).name.first : null),
