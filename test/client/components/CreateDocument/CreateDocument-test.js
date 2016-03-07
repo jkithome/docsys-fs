@@ -6,14 +6,18 @@
   var sinon = require('sinon');
   var DocumentStore = require('../../../../app/scripts/stores/DocumentStore');
   var DocumentActions = require('../../../../app/scripts/actions/DocumentActions');
+  var localStorage = require('localStorage');
   var React = require('react');
-  var CreateDocument = require('../../../../app/scripts/components/Dashboard/CreateDocument.jsx');
+  var CreateDocument = require('../../../../app/scripts/components/DocumentCreate/CreateDocument.jsx');
 
   describe('CreateDocument component', function() {
-
     window.Materialize = {};
     before(function() {
       window.Materialize.toast = sinon.spy();
+
+      // var storage = sinon.stub(localStorage, 'removeItem');
+      // storage.withArgs('user').returns(true);
+      // storage.withArgs('x-access-token').returns(true);
     });
 
     it('renders the CreateDocument component', function() {
@@ -32,10 +36,11 @@
       expect(createDocument.text()).to.have.string('Title');
       expect(createDocument.text()).to.have.string('Genre');
       expect(createDocument.text()).to.have.string('Content');
+      expect(createDocument.text()).to.have.string('Create Document');
     });
 
     it('renders the correct component', function() {
-      expect(enzyme.mount(<CreateDocument />).find('.modal-content').length).to.eql(1);
+      expect(enzyme.mount(<CreateDocument />).find('.green-text').length).to.eql(3);
       expect(enzyme.mount(<CreateDocument />).find('form').length).to.eql(1);
     });
 
@@ -99,6 +104,7 @@
       // The getCreatedDocument function should be called
       expect(DocumentStore.getCreatedDocument.called).to.eql(true);
       DocumentStore.getCreatedDocument.restore();
+      localStorage.removeItem.restore();
     });
 
     it('responds correctly if the document was created successfully', function() {
@@ -129,7 +135,6 @@
       };
       sinon.stub(DocumentActions, 'createDocument').returns(true);
 
-
       sinon.spy(mockEvent, 'preventDefault');
       var createDocument = enzyme.mount(<CreateDocument />);
       createDocument.setState({
@@ -143,7 +148,7 @@
       })
       var inst = createDocument.instance();
       sinon.spy(inst, 'onSubmit');
-      createDocument.find('button').simulate('click', mockEvent);
+      createDocument.find('#submit').simulate('click', mockEvent);
       expect(mockEvent.preventDefault.called).to.eql(true);
       expect(DocumentActions.createDocument.called).to.eql(true);
     });
