@@ -1,8 +1,10 @@
 (function(){
   'use strict';
   var React = require('react'),
+    Header = require('../Dashboard/header.jsx'),
     DocumentActions = require('../../actions/DocumentActions'),
     DocumentStore = require('../../stores/DocumentStore'),
+    browserHistory = require('react-router').browserHistory,
 
     CreateDocument = React.createClass({
 
@@ -41,8 +43,18 @@
             window.Materialize.toast('Required fields missing', 2000, 'error-toast');
           } else if (data.message === 'Document created successfully.') {
             this.setState({result: 'Success!'});
-            window.Materialize.toast('Document created successfully.', 2000, 'success-toast');
+            window.Materialize.toast(data.message, 2000, 'success-toast');
+            var id;
+            if(data) {
+              id = data.doc._id;
+            } else {
+              id = null;
+            }
+            browserHistory.push('/docs/' + id);
           }
+        } else {
+          this.setState({result: 'Failed!'});
+          window.Materialize.toast('Error creating document.', 2000, 'error-toast');
         }
 
       },
@@ -58,6 +70,11 @@
         var field = event.target.name;
 
         this.setState({[field] : !this.state[field] });
+      },
+
+      onCancel: function(event) {
+        event.preventDefault();
+        browserHistory.push('/dashboard');
       },
 
       onSubmit: function(event) {
@@ -80,25 +97,42 @@
 
       render: function() {
         return(
-          <div id="modal1" className="modal">
+          <div>
+            <Header/>
             <div className="container">
-              <div className="modal-content">
-                <h4>CREATE DOCUMENT</h4>
+              <div className="card-panel white" >
                 <div className="row">
-                  <form className="col s12">
-                    <div className="row">
-                      <div className="input-field col s6">
-                        <textarea name="title" id="title" className="materialize-textarea" onChange={this.handleFieldChange}></textarea>
-                        <label htmlFor="title">Title</label>
-                      </div>
-                      <div className="input-field col s6">
-                        <textarea name="genre" id="genre" className="materialize-textarea" onChange={this.handleFieldChange}></textarea>
-                        <label htmlFor="textarea1">Genre</label>
-                      </div>
-                      <div className="input-field col s12">
-                        <textarea name="content" id="content" className="materialize-textarea" onChange={this.handleFieldChange}></textarea>
-                        <label htmlFor="content">Content</label>
-                      </div>
+                  <h2 className="center-align">Create Document</h2>
+                </div>
+                <form className="col s10 offset-s1">
+                  <div className="row">
+                    <div className="col s6 offset-s3">
+                      <label htmlFor="title">Title</label>
+                      <input className="green-text" id="title"
+                        name="title"
+                        onChange={this.handleFieldChange}
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col s6 offset-s3">
+                      <label htmlFor="genre">Genre</label>
+                      <input className="green-text" id="genre"
+                        name="genre"
+                        onChange={this.handleFieldChange}
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col s6 offset-s3">
+                      <label htmlFor="content">Content</label>
+                      <textarea name="content" id="content" className="materialize-textarea green-text" onChange={this.handleFieldChange}></textarea>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col s6 offset-s3">
                       <p>Roles Allowed Access</p>
                       <p>
                         <input name="user" type="checkbox" id="user" defaultChecked={this.state.user} onChange={this.handleRoleSelect}/>
@@ -109,15 +143,22 @@
                         <label htmlFor="admin">Admin &nbsp; &nbsp;</label>
                       </p>
                     </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <div className="center-btn">
-                <button className="btn waves-effect waves-light modal-close blue center" type="submit" name="action" onClick={this.onSubmit}>Create
-                  <i className="material-icons right">send</i>
-                </button>
+                  </div>
+                  <div className="row">
+                    <div className="col s2 offset-s4">
+                      <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
+                        cancel
+                      </button>
+                    </div>
+                    <div className="col s2">
+                      <button id="submit" className="btn waves-effect teal" onClick={this.onSubmit}>
+                        create
+                      </button>
+                    </div>
+                    <div className="section">
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

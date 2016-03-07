@@ -133,13 +133,22 @@
     },
 
     find: function(req, res) {
-      User.findById(req.params.id, function(err, user) {
+      User.findById(req.params.id).populate('role').exec(function(err, user) {
         if (err) {
           res.json({
             error: 'Error fetching user.'
           });
         } else {
-          res.json(user);
+          var data = {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              username: user.username,
+              role: user.role,
+              createdAt: user.createdAt,
+              updatedAt: user.updatedAt
+            }
+          res.json(data);
         }
       });
     },

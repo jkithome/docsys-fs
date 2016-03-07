@@ -3,7 +3,6 @@
   var React = require('react'),
     UserActions = require('../../actions/UserActions'),
     UserStore = require('../../stores/UserStore'),
-    CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     browserHistory = require('react-router').browserHistory,
     Select = require('react-select'),
     Header = require('../Dashboard/header.jsx'),
@@ -122,7 +121,6 @@
         return(
           <div>
             <Header/>
-            <CreateDocument/>
             {this.state.user ?
               <div className="container">
                 <div className="card-panel white" >
@@ -214,7 +212,7 @@
                         </button>
                       </div>
                       <div className="col s2">
-                        <button id="submit" className="btn waves-effect blue center" onClick={this.onSubmit}>
+                        <button id="submit" className="btn waves-effect teal center" onClick={this.onSubmit}>
                           update
                         </button>
                       </div>

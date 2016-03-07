@@ -47,18 +47,29 @@
 
       handleSignup: function() {
         var data = UserStore.getCreatedUser();
-        if (data.code) {
-          this.setState({result: 'Failed!'});
-          if(data.errmsg.indexOf(this.state.username) !== -1) {
-            window.Materialize.toast('Username is already taken', 2000, 'error-toast');
-          } else if(data.errmsg.indexOf(this.state.email) !== -1) {
-            window.Materialize.toast('Email is already taken', 2000, 'error-toast');
+        if(data) {
+          if (data.code) {
+            this.setState({result: 'Failed!'});
+            if(data.errmsg.indexOf(this.state.username) !== -1) {
+              window.Materialize.toast('Username is already taken', 2000, 'error-toast');
+            } else if(data.errmsg.indexOf(this.state.email) !== -1) {
+              window.Materialize.toast('Email is already taken', 2000, 'error-toast');
+            }
+          } else if(data.message) {
+            if(data.message === 'User created successfully.') {
+              this.setState({result: 'Success!'});
+              window.Materialize.toast(data.message, 2000, 'success-toast');
+              browserHistory.push('/login');
+            } else {
+              this.setState({result: 'Failed!'});
+              window.Materialize.toast('Error Creating User. Try Again.', 2000, 'error-toast');
+            }
           }
         } else {
-          this.setState({result: 'Success!'});
-          window.Materialize.toast(data.message, 2000, 'success-toast');
-          browserHistory.push('/login');
+          this.setState({result: 'Failed!'});
+          window.Materialize.toast('Error Creating User. Try Again.', 2000, 'error-toast');
         }
+
       },
 
       handleRoleSelect: function(event) {

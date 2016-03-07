@@ -12,9 +12,10 @@
 
   describe('Profile', function() {
     window.Materialize = {};
-
+    window.location = {};
     before(function() {
       window.Materialize.toast = sinon.spy();
+      window.location.replace = sinon.spy();
       var user = {
       _id: "56cf451bacc801dd33939b79",
       name: {
@@ -65,7 +66,7 @@
         iat: 1456519988,
         exp: 1456523588
       }})
-      expect(profile.find('.row').length).to.be.at.least(4);
+      expect(profile.find('.row').length).to.be.at.least(1);
       expect(profile.find('.card-panel').length).to.be.at.least(0);
     });
 
@@ -148,7 +149,6 @@
       var mockEvent = {
           preventDefault: function() {}
         };
-        sinon.stub(browserHistory, 'push').returns(true);
         sinon.spy(mockEvent, 'preventDefault');
       var profile = enzyme.mount(<Profile />);
       profile.setState({user: {
@@ -173,8 +173,7 @@
       sinon.spy(inst, 'handleClick');
       profile.find('#update').simulate('click', mockEvent);
       expect(mockEvent.preventDefault.called).to.eql(true);
-      expect(browserHistory.push.called).to.eql(true);
-      browserHistory.push.restore();
+      expect(window.location.replace.called).to.eql(true);
     });
   });
 })();

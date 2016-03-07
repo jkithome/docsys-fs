@@ -8,7 +8,6 @@
     Header = require('./header.jsx'),
     Statistics = require('./Statistics.jsx'),
     DocList = require('./DocList.jsx'),
-    CreateDocument = require('./CreateDocument.jsx'),
     Dashboard = React.createClass({
       getInitialState: function() {
         return {
@@ -71,26 +70,20 @@
         return ( <div>
           <Header/>
           <div className="container">
-            <CreateDocument/>
-            <div className="section">
-              <h5 className="white-text">STATISTICS</h5>
+            <div className="section section-title">
+              <h5 className="white-text shadow">STATISTICS</h5>
             </div>
-            <div className="divider"></div>
             {this.state.users && this.state.documents && this.state.userDocuments ?
             <Statistics users={this.state.users} documents={this.state.documents} userDocuments={this.state.userDocuments}/> : <p>Loading...</p>}
-            <div className="divider"></div>
-            <div className="section">
-              <h5 className="white-text">MY DOCUMENTS</h5>
+            <div className="section section-title">
+              <h5 className="white-text shadow">MY DOCUMENTS</h5>
             </div>
-            <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.userDocuments
                 ? <DocList documents={this.state.userDocuments} />
                 : <p>Loading...</p>}</div>
-            <div className="divider"></div>
-            <div className="section">
-              <h5 className="white-text">ACCESSIBLE DOCUMENTS</h5>
+            <div className="section section-title">
+              <h5 className="white-text shadow">ACCESSIBLE DOCUMENTS</h5>
             </div>
-            <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
                 ? <DocList documents={this.state.documents} />
                 : <div className="progress">

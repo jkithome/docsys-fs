@@ -3,7 +3,6 @@
   var React = require('react');
   var DocumentStore = require('../../stores/DocumentStore'),
     DocumentActions = require('../../actions/DocumentActions'),
-    CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     Select = require('react-select'),
     Header = require('../Dashboard/header.jsx'),
     DocList = require('../Dashboard/DocList.jsx'),
@@ -14,6 +13,7 @@
         documents: null,
         search: 'genre',
         term: null,
+        date: null,
         limit: null,
         searches: [
             { value: 'genre', label: 'genre' },
@@ -50,19 +50,27 @@
         event.preventDefault();
         var token = localStorage.getItem('x-access-token');
         if(this.state.search === 'date') {
-          var date = (this.state.term).split(/[\/?\.]/),
-              day = parseInt(date[0]),
+          var date = (this.state.date).split(/[\-]/),
+              year = parseInt(date[0]),
               month = parseInt(date[1]),
-              year = parseInt(date[2]),
+              day = parseInt(date[2]),
               limit = this.state.limit ? this.state.limit : 0;
               console.log(date);
-          DocumentActions.dateSearch(day, month, year, limit, token);
+          DocumentActions.search({
+            year: year,
+            month: month,
+            date: day
+          }, limit, token);
         } else if(this.state.search === 'genre') {
           var limit = this.state.limit? this.state.limit: 0;
-          DocumentActions.genreSearch(this.state.term, limit, token);
+          DocumentActions.search({
+            genre: this.state.term
+          }, limit, token);
         } else if(this.state.search === 'content') {
           var limit = this.state.limit? this.state.limit: 0;
-          DocumentActions.contentSearch(this.state.term, limit, token);
+          DocumentActions.search({
+            search: this.state.term
+          }, limit, token);
         }
       },
 
@@ -71,51 +79,53 @@
         <div>
           <Header/>
           <div className="container">
-            <CreateDocument/>
-            <div className="section">
-              <h5 className="white-text">SEARCH DOCUMENTS</h5>
+            <div className="section section-title">
+              <h5 className="white-text shadow">SEARCH DOCUMENTS</h5>
             </div>
-            <div className="divider"></div>
             <div className="card-panel">
               <div className="row">
-                <form className="col s12">
-                  <div className="input-field col s4">
+                <form className="col s12 m12 l12">
+                  <div className="col s12 m6 l3 ">
                     <Select
                       name="search"
                       onChange={this.handleSearchSelect}
                       options={this.state.searches}
                       placeholder="Select Query Type"
                       value={this.state.search}
+                      style={{marginTop: 20}}
                     />
                   </div>
-                  <div className="input-field col s4">
-                    <input name="term" id="term" type="text" className="validate" onChange={this.handleFieldChange} required />
-                    <label htmlFor="term">Search term or date(DD/MM/YYYY)</label>
+                  {(this.state.search === 'genre' || this.state.search === 'content') ?
+                    <div className="input-field col s12 m6 l3">
+                      <input name="term" id="term" type="text" className="validate white green-text  search-box" onChange={this.handleFieldChange} required />
+                      <label className="label-text" htmlFor="term">Search term</label>
+                    </div>
+                    :
+                    <div className="input-field col s12 m6 l3">
+                      <input name="date" id="date" type="date" className="datepicker  white green-text search-box" onChange={this.handleFieldChange} required />
+                    </div>
+                  }
+                  <div className="input-field col s12 m6 l3">
+                    <input name="limit" id="limit" type="number" min="1" className="validate white green-text search-box" onChange={this.handleFieldChange} required />
+                    <label className="label-text" htmlFor="limit">Result limit</label>
                   </div>
-                  <div className="input-field col s4">
-                    <input name="limit" id="limit" type="number" min="1" className="validate" onChange={this.handleFieldChange} required />
-                    <label htmlFor="limit">Result limit</label>
-                  </div>
-                  <div className="center-btn">
-                    <button id="search" className="btn waves-effect waves-light" onClick={this.onSubmit}>SEARCH
+                  <div className="col s12 m6 l3 center-xs">
+                    <button id="search" className="btn waves-effect waves-light" onClick={this.onSubmit} style={{marginTop: 20, marginRight: 10}}>SEARCH
                       <i className="material-icons right">search</i>
                     </button>
                   </div>
                 </form>
               </div>
             </div>
-            <div className="divider"></div>
-            <div className="section">
-              <h5 className="white-text">RESULTS</h5>
+            <div className="section section-title">
+              <h5 className="white-text shadow">RESULTS</h5>
             </div>
-            <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
                 ? (this.state.documents.length !== 0)
                 ? <DocList documents={this.state.documents} />
                 : <h1>No documents found.</h1>
-                : <div className="progress">
-                    <div className="indeterminate"></div>
-                </div>}</div>
+                : <div></div>}
+            </div>
           </div>
         </div>
       );

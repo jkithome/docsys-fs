@@ -38,7 +38,8 @@
           localStorage.setItem('user', JSON.stringify(data.user));
           this.setState({result: 'Success'});
           window.Materialize.toast(data.message, 2000, 'success-toast');
-          browserHistory.push('/dashboard');
+          //browserHistory.push('/dashboard');
+          window.location.replace('/dashboard');
         }
       },
 

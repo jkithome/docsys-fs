@@ -79,17 +79,7 @@
       return this.byUserDocuments;
     },
 
-    setSearchedDocumentsGenre: function(documents) {
-      this.searchedDocuments = documents;
-      this.emitChange('search');
-    },
-
-    setSearchedDocumentsContent: function(documents) {
-      this.searchedDocuments = documents;
-      this.emitChange('search');
-    },
-
-    setSearchedDocumentsDate: function(documents) {
+    setSearchedDocuments: function(documents) {
       this.searchedDocuments = documents;
       this.emitChange('search');
     },
@@ -121,14 +111,8 @@
       case DocsysConstants.USERDOCUMENTS_GET:
         DocumentStore.setUserDocuments(action.data);
         break;
-      case DocsysConstants.GENRE_SEARCH:
-        DocumentStore.setSearchedDocumentsGenre(action.data);
-        break;
-      case DocsysConstants.CONTENT_SEARCH:
-        DocumentStore.setSearchedDocumentsContent(action.data);
-        break;
-      case DocsysConstants.DATE_SEARCH:
-        DocumentStore.setSearchedDocumentsDate(action.data);
+      case DocsysConstants.DOCUMENT_SEARCH:
+        DocumentStore.setSearchedDocuments(action.data);
         break;
       case DocsysConstants.USERACCESSDOCUMENTS_GET:
         DocumentStore.setByUserDocuments(action.data);

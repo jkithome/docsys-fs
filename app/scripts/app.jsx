@@ -14,6 +14,7 @@
     LoginPage = require('./components/LoginPage/LoginPage.jsx'),
     Dashboard = require('./components/Dashboard/index.jsx'),
     DocumentView = require('./components/DocumentView/DocumentView.jsx'),
+    CreateDocument = require('./components/DocumentCreate/CreateDocument.jsx'),
     Search = require('./components/Search/Search.jsx'),
     Profile = require('./components/Profile/Profile.jsx'),
     DocumentEdit = require('./components/DocumentEdit/DocumentEdit.jsx'),
@@ -26,6 +27,8 @@
         <Route path="/join" component={SignUpPage} >
         </Route>
         <Route path="/login" component={LoginPage} >
+        </Route>
+        <Route path="/create" component={CreateDocument} >
         </Route>
         <Route path="/dashboard" component={Dashboard} >
         </Route>

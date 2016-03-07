@@ -4,32 +4,36 @@
 body {
   background-image: url(../images/background.jpeg);
   background-size: cover;
+
+}
+
+#ui-view {
+    flex: 1 0 auto;
+  }
+
+#wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-#wrapper {
-  min-height: 100%;
-  position: relative;
-}
-
 nav {
   background-color: @color0;
   color: @color1;
-  opacity: 0.9;
+  // opacity: 0.9;
 }
 
-#footer-copyright {
+.footer-copyright {
   background-color: @color0;
   color: @color1;
+  line-height: 34px !important;
   opacity: 0.9;
 }
 
 footer.page-footer {
-  margin-top: 263px;
+  // margin-top: 263px;
   background-color: @color0;
-  opacity: 0.9;
+  // opacity: 0.9;
 }
 
 .card-panel {
@@ -99,6 +103,39 @@ h2 {
   padding-top: 2px;
 }
 
+.dropdown-content li>a, {
+  line-height: 35px;
+}
+
+input[type=text].search-box {
+  border-radius: 5px;
+  margin-top: 5px;
+  height: 2.5rem;
+}
+
+input[type=date].search-box {
+  border-radius: 5px;
+  margin-top: 5px;
+  height: 2.5rem;
+}
+
+input[type=number].search-box {
+  border-radius: 5px;
+  margin-top: 5px;
+  height: 2.5rem;
+}
+
+.input-field > label{
+  left: 1.5rem;
+}
+
+.shadow {
+  text-shadow: 2px 3px 2px midnightblue;
+}
+
+.section-title {
+  margin-bottom: 5px !important;
+}
 
 /**
  * React Select

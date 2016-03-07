@@ -18,7 +18,7 @@
           </header>
           <main>
             <div className="container">
-              <h1>The simplest way to manage your documents.</h1>
+              <h1 className="shadow">The simplest way to manage your documents.</h1>
               <div className="center-btn">
                 <button className="join btn waves-effect waves-light" type="submit" name="action"><a href= "/join" className = "join-btn">GET STARTED</a>
                 </button>

@@ -13,8 +13,10 @@
 
   describe('Login', function() {
     window.Materialize = {};
+    window.location = {};
     before(function() {
         window.Materialize.toast = sinon.spy();
+        window.location.replace = sinon.spy();
     });
 
     it('renders the login component', function() {
@@ -61,7 +63,6 @@
     });
 
     it('calls the user login change listener', function() {
-      sinon.stub(browserHistory, 'push').returns(true);
       sinon.spy(UserStore, 'getData');
       enzyme.mount(<Login />); // Mount the component
       // Trigger a change in the UserStore
@@ -85,13 +86,10 @@
       });
       // The getCreatedUser function should be called
       expect(UserStore.getData.called).to.eql(true);
-      expect(browserHistory.push.called).to.eql(true);
       UserStore.getData.restore();
-      browserHistory.push.restore();
     });
 
     it('sets the correct state if the response is valid', function() {
-      sinon.stub(browserHistory, 'push').returns(true);
       var login = enzyme.mount(<Login />);
         // Trigger a change in the UserStore
       UserStore.setData({
@@ -115,7 +113,6 @@
       expect(UserStore.getData()).to.be.an('object');
       expect(login.state().result).to.be.a('string');
       expect(login.state().result).to.eql('Success');
-      browserHistory.push.restore();
     });
 
     it('sets the correct state if the response has an error', function() {
@@ -149,7 +146,6 @@
       var mockEvent = {
         preventDefault: function() {}
       };
-      sinon.stub(browserHistory, 'push').returns(true);
       sinon.stub(UserActions, 'login').returns(true);
       var data = {
         username: 'jere',
@@ -190,8 +186,6 @@
       expect(mockEvent.preventDefault.called).to.eql(true);
       expect(UserActions.login.withArgs(data).called).to.eql(true);
       expect(inst.onSubmit.calledOnce).to.eql(true);
-      expect(browserHistory.push.called).to.eql(true);
-      browserHistory.push.restore();
     });
   });
 })();

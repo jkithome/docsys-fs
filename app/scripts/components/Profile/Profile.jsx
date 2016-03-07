@@ -6,7 +6,6 @@
     localStorage = require('localStorage'),
     Header = require('../Dashboard/header.jsx'),
     browserHistory = require('react-router').browserHistory,
-    CreateDocument = require('../Dashboard/CreateDocument.jsx'),
     user = JSON.parse(localStorage.getItem('user')),
 
 
@@ -34,66 +33,41 @@
 
     handleClick: function(event) {
       event.preventDefault();
-      browserHistory.push('/profile/edit/' + (user ? user._id : null))
+      // browserHistory.push('/profile/edit/' + (user ? user._id : null))
+      window.location.replace('/profile/edit/' + (user ? user._id : null));
     },
 
     render: function() {
       return (
         <div>
           <Header/>
-          {this.state.user
-            ?<div className="row">
-              <div className="container">
-                <CreateDocument/>
-                <div className="col s3">
-                  <div className="card-panel white">
-                    <img className="responsive-img" src={"../../images/profile.jpg"}/>
-                  </div>
+          {this.state.user ?
+            <div className="container">
+              <div className="card">
+                <div className="card-image waves-effect waves-block waves-light">
+                  <img max-width="320" max-height="240" className="activator" src={"../../images/freedom.jpg"}/>
                 </div>
-                <div className="col s9">
-                  <div className="card-panel white profile">
-                    <div className="row">
-                      <h2 className="center-align">PROFILE</h2>
-                    </div>
-                    <div className="row">
-                      <div className="col s8 offset-s3">
-                        <h4>Name: {this.state.user.name.first} {this.state.user.name.last}</h4>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col s8 offset-s3">
-                        <h4>Username: {this.state.user.username}</h4>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col s8 offset-s3">
-                        <h4>Email: {this.state.user.email}</h4>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col s8 offset-s3">
-                        <h4>Role: {this.state.user.role.title}</h4>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="center-btn">
-                        <button id="update" className="btn waves-effect blue center" onClick={this.handleClick}>
+                <div className="card-content">
+                  <span className="card-title activator grey-text text-darken-4">{this.state.user.name.first} {this.state.user.name.last}</span>
+                  <br/>
+                  <span className="brown-text">Username: {this.state.user.username}</span>
+                  <br/>
+                  <span className="brown-text">{this.state.user.email}</span>
+                  <br/>
+                  <span className="brown-text">Role: {this.state.user.role.title}</span>
+                </div>
+                <div className="row">
+                      <div className="col s2 offset-s5">
+                        <button id="update" className="btn waves-effect teal center" onClick={this.handleClick}>
                           update
                         </button>
                       </div>
                     </div>
                     <div className="section">
                     </div>
-                  </div>
-                </div>
               </div>
-            </div>
-            : <div className="container">
-                <div className="progress">
-                    <div className="indeterminate"></div>
-                </div>
-              </div>
-          }
+            </div> :
+          <div></div>}
         </div>
       );
     }

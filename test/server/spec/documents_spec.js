@@ -192,7 +192,7 @@
         var month = day.getMonth() + 1;
         var year = day.getFullYear();
         request
-          .get('http://localhost:8080/api/documents?year=' + year + '&month=' + month + '&date=' + date + '/' + '0')
+          .get('http://localhost:8080/api/documents?year=' + year + '&month=' + month + '&date=' + date)
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
@@ -207,7 +207,7 @@
 
       it('Documents accessible by a given role are returned', function(done) {
         request
-          .get('http://localhost:8080/api/documents/role?role=user&limit=0')
+          .get('http://localhost:8080/api/documents?role=user&limit=0')
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
@@ -221,7 +221,7 @@
 
       it('Documents can be searched by genre', function(done) {
         request
-          .get('http://localhost:8080/api/documents/genre?genre=science fiction')
+          .get('http://localhost:8080/api/documents/?genre=science fiction')
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
@@ -235,7 +235,7 @@
 
       it('Documents can be searched by content', function(done) {
         request
-          .get('http://localhost:8080/api/documents/search?term=hacker')
+          .get('http://localhost:8080/api/documents?search=hacker')
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {

@@ -64,7 +64,7 @@
         sinon.spy(UserStore, 'getCreatedUser');
         enzyme.mount(<SignUp />); // Mount the component
         // Trigger a change in the UserStore
-        UserStore.setCreatedUser({message: 'user created successfully'});
+        UserStore.setCreatedUser({message: 'User created successfully.'});
         // The getCreatedUser function should be called
         expect(browserHistory.push.called).to.eql(true);
         expect(UserStore.getCreatedUser.called).to.eql(true);
@@ -76,7 +76,7 @@
       sinon.stub(browserHistory, 'push').returns(true);
         var signup = enzyme.mount(<SignUp />);
         // Trigger a change in the UserStore
-        UserStore.setCreatedUser({message: 'user created successfully'});
+        UserStore.setCreatedUser({message: 'User created successfully.'});
         expect(UserStore.getCreatedUser()).to.be.an('object');
         expect(browserHistory.push.called).to.eql(true);
         expect(signup.state().result).to.be.a('string');

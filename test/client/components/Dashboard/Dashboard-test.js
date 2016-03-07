@@ -68,7 +68,7 @@
 
     it('renders the correct component', function() {
       var dashboard = enzyme.mount(<Dashboard />);
-      expect(dashboard.find('.divider').length).to.be.at.least(3);
+      expect(dashboard.find('.container').length).to.be.at.least(1);
       expect(dashboard.find('.section').length).to.eql(3);
     });
 
