@@ -68,11 +68,19 @@
             <nav>
               <div className="nav-wrapper">
                 <a href="#" className="brand-logo"><img className="logo-img" src="../../images/logo.gif" /></a>
+                <a data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
                 <ul className="right hide-on-med-and-down">
                   <li><a href="/dashboard"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard">dashboard</i></a></li>
                   <li><a href="/create"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Create Document">note_add</i></a></li>
                   <li><a href="/search"><i className="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search">search</i></a></li>
                   <li><a className="dropdown-button" data-activates="dropdown1">{userName}<i className="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+                <ul className="side-nav" id="mobile-demo">
+                  <li><a href="/dashboard">Dashboard</a></li>
+                  <li><a href="/create">Create</a></li>
+                  <li><a href="/search">Search</a></li>
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="/search" onClick={this.logout}>Logout</a></li>
                 </ul>
               </div>
             </nav>
