@@ -65,7 +65,7 @@
         iat: 1456519988,
         exp: 1456523588
       }})
-      expect(profile.find('.row').length).to.be.at.least(4);
+      expect(profile.find('.row').length).to.be.at.least(1);
       expect(profile.find('.card-panel').length).to.be.at.least(0);
     });
 
