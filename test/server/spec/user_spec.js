@@ -143,7 +143,7 @@
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(200);
-            expect(res.body.password).toBeDefined();
+            expect(res.body.password).toBeUndefined();
             expect(res.body.email).toBeDefined();
             expect(res.body.username).toBeDefined();
             expect(res.body.name instanceof Object).toBe(true);
@@ -159,7 +159,7 @@
           .end(function(err, res) {
             expect(res.status).toEqual(200);
             expect(res.body.role).toBeDefined();
-            expect(typeof res.body.role).toBe('string');
+            expect(res.body.role instanceof Object).toBe(true);
             done();
           });
       });
