@@ -8,8 +8,8 @@
     browserHistory = require('react-router').browserHistory,
     History = require('react-router').History,
     userId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user'))._id : null),
-    userRoleId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).role._id : null),
-    userRoleTitle = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).role.title : null),
+    userRoleId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).roleId : null),
+    userRoleTitle = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).roleTitle : null),
 
 
     DocumentCard = React.createClass({
