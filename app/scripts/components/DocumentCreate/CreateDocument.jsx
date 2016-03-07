@@ -43,8 +43,8 @@
             window.Materialize.toast('Required fields missing', 2000, 'error-toast');
           } else if (data.message === 'Document created successfully.') {
             this.setState({result: 'Success!'});
-            window.Materialize.toast('Document created successfully.', 2000, 'success-toast');
-            browserHistory.push('/dashboard');
+            window.Materialize.toast(data.message, 2000, 'success-toast');
+            browserHistory.push('/docs/' + data.doc._id);
           }
         } else {
           this.setState({result: 'Failed!'});
