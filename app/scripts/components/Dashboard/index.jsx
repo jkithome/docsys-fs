@@ -71,14 +71,14 @@
           <Header/>
           <div className="container">
             <div className="section">
-              <h5 className="white-text">STATISTICS</h5>
+              <h5 className="white-text shadow">STATISTICS</h5>
             </div>
             <div className="divider"></div>
             {this.state.users && this.state.documents && this.state.userDocuments ?
             <Statistics users={this.state.users} documents={this.state.documents} userDocuments={this.state.userDocuments}/> : <p>Loading...</p>}
             <div className="divider"></div>
             <div className="section">
-              <h5 className="white-text">MY DOCUMENTS</h5>
+              <h5 className="white-text shadow">MY DOCUMENTS</h5>
             </div>
             <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.userDocuments
@@ -86,7 +86,7 @@
                 : <p>Loading...</p>}</div>
             <div className="divider"></div>
             <div className="section">
-              <h5 className="white-text">ACCESSIBLE DOCUMENTS</h5>
+              <h5 className="white-text shadow">ACCESSIBLE DOCUMENTS</h5>
             </div>
             <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents

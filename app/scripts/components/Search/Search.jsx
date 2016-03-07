@@ -80,7 +80,7 @@
           <Header/>
           <div className="container">
             <div className="section">
-              <h5 className="white-text">SEARCH DOCUMENTS</h5>
+              <h5 className="white-text shadow">SEARCH DOCUMENTS</h5>
             </div>
             <div className="divider"></div>
             <div className="card-panel">
@@ -120,7 +120,7 @@
             </div>
             <div className="divider"></div>
             <div className="section">
-              <h5 className="white-text">RESULTS</h5>
+              <h5 className="white-text shadow">RESULTS</h5>
             </div>
             <div className="divider"></div>
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
