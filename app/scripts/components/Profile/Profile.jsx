@@ -33,7 +33,8 @@
 
     handleClick: function(event) {
       event.preventDefault();
-      browserHistory.push('/profile/edit/' + (user ? user._id : null))
+      // browserHistory.push('/profile/edit/' + (user ? user._id : null))
+      window.location.replace('/profile/edit/' + (user ? user._id : null));
     },
 
     render: function() {
