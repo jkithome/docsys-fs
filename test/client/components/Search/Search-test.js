@@ -48,7 +48,7 @@
       sinon.spy(DocumentStore, 'getSearchedDocuments');
       enzyme.mount(<Search />); // Mount the component
       // Trigger a change in the DocumentStore
-      DocumentStore.setSearchedDocumentsGenre([{
+      DocumentStore.setSearchedDocuments([{
         _id: "56cf4520acc801dd33939b95",
         updatedAt: "2016-02-25T18:17:04.000Z",
         createdAt: "2016-02-25T18:17:04.000Z",
@@ -112,7 +112,7 @@
       var mockEvent = {
         preventDefault: function() {}
       };
-      sinon.stub(DocumentActions, 'genreSearch').returns(true);
+      sinon.stub(DocumentActions, 'search').returns(true);
       sinon.spy(mockEvent, 'preventDefault');
       var search = enzyme.mount(<Search />);
       search.setState({search: 'genre',
@@ -123,7 +123,7 @@
       sinon.spy(inst, 'onSubmit');
       search.find('#search').simulate('click', mockEvent);
       expect(mockEvent.preventDefault.called).to.eql(true);
-      expect(DocumentActions.genreSearch.called).to.eql(true);
+      expect(DocumentActions.search.called).to.eql(true);
     })
   });
 })();
