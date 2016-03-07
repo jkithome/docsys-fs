@@ -44,7 +44,13 @@
           } else if (data.message === 'Document created successfully.') {
             this.setState({result: 'Success!'});
             window.Materialize.toast(data.message, 2000, 'success-toast');
-            browserHistory.push('/docs/' + data.doc._id);
+            var id;
+            if(data) {
+              id = data.doc._id;
+            } else {
+              id = null;
+            }
+            browserHistory.push('/docs/' + id);
           }
         } else {
           this.setState({result: 'Failed!'});

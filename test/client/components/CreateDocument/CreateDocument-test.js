@@ -9,6 +9,7 @@
   var localStorage = require('localStorage');
   var React = require('react');
   var CreateDocument = require('../../../../app/scripts/components/DocumentCreate/CreateDocument.jsx');
+  var browserHistory = require('react-router').browserHistory;
 
   describe('CreateDocument component', function() {
     window.Materialize = {};
@@ -98,22 +99,29 @@
 
     it('calls the document change listener', function() {
       sinon.spy(DocumentStore, 'getCreatedDocument');
+      sinon.stub(browserHistory, 'push').returns(true);
       enzyme.mount(<CreateDocument />); // Mount the component
       // Trigger a change in the DocumentStore
-      DocumentStore.setCreatedDocument({ message: 'Document created successfully.' });
+      DocumentStore.setCreatedDocument({
+        message: 'Document created successfully.',
+        doc: {_id: 1} });
       // The getCreatedDocument function should be called
       expect(DocumentStore.getCreatedDocument.called).to.eql(true);
       DocumentStore.getCreatedDocument.restore();
-      localStorage.removeItem.restore();
+      browserHistory.push.restore();
     });
 
     it('responds correctly if the document was created successfully', function() {
+      sinon.stub(browserHistory, 'push').returns(true);
       var createDocument = enzyme.mount(<CreateDocument />);
       // Trigger a change in the DocumentStore
-      DocumentStore.setCreatedDocument({ message: 'Document created successfully.' });
+      DocumentStore.setCreatedDocument({
+        message: 'Document created successfully.',
+        doc: {_id: 1} });
       expect(DocumentStore.getCreatedDocument()).to.be.an('object');
       expect(createDocument.state().result).to.be.a('string');
       expect(createDocument.state().result).to.eql('Success!');
+      browserHistory.push.restore();
     });
 
     it('responds correctly if the response has an error', function() {
