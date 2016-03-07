@@ -192,7 +192,7 @@
         var month = day.getMonth() + 1;
         var year = day.getFullYear();
         request
-          .get('http://localhost:8080/api/documents?year=' + year + '&month=' + month + '&date=' + date + '/' + '0')
+          .get('http://localhost:8080/api/documents?year=' + year + '&month=' + month + '&date=' + date)
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
