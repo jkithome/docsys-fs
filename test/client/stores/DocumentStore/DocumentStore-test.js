@@ -105,41 +105,15 @@
             expect(documents).to.eql(documentAction.data);
         });
 
-        it('adds searched genre document', function() {
-            sinon.spy(DocumentStore, 'setSearchedDocumentsGenre');
+        it('adds searched documents by genre,title or date', function() {
+            sinon.spy(DocumentStore, 'setSearchedDocuments');
             var documentAction = {
-                actionType: constants.GENRE_SEARCH,
+                actionType: constants.DOCUMENT_SEARCH,
                 data: [{ id: 1 }, { id: 2 }]
             };
             AppDispatcher.dispatch(documentAction);
 
-            expect(DocumentStore.setSearchedDocumentsGenre.called).to.eql(true);
-            var documents = DocumentStore.getSearchedDocuments();
-            expect(documents).to.eql(documentAction.data);
-        });
-
-        it('adds searched content document', function() {
-            sinon.spy(DocumentStore, 'setSearchedDocumentsContent');
-            var documentAction = {
-                actionType: constants.CONTENT_SEARCH,
-                data: [{ id: 1 }, { id: 2 }]
-            };
-            AppDispatcher.dispatch(documentAction);
-
-            expect(DocumentStore.setSearchedDocumentsContent.called).to.eql(true);
-            var documents = DocumentStore.getSearchedDocuments();
-            expect(documents).to.eql(documentAction.data);
-        });
-
-        it('adds searched genre document', function() {
-            sinon.spy(DocumentStore, 'setSearchedDocumentsDate');
-            var documentAction = {
-                actionType: constants.DATE_SEARCH,
-                data: [{ id: 1 }, { id: 2 }]
-            };
-            AppDispatcher.dispatch(documentAction);
-
-            expect(DocumentStore.setSearchedDocumentsDate.called).to.eql(true);
+            expect(DocumentStore.setSearchedDocuments.called).to.eql(true);
             var documents = DocumentStore.getSearchedDocuments();
             expect(documents).to.eql(documentAction.data);
         });
