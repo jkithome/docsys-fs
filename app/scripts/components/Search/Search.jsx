@@ -123,7 +123,7 @@
             <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
                 ? (this.state.documents.length !== 0)
                 ? <DocList documents={this.state.documents} />
-                : <h1>No documents found.</h1>
+                : <h3 className="white-text shadow center result-text">No documents found.</h3>
                 : <div></div>}
             </div>
           </div>

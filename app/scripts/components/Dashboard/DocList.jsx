@@ -25,8 +25,8 @@
         };
         return (<div>{this.props.documents ? (this.props.documents.length !== 0
                         ? this.props.documents.map(renderDoc)
-                        : <h1>No documents available.</h1>) :
-       <h1>No documents available.</h1>}</div>);
+                        : <h2 className="white-text shadow center result-text">No documents available.</h2>) :
+       <h2 className="white-text shadow center result-text">No documents available.</h2>}</div>);
       }
     });
   module.exports = DocList;
