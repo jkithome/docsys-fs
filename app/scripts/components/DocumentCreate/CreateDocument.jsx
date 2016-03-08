@@ -147,12 +147,12 @@
                   <div className="row">
                     <div className="col s6 offset-s3 create-btns">
                       <div className="col s12 m6 l6">
-                        <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
+                        <button id="cancel" className="btn waves-effect red accent-2 center search" onClick={this.onCancel}>
                           cancel
                         </button>
                       </div>
                       <div className="col s12 m6 l6">
-                        <button id="submit" className="btn waves-effect teal" onClick={this.onSubmit}>
+                        <button id="submit" className="btn waves-effect teal search" onClick={this.onSubmit}>
                           create
                         </button>
                       </div>
