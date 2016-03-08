@@ -131,7 +131,7 @@
                     <div className="row">
                       <div className="col s4 offset-s4">
                         <label htmlFor="firstname">First Name</label>
-                        <input className="green-text" id="firstname"
+                        <input className="teal-text" id="firstname"
                             name="firstname"
                             defaultValue={this.state.user.name.first}
                             onChange={this.handleFieldChange}
@@ -142,7 +142,7 @@
                     <div className="row">
                       <div className="col s4 offset-s4">
                         <label htmlFor="lastname">Last Name</label>
-                        <input className="green-text" id="lastname"
+                        <input className="teal-text" id="lastname"
                             name="lastname"
                             defaultValue={this.state.user.name.last}
                             onChange={this.handleFieldChange}
@@ -153,7 +153,7 @@
                     <div className="row">
                       <div className="col s4 offset-s4">
                         <label htmlFor="username">Username</label>
-                        <input className="green-text" id="username"
+                        <input className="teal-text" id="username"
                             name="username"
                             defaultValue={this.state.user.username}
                             onChange={this.handleFieldChange}
@@ -164,7 +164,7 @@
                     <div className="row">
                       <div className="col s4 offset-s4">
                         <label htmlFor="email">Email</label>
-                        <input className="green-text" id="email"
+                        <input className="teal-text" id="email"
                             name="email"
                             defaultValue={this.state.user.email}
                             onChange={this.handleFieldChange}
@@ -186,7 +186,7 @@
                     <div className="row">
                       <div className="col s4 offset-s4">
                         <label htmlFor="password">New Password</label>
-                        <input className="green-text" id="password"
+                        <input className="teal-text" id="password"
                             name="password"
                             value={null}
                             onChange={this.handleFieldChange}
@@ -197,7 +197,7 @@
                     <div className="row">
                       <div className="col s4 offset-s4">
                         <label htmlFor="confirmpassword">Confirm Password</label>
-                        <input className="green-text" id="confirmpassword"
+                        <input className="teal-text" id="confirmpassword"
                             name="confirmpassword"
                             value={null}
                             onChange={this.handleFieldChange}

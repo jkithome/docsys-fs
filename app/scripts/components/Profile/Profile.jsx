@@ -47,7 +47,7 @@
                   <img max-width="320" max-height="240" className="activator" src={"../../images/freedom.jpg"}/>
                 </div>
                 <div className="card-content">
-                  <span className="green-text card-heading">{this.state.user.name.first} {this.state.user.name.last}</span>
+                  <span className="teal-text card-heading">{this.state.user.name.first} {this.state.user.name.last}</span>
                   <br/>
                   <span className="role-text">Role: {this.state.user.role.title}</span>
                   <br/>

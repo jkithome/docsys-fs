@@ -97,16 +97,16 @@
                   </div>
                   {(this.state.search === 'genre' || this.state.search === 'content') ?
                     <div className="input-field col s12 m6 l3">
-                      <input name="term" id="term" type="text" className="validate white green-text  search-box" onChange={this.handleFieldChange} required />
+                      <input name="term" id="term" type="text" className="validate white teal-text  search-box" onChange={this.handleFieldChange} required />
                       <label className="label-text" htmlFor="term">Search term</label>
                     </div>
                     :
                     <div className="input-field col s12 m6 l3">
-                      <input name="date" id="date" type="date" className="datepicker  white green-text search-box" onChange={this.handleFieldChange} required />
+                      <input name="date" id="date" type="date" className="datepicker  white teal-text search-box" onChange={this.handleFieldChange} required />
                     </div>
                   }
                   <div className="input-field col s12 m6 l3">
-                    <input name="limit" id="limit" type="number" min="1" className="validate white green-text search-box" onChange={this.handleFieldChange} required />
+                    <input name="limit" id="limit" type="number" min="1" className="validate white teal-text search-box" onChange={this.handleFieldChange} required />
                     <label className="label-text" htmlFor="limit">Result limit</label>
                   </div>
                   <div className="col s12 m6 l3  search-btn">

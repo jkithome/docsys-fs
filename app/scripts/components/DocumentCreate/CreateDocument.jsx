@@ -108,7 +108,7 @@
                   <div className="row">
                     <div className="col s6 offset-s3">
                       <label htmlFor="title">Title</label>
-                      <input className="green-text" id="title"
+                      <input className="teal-text" id="title"
                         name="title"
                         onChange={this.handleFieldChange}
                         type="text"
@@ -118,7 +118,7 @@
                   <div className="row">
                     <div className="col s6 offset-s3">
                       <label htmlFor="genre">Genre</label>
-                      <input className="green-text" id="genre"
+                      <input className="teal-text" id="genre"
                         name="genre"
                         onChange={this.handleFieldChange}
                         type="text"
@@ -128,7 +128,7 @@
                   <div className="row">
                     <div className="col s6 offset-s3">
                       <label htmlFor="content">Content</label>
-                      <textarea name="content" id="content" className="materialize-textarea green-text" onChange={this.handleFieldChange}></textarea>
+                      <textarea name="content" id="content" className="materialize-textarea teal-text" onChange={this.handleFieldChange}></textarea>
                     </div>
                   </div>
                   <div className="row">
