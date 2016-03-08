@@ -149,15 +149,17 @@
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col s2 offset-s4">
-                        <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
-                          cancel
-                        </button>
-                      </div>
-                      <div className="col s2">
-                        <button id="submit" className="btn waves-effect teal center" onClick={this.onSubmit}>
-                          edit
-                        </button>
+                      <div className="col s4 offset-s4 create-btns">
+                        <div className="col s12 m12 l6">
+                          <button id="cancel" className="btn waves-effect red accent-2 center search" onClick={this.onCancel}>
+                            cancel
+                          </button>
+                        </div>
+                        <div className="col s12 m12 l6">
+                          <button id="submit" className="btn waves-effect teal search" onClick={this.onSubmit}>
+                            edit
+                          </button>
+                        </div>
                       </div>
                       <div className="section">
                       </div>
