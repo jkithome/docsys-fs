@@ -117,14 +117,20 @@
                 </form>
               </div>
             </div>
-            <div className="section section-title">
-              <h5 className="white-text shadow">RESULTS</h5>
-            </div>
-            <div className="row isotope" style={{position: 'relative'}}>{this.state.documents
-                ? (this.state.documents.length !== 0)
-                ? <DocList documents={this.state.documents} />
+            <div>
+              {this.state.documents
+                ?(this.state.documents.length !== 0)
+                ? <div>
+                    <div className="section section-title">
+                      <h5 className="white-text shadow">RESULTS</h5>
+                    </div>
+                    <div className="row isotope" style={{position: 'relative'}}>
+                      <DocList documents={this.state.documents} />
+                    </div>
+                  </div>
                 : <h3 className="white-text shadow center result-text">No documents found.</h3>
-                : <div></div>}
+                : <div></div>
+              }
             </div>
           </div>
         </div>
