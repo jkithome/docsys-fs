@@ -47,13 +47,13 @@
                   <img max-width="320" max-height="240" className="activator" src={"../../images/freedom.jpg"}/>
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">{this.state.user.name.first} {this.state.user.name.last}</span>
+                  <span className="green-text card-heading">{this.state.user.name.first} {this.state.user.name.last}</span>
                   <br/>
-                  <span className="brown-text">Username: {this.state.user.username}</span>
+                  <span className="role-text">Role: {this.state.user.role.title}</span>
                   <br/>
-                  <span className="brown-text">{this.state.user.email}</span>
+                  <span className="date-text">Username: {this.state.user.username}</span>
                   <br/>
-                  <span className="brown-text">Role: {this.state.user.role.title}</span>
+                  <span className="date-text">{this.state.user.email}</span>
                 </div>
                 <div className="row search-btn">
                       <div className="col s12">
