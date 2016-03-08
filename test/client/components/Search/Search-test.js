@@ -12,7 +12,7 @@
   describe('Search component', function() {
     it('renders the correct content', function() {
       expect(enzyme.shallow(<Search />).text()).to.have.string('SEARCH DOCUMENTS');
-      expect(enzyme.shallow(<Search />).text()).to.have.string('RESULTS');
+      expect(enzyme.shallow(<Search />).text()).to.not.have.string('RESULTS');
     });
 
     it('has correct initial states', function() {
@@ -25,7 +25,7 @@
 
     it('renders the correct component', function() {
       expect(enzyme.mount(<Search />).find('.container').length).to.be.at.least(1);
-      expect(enzyme.mount(<Search />).find('.section').length).to.be.at.least(2);
+      expect(enzyme.mount(<Search />).find('.section').length).to.eql(1);
       expect(enzyme.mount(<Search />).find('.card-panel').length).to.be.at.least(1);
     });
 
