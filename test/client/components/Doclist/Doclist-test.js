@@ -50,7 +50,7 @@
     });
 
     it('renders the correct content when no document is available', function() {
-      expect(enzyme.shallow( <DocList /> ).find('h1').length).to.be.at.least(1);
+      expect(enzyme.shallow( <DocList /> ).find('h2').length).to.be.at.least(1);
     });
 
     it('renders the correct content when documents are available', function() {
