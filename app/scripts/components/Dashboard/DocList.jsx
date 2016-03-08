@@ -14,10 +14,10 @@
                     <img width="320" height="240" src={"../../images/image" + Math.ceil(Math.random() * 10) + ".jpg"} className=" wp-post-image" alt={document.title} title={document.title} /> </a>
                 </div>
                 <div className="card-content">
-                  <a href={'/docs/' + document._id}><p className="green-text">{document.title}</p></a>
-                  <p className="brown-text">Owner: {document.owner.name.first} {document.owner.name.last}</p>
-                  <p className="brown-text">Genre: {document.genre}</p>
-                  <p className="brown-text">Created: {date}</p>
+                  <a href={'/docs/' + document._id}><p className="green-text card-title">{document.title}</p></a>
+                  <p className="genre-text">Genre: {document.genre}</p>
+                  <p>{document.owner.name.first} {document.owner.name.last}</p>
+                  <p className="date-text">{date}</p>
                 </div>
               </div>
             </div>
