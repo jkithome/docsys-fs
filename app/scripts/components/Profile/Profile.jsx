@@ -55,8 +55,8 @@
                   <br/>
                   <span className="brown-text">Role: {this.state.user.role.title}</span>
                 </div>
-                <div className="row">
-                      <div className="col s2 offset-s5">
+                <div className="row search-btn">
+                      <div className="col s12">
                         <button id="update" className="btn waves-effect teal center" onClick={this.handleClick}>
                           update
                         </button>
