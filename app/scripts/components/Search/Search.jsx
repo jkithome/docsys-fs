@@ -109,8 +109,8 @@
                     <input name="limit" id="limit" type="number" min="1" className="validate white green-text search-box" onChange={this.handleFieldChange} required />
                     <label className="label-text" htmlFor="limit">Result limit</label>
                   </div>
-                  <div className="col s12 m6 l3 center-xs">
-                    <button id="search" className="btn waves-effect waves-light" onClick={this.onSubmit} style={{marginTop: 20, marginRight: 10}}>SEARCH
+                  <div className="col s12 m6 l3  search-btn">
+                    <button id="search" className="btn waves-effect waves-light search" onClick={this.onSubmit} style={{marginTop: 20, marginRight: 10}}>SEARCH
                       <i className="material-icons right">search</i>
                     </button>
                   </div>
