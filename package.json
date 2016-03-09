@@ -10,9 +10,12 @@
     "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js  test/client/**/*test.js",
     "test": "npm run test:bend && npm run test:fend",
     "posttest": "pkill node",
-    "coverage": "nyc npm run pretest \n npm run test:bend && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc --require babel-core/register npm run pretest \n npm run test:bend && nyc report --reporter=text-lcov | coveralls",
     "codecov": "cat coverage/lcov/lcov.info | codecov",
     "postinstall": "gulp build"
+  },
+  "bin": {
+    "coveralls": "./bin/coveralls.js"
   },
   "repository": {
     "type": "git",
