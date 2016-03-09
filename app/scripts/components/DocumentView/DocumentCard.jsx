@@ -4,7 +4,6 @@
     moment = require('moment'),
     DocumentStore = require('../../stores/DocumentStore'),
     DocumentActions = require('../../actions/DocumentActions'),
-    localStorage = require('localStorage'),
     browserHistory = require('react-router').browserHistory,
     History = require('react-router').History,
     userId = (JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user'))._id : null),
