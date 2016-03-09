@@ -9,8 +9,10 @@
     "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js  test/client/**/*test.js",
     "test": "npm run test:bend && npm run test:fend",
     "posttest": "pkill node",
-    "coverage": "nyc --require babel-core/register npm run test:bend && nyc report --reporter=text-lcov | coveralls",
+    "runOne": "nyc --require babel-core/register npm run test:bend && nyc report --reporter=text-lcov",
     "codecov": "cat coverage/lcov/lcov.info | codecov",
+    "runTwo": "nyc --require babel-core/register npm run test:bend && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "npm run runOne && npm run runTwo",
     "postinstall": "gulp build"
   },
   "bin": {
