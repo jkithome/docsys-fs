@@ -9,5 +9,5 @@ cache:
   - node_modules
 before_install:
   - npm install --global karma
-after_script:
-- npm run codecov
+after_success:
+- npm run coverage

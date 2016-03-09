@@ -29,13 +29,13 @@
     });
 
     it('renders the correct component', function() {
-      expect(enzyme.mount(<Login />).find('.container').length).to.be.at.least(1);
+      expect(enzyme.mount(<Login />).find('.nav-wrapper').length).to.be.at.least(1);
       expect(enzyme.mount(<Login />).find('.row').length).to.be.at.least(3);
       expect(enzyme.mount(<Login />).find('.card-panel').length).to.be.at.least(1);
     });
 
     it('renders the correct content', function() {
-      expect(enzyme.shallow(<Login />).text()).to.have.string('WELCOME BACK');
+      expect(enzyme.shallow(<Login />).text()).to.have.string('Sign In');
       expect(enzyme.shallow(<Login />).text()).to.have.string('Register');
     });
 
