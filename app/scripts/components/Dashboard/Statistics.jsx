@@ -8,7 +8,7 @@
               <div className="row">
                 <div className="col s12 m6 l4">
                   <div className="card">
-                    <div className="card-content  green white-text">
+                    <div className="card-content teal white-text">
                       <p className="card-stats-title"><i className="mdi-social-group-add"></i> Total Users</p>
                       <h4 className="card-stats-number">{this.props.users.length}</h4>
                     </div>

@@ -40,7 +40,7 @@
     });
 
     it('renders the correct component', function() {
-      expect(enzyme.mount(<CreateDocument />).find('.green-text').length).to.eql(3);
+      expect(enzyme.mount(<CreateDocument />).find('.teal-text').length).to.eql(3);
       expect(enzyme.mount(<CreateDocument />).find('form').length).to.eql(1);
     });
 

@@ -122,7 +122,7 @@
                     <div className="card-panel">
                       <div className="row">
                         <div className="card-panel teal">
-                          <h2 className="black-text">Sign Up Today</h2>
+                          <h2 className="white-text form-titles">Sign Up Today</h2>
                         </div>
                       </div>
                       <div className="row">
@@ -175,7 +175,7 @@
                             </div>
                           </div>
                           <div className="row">
-                            <div className="center-btn">
+                            <div className="search-btn">
                               <button className="btn waves-effect waves-light" type="submit" name="action">JOIN
                                 <i className="material-icons right">send</i>
                               </button>

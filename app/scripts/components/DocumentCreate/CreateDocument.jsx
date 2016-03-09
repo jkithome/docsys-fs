@@ -108,7 +108,7 @@
                   <div className="row">
                     <div className="col s6 offset-s3">
                       <label htmlFor="title">Title</label>
-                      <input className="green-text" id="title"
+                      <input className="teal-text" id="title"
                         name="title"
                         onChange={this.handleFieldChange}
                         type="text"
@@ -118,7 +118,7 @@
                   <div className="row">
                     <div className="col s6 offset-s3">
                       <label htmlFor="genre">Genre</label>
-                      <input className="green-text" id="genre"
+                      <input className="teal-text" id="genre"
                         name="genre"
                         onChange={this.handleFieldChange}
                         type="text"
@@ -128,7 +128,7 @@
                   <div className="row">
                     <div className="col s6 offset-s3">
                       <label htmlFor="content">Content</label>
-                      <textarea name="content" id="content" className="materialize-textarea green-text" onChange={this.handleFieldChange}></textarea>
+                      <textarea name="content" id="content" className="materialize-textarea teal-text" onChange={this.handleFieldChange}></textarea>
                     </div>
                   </div>
                   <div className="row">
@@ -147,12 +147,12 @@
                   <div className="row">
                     <div className="col s6 offset-s3 create-btns">
                       <div className="col s12 m6 l6">
-                        <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
+                        <button id="cancel" className="btn waves-effect red accent-2 center search" onClick={this.onCancel}>
                           cancel
                         </button>
                       </div>
                       <div className="col s12 m6 l6">
-                        <button id="submit" className="btn waves-effect teal" onClick={this.onSubmit}>
+                        <button id="submit" className="btn waves-effect teal search" onClick={this.onSubmit}>
                           create
                         </button>
                       </div>

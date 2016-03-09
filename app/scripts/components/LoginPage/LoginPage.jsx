@@ -74,41 +74,36 @@
                 </nav>
               </header>
               <main>
-                <div className="container">
-                    <h2 className="login-text white-text">WELCOME BACK</h2></div>
-                  <div className="row">
-                    <div className="login-form">
-                      <div className="login-card card-panel">
-                        <div className="row">
-                          <form className="col s12" onSubmit={this.onSubmit}>
-                            <div className="row">
-                              <div className="input-field col s12">
-                                <i className="material-icons prefix">account_circle</i>
-                                <input name="username" id="username" type="text" className="validate" onChange={this.handleFieldChange} required />
-                                <label htmlFor="username">Username *</label>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="input-field col s12">
-                                <i className="material-icons prefix">security</i>
-                                <input name="password"id="password" type="password" className="validate"onChange={this.handleFieldChange} required />
-                                <label htmlFor="password">Password *</label>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="center-btn">
-                                <button className="btn waves-effect waves-light" type="submit" name="action">LOGIN
-                                  <i className="material-icons right">send</i>
-                                </button>
-                              </div>
-                            </div>
-                          </form>
+                <div className="row">
+                  <div className="login-form">
+                    <div className="card-panel">
+                      <div className="row">
+                        <div className="card-panel teal">
+                          <h2 className="white-text form-titles">Sign In</h2>
                         </div>
+                      </div>
+                      <div className="row">
+                        <form className="col s12" onSubmit={this.onSubmit}>
+                          <div className="input-field col s12">
+                            <input className="validate valid" id="username" name="username" type="text" className="validate" onChange={this.handleFieldChange} required />
+                            <label htmlFor="username" >Username *</label>
+                          </div>
+                          <div className="input-field col s12 ">
+                            <input className="validate valid" id="password" name="password" type="password" className="validate " onChange={this.handleFieldChange} required />
+                            <label htmlFor="password" >Password *</label>
+                          </div>
+                          <div className="search-btn">
+                            <button className="btn waves-effect waves-light search" type="submit " name="action ">LOGIN
+                              <i className="material-icons right ">send</i>
+                            </button>
+                        </div>
+                      </form>
                       </div>
                     </div>
                   </div>
-                  <div className="row col s12 m5">
-                  </div>
+                </div>
+                <div className="row col s12 m5">
+                </div>
               </main>
           </div>);
       }

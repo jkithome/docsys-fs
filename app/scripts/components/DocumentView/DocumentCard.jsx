@@ -55,7 +55,7 @@
                       <img className="activator" src={"../../images/image" + Math.ceil(Math.random() * 10) + ".jpg"}/>
                     </div>
                     <div className="card-content">
-                      <span className="card-title activator green-text text-darken-4">{this.props.document.title}<i className="material-icons right">more_vert</i></span>
+                      <span className="card-title activator teal-text text-darken-4">{this.props.document.title}<i className="material-icons right">more_vert</i></span>
                       <p className="brown-text">Created: {moment(this.props.document.createdAt).fromNow()} by {this.props.document.owner.name.first} {this.props.document.owner.name.last}</p>
                     </div>
                     <div className="card-reveal">

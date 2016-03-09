@@ -108,7 +108,7 @@
                     <div className="row">
                       <div className="col s6 offset-s3">
                         <label htmlFor="title">Title</label>
-                        <input className="green-text" id="title"
+                        <input className="teal-text" id="title"
                           name="title"
                           defaultValue={this.state.originalDocument.title}
                           onChange={this.handleFieldChange}
@@ -119,7 +119,7 @@
                     <div className="row">
                       <div className="col s6 offset-s3">
                         <label htmlFor="genre">Genre</label>
-                        <input className="green-text" id="genre"
+                        <input className="teal-text" id="genre"
                           name="genre"
                           defaultValue={this.state.originalDocument.genre}
                           onChange={this.handleFieldChange}
@@ -130,7 +130,7 @@
                     <div className="row">
                       <div className="col s6 offset-s3">
                         <label htmlFor="content">Content</label>
-                        <textarea name="content" id="content" className="materialize-textarea green-text"
+                        <textarea name="content" id="content" className="materialize-textarea teal-text"
                           defaultValue={this.state.originalDocument.content}
                           onChange={this.handleFieldChange}></textarea>
                       </div>
@@ -149,15 +149,17 @@
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col s2 offset-s4">
-                        <button id="cancel" className="btn waves-effect red accent-2 center" onClick={this.onCancel}>
-                          cancel
-                        </button>
-                      </div>
-                      <div className="col s2">
-                        <button id="submit" className="btn waves-effect teal center" onClick={this.onSubmit}>
-                          edit
-                        </button>
+                      <div className="col s4 offset-s4 create-btns">
+                        <div className="col s12 m12 l6">
+                          <button id="cancel" className="btn waves-effect red accent-2 center search" onClick={this.onCancel}>
+                            cancel
+                          </button>
+                        </div>
+                        <div className="col s12 m12 l6">
+                          <button id="submit" className="btn waves-effect teal search" onClick={this.onSubmit}>
+                            edit
+                          </button>
+                        </div>
                       </div>
                       <div className="section">
                       </div>
