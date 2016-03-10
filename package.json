@@ -7,12 +7,12 @@
     "start": "nodemon index.js",
     "test:bend": "node test/server/helpers/clearDB.js &\nsleep 4 \n node index &\nsleep 4 \n jasmine-node test/server/spec/*.js --verbose || :",
     "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js test/client/**/*test.js",
-    "test": "npm run test:bend && npm run test:fend",
+    "test": "npm run test:fend",
     "posttest": "pkill node",
     "runOne": "nyc npm run test:bend",
     "codecov": "cat coverage/lcov/lcov.info | codecov",
     "runTwo": "nyc --require babel-core/register npm run test:bend && nyc report --reporter=text-lcov | coveralls",
-    "coverage": "npm run runOne && npm run runOne && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "npm run runOne && npm run runOne",
     "postinstall": "gulp build"
   },
   "bin": {
