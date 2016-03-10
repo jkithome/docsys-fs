@@ -3,7 +3,7 @@
   var request = require('superagent');
   var documentId, documentIdB, token, tokenB, userId;
   var userHelper = require('../helpers/usersHelper');
-  var roleHelper = require('../helpers/rolesHelper');
+  // var roleHelper = require('../helpers/rolesHelper');
 
   describe('Document spec', function() {
     beforeEach(function(done) {
