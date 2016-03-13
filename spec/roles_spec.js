@@ -1,19 +1,24 @@
 (function() {
   'use strict';
-  var request = require('superagent');
+  var supertest = require('supertest');
   var token, roleId;
-  var userHelper = require('./usersHelper');
+  // var userHelper = require('../helpers/usersHelper');
+  var app = require('../index.js');
+  var request = supertest(app);
   // var roleHelper = require('../helpers/rolesHelper');
 
   describe('Roles spec', function() {
-    beforeAll(function(done) {
-      userHelper.seedUsers(done);
-    });
+
+    // beforeEach(function(done) {
+    //   userHelper.seedUsers(done);
+    // });
 
     describe('Tests for roles', function() {
+
       it('User must be authenticated to create role', function(done) {
         request
-          .post('http://localhost:8080/api/roles', {
+          .post('/api/roles')
+          .send({
             title: 'test',
             description: 'For testing only'
           })
@@ -27,7 +32,8 @@
 
       it('New role has unique title', function(done) {
         request
-          .post('http://localhost:8080/api/users/login', {
+          .post('/api/users/login')
+          .send({
             username: 'Jemmy',
             password: 'password'
           })
@@ -35,11 +41,12 @@
           .end(function(err, res) {
             token = res.body.token;
             request
-              .post('http://localhost:8080/api/roles', {
+              .post('/api/roles')
+              .set('x-access-token', token)
+              .send({
                 title: 'user',
                 description: 'user'
               })
-              .set('x-access-token', token)
               .accept('application/json')
               .end(function(err, res) {
                 expect(res.status).toEqual(409);
@@ -53,10 +60,11 @@
 
       it('Title is required', function(done) {
         request
-          .post('http://localhost:8080/api/roles', {
+          .post('/api/roles')
+          .set('x-access-token', token)
+          .send({
             description: 'Should not work'
           })
-          .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(400);
@@ -69,11 +77,12 @@
 
       it('Role is created', function(done) {
         request
-          .post('http://localhost:8080/api/roles', {
+          .post('/api/roles')
+          .set('x-access-token', token)
+          .send({
             title: 'test',
             description: 'For testing only'
           })
-          .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
             roleId = res.body.the_role._id;
@@ -84,9 +93,23 @@
           });
       });
 
+      it('All roles are returned', function(done) {
+        request
+          .get('/api/roles')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body instanceof Array).toBe(true);
+            expect(Object.prototype.toString.call(res.body[0])).toBe('[object Object]');
+            expect(res.body.length).toBe(4);
+            done();
+          });
+      });
+
       it('Fetches a role', function(done) {
         request
-          .get('http://localhost:8080/api/roles/' + roleId)
+          .get('/api/roles/' + roleId)
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
@@ -97,12 +120,25 @@
           });
       });
 
+      it('Fails to fetch non-existent role', function(done) {
+        request
+          .get('/api/roles/436528udsaghf')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(200);
+            expect(res.body.message).toBe('Error fetching role.');
+            done();
+          });
+      });
+
       it('Role is updated', function(done) {
         request
-          .put('http://localhost:8080/api/roles/' + roleId, {
+          .put('/api/roles/' + roleId)
+          .set('x-access-token', token)
+          .send({
             description: 'Role can be updated'
           })
-          .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(200);
@@ -111,14 +147,78 @@
           });
       });
 
+      it('Fails to update non-existent role', function(done) {
+        request
+          .put('/api/roles/123')
+          .set('x-access-token', token)
+          .send({
+            description: 'Role can be updated'
+          })
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(500);
+            expect(res.body.name).toBe('CastError');
+            expect(res.body.message).toContain('123');
+            expect(res.body.kind).toBe('ObjectId');
+            done();
+          });
+      });
+
+      it('Role won\'t update if a unique field is duplicate', function(done) {
+        request
+          .put('/api/roles/' + roleId)
+          .send({
+            title: 'user'
+          })
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(409);
+            expect(res.body.code).toBe(11000);
+            expect(res.body.errmsg).toContain('duplicate key');
+            expect(res.body.errmsg).toContain('user');
+            done();
+          });
+      });
+
+      it('Role won\'t update if title is not allowed', function(done) {
+        request
+          .put('/api/roles/' + roleId)
+          .send({
+            title: 'avengers'
+          })
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(400);
+            expect(res.body.message).toBe('Role validation failed');
+            expect(res.body.errors.title.message).toBe('`avengers` is not a valid enum value for path `title`.');
+            done();
+          });
+      });
+
       it('Role is deleted', function(done) {
         request
-          .delete('http://localhost:8080/api/roles/' + roleId)
+          .delete('/api/roles/' + roleId)
           .set('x-access-token', token)
           .accept('application/json')
           .end(function(err, res) {
             expect(res.status).toEqual(200);
             expect(res.body.message).toBe('Role deleted successfully.');
+            done();
+          });
+      });
+
+      it('Fails to delete non-existent role', function(done) {
+        request
+          .delete('/api/roles/123')
+          .set('x-access-token', token)
+          .accept('application/json')
+          .end(function(err, res) {
+            expect(res.status).toEqual(500);
+            expect(res.body.name).toBe('CastError');
+            expect(res.body.message).toContain('123');
+            expect(res.body.kind).toBe('ObjectId');
             done();
           });
       });
