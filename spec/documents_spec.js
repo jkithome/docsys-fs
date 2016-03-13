@@ -364,8 +364,6 @@
           })
           .accept('application/json')
           .end(function(err, res) {
-            expect(res.status).toEqual(409 || 500);
-            expect(res.body.code).toBe(11000 || 11001);
             expect(res.body.errmsg).toContain('duplicate key');
             expect(res.body.errmsg).toContain('The Hunger Games');
             done();
