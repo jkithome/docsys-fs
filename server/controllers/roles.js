@@ -55,6 +55,9 @@
           if (req.body.description) {
             role.description = req.body.description;
           }
+          if (req.body.title) {
+            role.title = req.body.title;
+          }
           role.save(function(err) {
             if (err) {
               if(err.code === 11000) {

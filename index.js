@@ -26,7 +26,10 @@ app.use(favicon(__dirname + '/app/images/favicon.gif'));
 app.use(morgan('dev'));
 
 // Routes
-
 routes(app);
 
 app.listen(port);
+
+module.exports = app;
+
+

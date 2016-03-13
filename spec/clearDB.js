@@ -1,11 +1,31 @@
 (function() {
   'use strict';
-  var config = require('../../../config');
+  var config = require('../config');
   var MongoClient = require('mongodb').MongoClient;
   var assert = require('assert');
   var ObjectId = require('mongodb').ObjectID;
   var url = config.database;
 
+  var dropRoles = function(db, callback) {
+    db.collection('roles').drop(function(err, response) {
+      console.log(response);
+      callback();
+    });
+  };
+
+  var dropUsers = function(db, callback) {
+    db.collection('users').drop(function(err, response) {
+      console.log(response);
+      callback();
+    });
+  };
+
+  var dropDocuments = function(db, callback) {
+    db.collection('documents').drop(function(err, response) {
+      console.log(response);
+      callback();
+    });
+  };
 
   var data = [{
     title: 'user',
@@ -19,19 +39,27 @@
   }];
 
   var insertDocument = function(db, callback) {
-    db.collection('roles').insertMany(data, function(err, result) {
+    db.collection('roles').insertMany(data, function(err, response) {
       assert.equal(err, null);
       console.log('Inserted a document into the roles collection.');
-      callback(result);
+      callback();
     });
   };
+
 
   MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
 
+    dropRoles(db, function() {});
+
+    dropUsers(db, function() {});
+
+    dropDocuments(db, function() {});
+
     insertDocument(db, function() {
       db.close();
     });
+
   });
 
 })();

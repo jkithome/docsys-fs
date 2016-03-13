@@ -36,9 +36,7 @@
     role: 'admin'
   };
 
-  module.exports = {
-    seedUsers: function(callback) {
-      request
+  request
         .post('http://localhost:8080/api/users/create', User1)
         .accept('application/json')
         .end();
@@ -57,9 +55,5 @@
         .post('http://localhost:8080/api/users/create', user4)
         .accept('application/json')
         .end();
-
-      callback();
-    }
-  };
 
 })();

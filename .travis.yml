@@ -9,5 +9,5 @@ cache:
   - node_modules
 before_install:
   - npm install --global karma
-after_success:
+after_script:
 - npm run coverage
