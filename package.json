@@ -10,7 +10,7 @@
     "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js test/client/**/*test.js",
     "test": "npm run test:bend && npm run test:fend",
     "posttest": "pkill node",
-    "coverage": "cat coverage/lcov-report/lcov.info | coveralls",
+    "coverage": "cat coverage/lcov.info | coveralls",
     "postinstall": "gulp build"
   },
   "bin": {
