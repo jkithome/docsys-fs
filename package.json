@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "pretest": "node spec/clearDB.js &\nsleep 4 \n node spec/userSeed.js &\nsleep 4",
+    "pretest": "node spec/clearDB.js &\nsleep 4 \n node index &\nsleep 4 \n node spec/usersHelper.js \n pkill node",
     "test:bend": "istanbul cover jasmine",
     "test:fend": "mocha --compilers .:test/compiler.js  --require test/testdom.js test/client/**/*test.js",
     "test": "npm run test:bend && npm run test:fend",
