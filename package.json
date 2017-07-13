@@ -121,5 +121,8 @@
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.0",
     "watchify": "^3.7.0"
+  },
+  "engines": {
+    "node": "6.11.1"
   }
 }
